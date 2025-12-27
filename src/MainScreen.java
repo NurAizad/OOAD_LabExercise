@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import panels.Login;
 
 
@@ -9,10 +10,8 @@ public class MainScreen extends JFrame {
     JPanel cardManager = new JPanel(cardLayout);
 
     JPanel mainPanel = new JPanel(new BorderLayout());
-    Login loginPanel = new Login();
+    Login loginPanel = new Login(cardLayout, cardManager);
 
-
-    JButton goToLogin = new JButton("Go to Login");
 
     public MainScreen() {
 
@@ -23,6 +22,9 @@ public class MainScreen extends JFrame {
         setLocationRelativeTo(null);
 
 
+        JButton goToLogin = new JButton("Login");
+        //JButton goToRegister = new JButton("Register");
+        
         JLabel mainLabel = new JLabel("MAIN SCREEN", SwingConstants.CENTER);
         mainPanel.add(mainLabel, BorderLayout.CENTER);
         mainPanel.add(goToLogin, BorderLayout.SOUTH);
@@ -31,9 +33,11 @@ public class MainScreen extends JFrame {
         cardManager.add(loginPanel, "LoginPanel");
 
        // mainPanel.add(loginPanel, "LoginPanel");
-        goToLogin.addActionListener(e -> 
+        goToLogin.addActionListener(new ActionListener()
         {
-            cardLayout.show(cardManager, "LoginPanel");
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardManager, "LoginPanel");
+            }
         });
 
 
