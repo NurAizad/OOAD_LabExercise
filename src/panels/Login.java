@@ -9,14 +9,10 @@ public class Login extends JPanel
 {
     public Login()
     {
-        //setTitle("Login");
-        //setSize(900, 600);
-
-        //JPanel panel = new JPanel(new FlowLayout());
         setLayout(new FlowLayout());
         setVisible(true);
-       // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //the close, minimise button
-        //panel.setResizeable(false); 
+    
+
 
         JLabel userLabel = new JLabel("Username:");
         add(userLabel);
@@ -42,8 +38,4 @@ public class Login extends JPanel
         });
     }
 
-    public static void main(String[] args) 
-    {
-        new Login();
-    }
 }

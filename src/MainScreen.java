@@ -1,17 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
-import panels.LoginPanel;
-package panels;
+import panels.Login;
 
 
 public class MainScreen extends JFrame {
 
     CardLayout cardLayout = new CardLayout();
-    JPanel mainPanel = new JPanel(cardLayout);
-    JPanel loginPanel = new JPanel();
+    JPanel cardManager = new JPanel(cardLayout);
+
+    JPanel mainPanel = new JPanel(new BorderLayout());
+    Login loginPanel = new Login();
 
 
-    JButton switchToLoginButton = new JButton("Go to Login");
+    JButton goToLogin = new JButton("Go to Login");
 
     public MainScreen() {
 
@@ -23,17 +24,20 @@ public class MainScreen extends JFrame {
 
 
         JLabel mainLabel = new JLabel("MAIN SCREEN", SwingConstants.CENTER);
-        add(mainLabel, BorderLayout.CENTER);
-        add(switchToLoginButton, BorderLayout.SOUTH);
+        mainPanel.add(mainLabel, BorderLayout.CENTER);
+        mainPanel.add(goToLogin, BorderLayout.SOUTH);
 
-        mainPanel.add(loginPanel, "LoginPanel");
-        switchToLoginButton.addActionListener(e -> 
+        cardManager.add(mainPanel, "MainPanel");
+        cardManager.add(loginPanel, "LoginPanel");
+
+       // mainPanel.add(loginPanel, "LoginPanel");
+        goToLogin.addActionListener(e -> 
         {
-            cardLayout.show(mainPanel, "LoginPanel");
+            cardLayout.show(cardManager, "LoginPanel");
         });
 
-         
 
+        setContentPane(cardManager);
         setVisible(true);
     }
 
