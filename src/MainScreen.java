@@ -9,10 +9,6 @@ public class MainScreen extends JFrame {
     CardLayout cardLayout = new CardLayout();
     JPanel cardManager = new JPanel(cardLayout);
 
-    JPanel mainPanel = new JPanel(new BorderLayout());
-    Login loginPanel = new Login(cardLayout, cardManager);
-
-
     public MainScreen() {
 
         setTitle("Main Window");
@@ -21,16 +17,41 @@ public class MainScreen extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-
-        JButton goToLogin = new JButton("Login");
-        //JButton goToRegister = new JButton("Register");
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        Login loginPanel = new Login(cardLayout, cardManager);
         
+        //TITLE
         JLabel mainLabel = new JLabel("MAIN SCREEN", SwingConstants.CENTER);
-        mainPanel.add(mainLabel, BorderLayout.CENTER);
-        mainPanel.add(goToLogin, BorderLayout.SOUTH);
+        mainLabel.setAlignmentX(CENTER_ALIGNMENT);
+        mainPanel.add(Box.createVerticalGlue());
+        mainPanel.add(mainLabel);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 40)));
+        
+        //mainPanel.add(mainLabel, BorderLayout.CENTER);
+        //mainPanel.add(goToLogin, BorderLayout.SOUTH);
+
+        //LOGIN BUTTON
+        Dimension buttonSize = new Dimension(100, 30);
+        JButton goToLogin = new JButton("Login");
+        goToLogin.setAlignmentX(CENTER_ALIGNMENT);
+        goToLogin.setMaximumSize(buttonSize);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        mainPanel.add(goToLogin);
+
+
+        //REGISTER BUTTON
+        JButton goToRegister = new JButton("Register");
+        goToRegister.setAlignmentX(CENTER_ALIGNMENT);
+        goToRegister.setMaximumSize(buttonSize);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        mainPanel.add(goToRegister);
+
+        mainPanel.add(Box.createVerticalGlue());
 
         cardManager.add(mainPanel, "MainPanel");
         cardManager.add(loginPanel, "LoginPanel");
+        cardManager.add(new JPanel(), "RegisterPanel");
 
        // mainPanel.add(loginPanel, "LoginPanel");
         goToLogin.addActionListener(new ActionListener()
