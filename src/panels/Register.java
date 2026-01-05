@@ -21,27 +21,25 @@ public class Register extends JPanel
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(10, 5, 10, 5);
+       
 
        // Set pink background and make it opaque
         JPanel centerContainer = new JPanel();
         centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
-        // centerContainer.setBackground(Color.PINK);
-        // centerContainer.setOpaque(true);
         add(centerContainer, gbc);
 
 
-        //USERNAME PANEL
-        JPanel userPanel = new JPanel();
-        userPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        userPanel.setBackground(Color.CYAN);
-        userPanel.setOpaque(true);
-        centerContainer.add(userPanel, gbc);
-        
-        JLabel userLabel = new JLabel ("Username");
-        userPanel.add(userLabel);
-        JTextField userText = new JTextField(20);
-        userPanel.add(userText);
+        //IDNAME PANEL
+        JPanel idPanel = new JPanel();
+        idPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        idPanel.setBackground(Color.CYAN);
+        idPanel.setOpaque(true);
+        centerContainer.add(idPanel, gbc);
+
+        JLabel idLabel = new JLabel ("ID");
+        idPanel.add(idLabel);
+        JTextField idText = new JTextField(20);
+        idPanel.add(idText);
 
         //PASSWORD PANEL
         JPanel passPanel = new JPanel();
@@ -55,6 +53,18 @@ public class Register extends JPanel
         JPasswordField passText = new JPasswordField(20);
         passPanel.add(passText);
 
+        //NAME
+        JPanel namePanel = new JPanel();
+        namePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        namePanel.setBackground(Color.ORANGE);
+        namePanel.setOpaque(true);
+        centerContainer.add(namePanel, gbc);
+        
+        JLabel nameLabel = new JLabel ("Name");
+        namePanel.add(nameLabel);
+        JTextField nameText = new JTextField(20);
+        namePanel.add(nameText);
+
         //ROLE PANEL
         JPanel rolePanel = new JPanel();
         rolePanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
@@ -64,16 +74,59 @@ public class Register extends JPanel
         
         JLabel roleLabel = new JLabel ("Role");
         rolePanel.add(roleLabel);
-        String[] roles = { "Admin", "User", "Guest" };
+        String[] roles = { "Student", "Evaluator", "Coordinator" };
         JComboBox<String> roleList = new JComboBox<>(roles);
         rolePanel.add(roleList);
 
+        //BUTTONS
+        Dimension buttonSize = new Dimension(100, 30);
+        //REGISTER BUTTON
+        JPanel registerButtonPanel = new JPanel();
+        registerButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        centerContainer.add(registerButtonPanel, gbc);
+
+        JButton registerButton = new JButton("Register");
+        registerButton.setPreferredSize(buttonSize);
+        registerButtonPanel.add(registerButton);
+
+        //BACK BUTTON
+        JPanel backButtonPanel = new JPanel();
+        backButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        centerContainer.add(backButtonPanel, gbc);
+
+        JButton backButton = new JButton("Back");
+        backButton.setPreferredSize(buttonSize);
+        backButtonPanel.add(backButton);
+
         //ALIGN LABEL
-        userLabel.setPreferredSize(new Dimension(90, 25));
+        idLabel.setPreferredSize(new Dimension(90, 25));
         passLabel.setPreferredSize(new Dimension(90, 25));
         roleLabel.setPreferredSize(new Dimension(90, 25));
+        nameLabel.setPreferredSize(new Dimension(90, 25));
 
         frame.setVisible(true);
+
+        // --- Action Listeners ---
+        registerButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                String id = idText.getText();
+                String password = new String(passText.getPassword());
+                String name = nameText.getText();
+                String role = (String) roleList.getSelectedItem();
+                JOptionPane.showMessageDialog(null, "ID: " + id + "\nPassword: " + password + "\nName: " + name + "\nRole: " + role);
+                //JOptionPane.showMessageDialog(null, "ID: " + id + "\nPassword: " + password);
+            }
+        });
+
+        // backButton.addActionListener(new ActionListener()
+        // {
+        //     public void actionPerformed(ActionEvent e)
+        //     {
+        //         cardLayout.show(cardManager, "MainPanel");
+        //     }
+        // });
     
     }
 

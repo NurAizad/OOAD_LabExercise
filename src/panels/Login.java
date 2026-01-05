@@ -23,14 +23,14 @@ public class Login extends JPanel
     
 
         //username label and text field
-        JPanel userPanel = new JPanel();
-        userPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        centerContainer.add(userPanel);
+        JPanel idPanel = new JPanel();
+        idPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        centerContainer.add(idPanel);
 
-        JLabel userLabel = new JLabel("Username");
-        userPanel.add(userLabel);
-        JTextField userText = new JTextField(20);
-        userPanel.add(userText);
+        JLabel idLabel = new JLabel("ID");
+        idPanel.add(idLabel);
+        JTextField idText = new JTextField(20);
+        idPanel.add(idText);
 
         //password label and text field
         JPanel passPanel = new JPanel();
@@ -64,7 +64,7 @@ public class Login extends JPanel
         backButtonPanel.add(backButton);
 
         //ALIGN LABELS
-        userLabel.setPreferredSize(new Dimension(90, 25));
+        idLabel.setPreferredSize(new Dimension(90, 25));
         passLabel.setPreferredSize(new Dimension(90, 25));
 
 
@@ -75,9 +75,9 @@ public class Login extends JPanel
         {
             public void actionPerformed(ActionEvent e)
             {
-                String username = userText.getText();
+                String id = idText.getText();
                 String password = new String(passText.getPassword());
-                JOptionPane.showMessageDialog(null, "Username: " + username + "\nPassword: " + password);
+                JOptionPane.showMessageDialog(null, "ID: " + id + "\nPassword: " + password);
             }
         });
 
