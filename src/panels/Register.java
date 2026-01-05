@@ -2,6 +2,8 @@ package panels;
 import java.awt.*; 
 import javax.swing.*; 
 import java.awt.event.*;
+import java.io.*; //for file 
+import java.util.Scanner;
 
 public class Register extends JPanel
 {
@@ -99,12 +101,50 @@ public class Register extends JPanel
             public void actionPerformed(ActionEvent e)
             {
                 String id = idText.getText();
-                String password = new String(passText.getPassword());
+                String password = new String(passText.getPassword()); //getPassword returns char
                 String name = nameText.getText();
                 String role = (String) roleList.getSelectedItem();
-                JOptionPane.showMessageDialog(null, "ID: " + id + "\nPassword: " + password + "\nName: " + name + "\nRole: " + role);
+                
+                File folder = new File("csvFiles");
+                if (!folder.exists()) 
+                    {
+                        folder.mkdir(); // create folder if missing
+                    }
+
+                File file = new File("csvFiles/usersCSV.csv"); //.. means to go up one directory
+
+                try 
+                {
+                    Scanner fileReader = new Scanner(file);
+                    while (fileReader.hasNextLine()) 
+                    {
+                        String line = fileReader.nextLine();
+                        String[] parts = line.split(",");
+                        if (parts[0].equals(id)) 
+                        {
+                            JOptionPane.showMessageDialog(null, "ID already exists!","Error!", JOptionPane.ERROR_MESSAGE);
+                            fileReader.close();
+                            cardLayout.show(cardManager, "MainPanel"); //return to main
+                            return;  // Exit the method if ID exists
+                        }
+                    }
+
+
+                    FileWriter writer = new FileWriter(file, true); // true is for append mode
+                    writer.write(id + "," + password + "," + name + "," + role + "\n");
+                    writer.close();
+                    JOptionPane.showMessageDialog(null, "Registration Successful!");
+                    cardLayout.show(cardManager, "MainPanel");  //return to main
+                    
+                } 
+                catch (IOException ex) 
+                {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error occured!","Error!", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
+
 
         backButton.addActionListener(new ActionListener()
         {
