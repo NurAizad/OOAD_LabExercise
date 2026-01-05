@@ -27,7 +27,7 @@ public class Login extends JPanel
         userPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         centerContainer.add(userPanel);
 
-        JLabel userLabel = new JLabel("Username:");
+        JLabel userLabel = new JLabel("Username");
         userPanel.add(userLabel);
         JTextField userText = new JTextField(20);
         userPanel.add(userText);
@@ -37,7 +37,7 @@ public class Login extends JPanel
         passPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         centerContainer.add(passPanel);
 
-        JLabel passLabel = new JLabel("Password:");
+        JLabel passLabel = new JLabel("Password");
         passPanel.add(passLabel);
         JPasswordField passText = new JPasswordField(20);
         passPanel.add(passText);
@@ -62,6 +62,12 @@ public class Login extends JPanel
         JButton backButton = new JButton("Back");
         backButton.setPreferredSize(buttonSize);
         backButtonPanel.add(backButton);
+
+        //ALIGN LABELS
+        userLabel.setPreferredSize(new Dimension(90, 25));
+        passLabel.setPreferredSize(new Dimension(90, 25));
+
+
         setVisible(true);
 
         // --- Action Listeners ---
