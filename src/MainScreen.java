@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import panels.Login;
+import panels.Register;
 
 
 public class MainScreen extends JFrame {
@@ -17,9 +18,11 @@ public class MainScreen extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        //PANELS
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         Login loginPanel = new Login(cardLayout, cardManager);
+        Register registerPanel = new Register(cardLayout, cardManager);
         
         //TITLE
         JLabel mainLabel = new JLabel("MAIN SCREEN", SwingConstants.CENTER);
@@ -33,6 +36,7 @@ public class MainScreen extends JFrame {
 
         //LOGIN BUTTON
         Dimension buttonSize = new Dimension(100, 30);
+        
         JButton goToLogin = new JButton("Login");
         goToLogin.setAlignmentX(CENTER_ALIGNMENT);
         goToLogin.setMaximumSize(buttonSize);
@@ -51,13 +55,20 @@ public class MainScreen extends JFrame {
 
         cardManager.add(mainPanel, "MainPanel");
         cardManager.add(loginPanel, "LoginPanel");
-        cardManager.add(new JPanel(), "RegisterPanel");
+        cardManager.add(registerPanel, "RegisterPanel");
 
        // mainPanel.add(loginPanel, "LoginPanel");
         goToLogin.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(cardManager, "LoginPanel");
+            }
+        });
+
+        goToRegister.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardManager, "RegisterPanel");
             }
         });
 

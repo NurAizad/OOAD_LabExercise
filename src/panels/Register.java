@@ -2,32 +2,19 @@ package panels;
 import java.awt.*; 
 import javax.swing.*; 
 import java.awt.event.*;
-import java.util.concurrent.Flow;
 
 public class Register extends JPanel
 {
-    //public Register(CardLayout cardLayout, JPanel cardManager)
-    public Register()
+    public Register(CardLayout cardLayout, JPanel cardManager)
+    //public Register()
     {
-        // Create and show the frame inside the constructor
-        JFrame frame = new JFrame("Register Panel Test");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
-        frame.setLocationRelativeTo(null); // center on screen
-        frame.setContentPane(this);        // add this panel
-        
-        //frame.setResizable(false);
-
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.CENTER;
        
-
-       // Set pink background and make it opaque
         JPanel centerContainer = new JPanel();
         centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
         add(centerContainer, gbc);
-
 
         //IDNAME PANEL
         JPanel idPanel = new JPanel();
@@ -104,7 +91,7 @@ public class Register extends JPanel
         roleLabel.setPreferredSize(new Dimension(90, 25));
         nameLabel.setPreferredSize(new Dimension(90, 25));
 
-        frame.setVisible(true);
+        setVisible(true);
 
         // --- Action Listeners ---
         registerButton.addActionListener(new ActionListener()
@@ -116,21 +103,15 @@ public class Register extends JPanel
                 String name = nameText.getText();
                 String role = (String) roleList.getSelectedItem();
                 JOptionPane.showMessageDialog(null, "ID: " + id + "\nPassword: " + password + "\nName: " + name + "\nRole: " + role);
-                //JOptionPane.showMessageDialog(null, "ID: " + id + "\nPassword: " + password);
             }
         });
 
-        // backButton.addActionListener(new ActionListener()
-        // {
-        //     public void actionPerformed(ActionEvent e)
-        //     {
-        //         cardLayout.show(cardManager, "MainPanel");
-        //     }
-        // });
-    
-    }
-
-    public static void main(String[] args) {
-        new Register();
+        backButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                cardLayout.show(cardManager, "MainPanel");
+            }
+        });
     }
 }
