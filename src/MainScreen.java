@@ -28,8 +28,8 @@ public class MainScreen extends JFrame {
         mainLabel.setAlignmentX(CENTER_ALIGNMENT);
         mainPanel.add(Box.createVerticalGlue());
         mainPanel.add(mainLabel);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 40)));
-        
+        //mainPanel.add(Box.createRigidArea(new Dimension(0, 40)));
+        mainPanel.add(Box.createVerticalGlue());
         //mainPanel.add(mainLabel, BorderLayout.CENTER);
         //mainPanel.add(goToLogin, BorderLayout.SOUTH);
 
@@ -57,7 +57,6 @@ public class MainScreen extends JFrame {
         cardManager.add(registerPanel, "RegisterPanel");
         cardManager.add(evaluatorPanel, "EvaluatorPanel");
 
-       // mainPanel.add(loginPanel, "LoginPanel");
         goToLogin.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e) {

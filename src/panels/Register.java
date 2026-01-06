@@ -72,7 +72,7 @@ public class Register extends JPanel
         //REGISTER BUTTON
         JPanel registerButtonPanel = new JPanel();
         registerButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        centerContainer.add(registerButtonPanel, gbc);
+        centerContainer.add(registerButtonPanel);
 
         JButton registerButton = new JButton("Register");
         registerButton.setPreferredSize(buttonSize);
@@ -81,7 +81,7 @@ public class Register extends JPanel
         //BACK BUTTON
         JPanel backButtonPanel = new JPanel();
         backButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        centerContainer.add(backButtonPanel, gbc);
+        centerContainer.add(backButtonPanel);
 
         JButton backButton = new JButton("Back");
         backButton.setPreferredSize(buttonSize);
