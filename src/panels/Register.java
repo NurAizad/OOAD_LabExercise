@@ -128,6 +128,7 @@ public class Register extends JPanel
                             return;  // Exit the method if ID exists
                         }
                     }
+                    fileReader.close();
 
 
                     FileWriter writer = new FileWriter(file, true); // true is for append mode

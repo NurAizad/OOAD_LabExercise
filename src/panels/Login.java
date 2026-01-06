@@ -3,6 +3,8 @@ package panels;
 import java.awt.*; 
 import javax.swing.*; 
 import java.awt.event.*;
+import java.io.*;
+import java.util.Scanner;
 
 
 public class Login extends JPanel
@@ -77,7 +79,50 @@ public class Login extends JPanel
             {
                 String id = idText.getText();
                 String password = new String(passText.getPassword());
-                JOptionPane.showMessageDialog(null, "ID: " + id + "\nPassword: " + password);
+
+                //JOptionPane.showMessageDialog(null, "ID: " + id + "\nPassword: " + password);
+                File file = new File("csvFiles/usersCSV.csv");
+               
+               try 
+                {
+                    Scanner fileReader = new Scanner(file);
+                    while (fileReader.hasNextLine()) 
+                    {
+                        String line = fileReader.nextLine();
+                        String[] parts = line.split(",");
+                        if (parts[0].equals(id) && parts[1].equals(password)) 
+                        {
+                            JOptionPane.showMessageDialog(null, "Login successful!","Success!", JOptionPane.INFORMATION_MESSAGE);
+                            fileReader.close();
+                            //SHOW THE DASHBOARD PANEL HERE
+                            return;
+                        }
+
+                        // INCORRECT PASSWROD
+                        if (parts[0].equals(id) && !parts[1].equals(password)) 
+                        {
+                            JOptionPane.showMessageDialog(null, "Incorrect password!","Error!", JOptionPane.ERROR_MESSAGE);
+                            fileReader.close();
+                            return;
+                        }
+
+                        // ID NOT FOUND
+                        if (!parts[0].equals(id)) 
+                        {
+                            JOptionPane.showMessageDialog(null, "User not found!","Error!", JOptionPane.ERROR_MESSAGE);
+                            fileReader.close();
+                            return;
+                        }
+                    }
+                    fileReader.close();
+                }
+
+                catch (Exception ex) 
+                {
+                    JOptionPane.showMessageDialog(null, "Error reading user file.","Error!", JOptionPane.ERROR_MESSAGE);
+                }
+                
+
             }
         });
 
