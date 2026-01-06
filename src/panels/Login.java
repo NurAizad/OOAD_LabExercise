@@ -83,6 +83,9 @@ public class Login extends JPanel
                 //JOptionPane.showMessageDialog(null, "ID: " + id + "\nPassword: " + password);
                 File file = new File("csvFiles/usersCSV.csv");
                
+                //clear fields after login attempt
+                idText.setText("");
+                passText.setText("");
                try 
                 {
                     Scanner fileReader = new Scanner(file);
@@ -106,21 +109,24 @@ public class Login extends JPanel
                             return;
                         }
 
-                        // ID NOT FOUND
-                        if (!parts[0].equals(id)) 
-                        {
-                            JOptionPane.showMessageDialog(null, "User not found!","Error!", JOptionPane.ERROR_MESSAGE);
-                            fileReader.close();
-                            return;
-                        }
+                        
                     }
                     fileReader.close();
+
+                    // ID NOT FOUND
+                    if (id != null) 
+                    {
+                        JOptionPane.showMessageDialog(null, "User not found!","Error!", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
+
+                
 
                 catch (Exception ex) 
                 {
                     JOptionPane.showMessageDialog(null, "Error reading user file.","Error!", JOptionPane.ERROR_MESSAGE);
                 }
+
                 
 
             }

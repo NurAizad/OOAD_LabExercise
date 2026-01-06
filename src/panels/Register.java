@@ -104,6 +104,12 @@ public class Register extends JPanel
                 String password = new String(passText.getPassword()); //getPassword returns char
                 String name = nameText.getText();
                 String role = (String) roleList.getSelectedItem();
+
+                //clear fields
+                idText.setText("");
+                passText.setText("");
+                nameText.setText("");
+                roleList.setSelectedIndex(0);
                 
                 File folder = new File("csvFiles");
                 if (!folder.exists()) 
@@ -143,6 +149,8 @@ public class Register extends JPanel
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Error occured!","Error!", JOptionPane.ERROR_MESSAGE);
                 }
+
+                
             }
         });
 
