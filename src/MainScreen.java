@@ -49,7 +49,7 @@ public class MainScreen extends JFrame {
         goToRegister.setAlignmentX(CENTER_ALIGNMENT);
         goToRegister.setMaximumSize(buttonSize);
         mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        mainPanel.add(goToRegister);
+        mainPanel.add(goToRegister); 
 
         mainPanel.add(Box.createVerticalGlue());
 
@@ -81,3 +81,5 @@ public class MainScreen extends JFrame {
         new MainScreen();
     }
 }
+
+//gg geng
