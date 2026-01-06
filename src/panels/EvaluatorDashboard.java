@@ -8,17 +8,9 @@ import java.awt.event.*;
 
 public class EvaluatorDashboard extends JPanel
 {
-    //public EvaluatorDashboard(CardLayout cardLayout, JPanel cardManager)
-    public EvaluatorDashboard()
+    public EvaluatorDashboard(CardLayout cardLayout, JPanel cardManager)
+    //public EvaluatorDashboard()
     {
-        JFrame frame = new JFrame("Evaluator Dashboard");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
-        frame.setResizable(false);
-        frame.setLocationRelativeTo(null);
-        frame.setContentPane(this);
-        
-        
         //setLayout(new GridBagLayout());
         setLayout (new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -63,18 +55,28 @@ public class EvaluatorDashboard extends JPanel
         JButton evaluateButton = new JButton("Evaluate Presentations");
         evaluateButton.setPreferredSize(buttonSize);
         evaluateButtonPanel.add(evaluateButton);
-        
 
+        //LOGOUT BUTTON
+        JButton logoutButton = new JButton("Logout");
+        logoutButton.setPreferredSize(buttonSize);
+        JPanel logoutButtonPanel = new JPanel();
 
+        logoutButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        centerContainer.add(logoutButtonPanel);
+        logoutButtonPanel.add(logoutButton);
 
-        frame.setVisible(true);
+        setVisible(true);
 
-        //add(evaluatorLabel, gbc);
+        //---ACTION LISTENERS---
+        logoutButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardManager, "MainPanel");
+                
+            }
+        });
+
+       
     }
     
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        new EvaluatorDashboard();
-
-    }
 }

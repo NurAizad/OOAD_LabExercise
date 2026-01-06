@@ -1,9 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import panels.Login;
-import panels.Register;
-
+import panels.*;
 
 public class MainScreen extends JFrame {
 
@@ -23,6 +21,7 @@ public class MainScreen extends JFrame {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         Login loginPanel = new Login(cardLayout, cardManager);
         Register registerPanel = new Register(cardLayout, cardManager);
+        EvaluatorDashboard evaluatorPanel = new EvaluatorDashboard(cardLayout, cardManager);
         
         //TITLE
         JLabel mainLabel = new JLabel("MAIN SCREEN", SwingConstants.CENTER);
@@ -56,6 +55,7 @@ public class MainScreen extends JFrame {
         cardManager.add(mainPanel, "MainPanel");
         cardManager.add(loginPanel, "LoginPanel");
         cardManager.add(registerPanel, "RegisterPanel");
+        cardManager.add(evaluatorPanel, "EvaluatorPanel");
 
        // mainPanel.add(loginPanel, "LoginPanel");
         goToLogin.addActionListener(new ActionListener()
