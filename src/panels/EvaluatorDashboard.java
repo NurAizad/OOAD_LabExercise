@@ -15,21 +15,6 @@ public class EvaluatorDashboard extends JPanel
         setLayout (new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.CENTER;
-
-        //TOP TITLE
-        //DASHBOARD PANEL
-        // JPanel dashboardPanel = new JPanel();
-        // dashboardPanel.setLayout(new BoxLayout(dashboardPanel, BoxLayout.Y_AXIS));
-        // dashboardPanel.setBackground(Color.LIGHT_GRAY);
-        // dashboardPanel.setOpaque(true);
-        // add(dashboardPanel, gbc);
-
-        // JLabel dashboardLabel = new JLabel("EVALUATOR DASHBOARD", SwingConstants.CENTER);
-        // dashboardLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        // dashboardLabel.setAlignmentX(CENTER_ALIGNMENT);
-        // dashboardLabel.setAlignmentY(TOP_ALIGNMENT);
-        // //dashboardPanel.add(dashboardLabel);
-        // add(dashboardLabel, BorderLayout.NORTH);
         
         JPanel centerContainer = new JPanel();
         centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));

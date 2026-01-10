@@ -19,7 +19,9 @@ public class Login extends JPanel
 
         JPanel centerContainer = new JPanel();
         centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
-        
+        //centerContainer.setBackground(Color.PINK);
+        //centerContainer.setPreferredSize(new Dimension(300, 250));
+        //centerContainer.setOpaque(true);
         add(centerContainer, gbc);
 
     
@@ -27,6 +29,7 @@ public class Login extends JPanel
         //username label and text field
         JPanel idPanel = new JPanel();
         idPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        idPanel.setBackground(Color.LIGHT_GRAY);
         centerContainer.add(idPanel);
 
         JLabel idLabel = new JLabel("ID");
@@ -37,6 +40,7 @@ public class Login extends JPanel
         //password label and text field
         JPanel passPanel = new JPanel();
         passPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        passPanel.setBackground(Color.LIGHT_GRAY);
         centerContainer.add(passPanel);
 
         JLabel passLabel = new JLabel("Password");
@@ -46,23 +50,27 @@ public class Login extends JPanel
 
         //BUTTONS
         Dimension buttonSize = new Dimension(100, 30);
-
+        Color buttonColor = new Color(216, 223, 231);
         //LOGIN BUTTON
         JPanel loginButtonPanel = new JPanel();
         loginButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        loginButtonPanel.setBackground(Color.LIGHT_GRAY);
         centerContainer.add(loginButtonPanel);
 
         JButton loginButton = new JButton("Login");
         loginButton.setPreferredSize(buttonSize);
+        loginButton.setBackground(buttonColor);
         loginButtonPanel.add(loginButton);
         
         //BACK BUTTON
         JPanel backButtonPanel = new JPanel();
         backButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        backButtonPanel.setBackground(Color.LIGHT_GRAY);
         centerContainer.add(backButtonPanel);
 
         JButton backButton = new JButton("Back");
         backButton.setPreferredSize(buttonSize);
+        backButton.setBackground(buttonColor);
         backButtonPanel.add(backButton);
 
         //ALIGN LABELS

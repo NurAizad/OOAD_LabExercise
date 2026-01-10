@@ -23,15 +23,13 @@ public class MainScreen extends JFrame {
         Register registerPanel = new Register(cardLayout, cardManager);
         EvaluatorDashboard evaluatorPanel = new EvaluatorDashboard(cardLayout, cardManager);
         
+        
         //TITLE
         JLabel mainLabel = new JLabel("MAIN SCREEN", SwingConstants.CENTER);
         mainLabel.setAlignmentX(CENTER_ALIGNMENT);
         mainPanel.add(Box.createVerticalGlue());
         mainPanel.add(mainLabel);
-        //mainPanel.add(Box.createRigidArea(new Dimension(0, 40)));
         mainPanel.add(Box.createVerticalGlue());
-        //mainPanel.add(mainLabel, BorderLayout.CENTER);
-        //mainPanel.add(goToLogin, BorderLayout.SOUTH);
 
         //LOGIN BUTTON
         Dimension buttonSize = new Dimension(100, 30);
