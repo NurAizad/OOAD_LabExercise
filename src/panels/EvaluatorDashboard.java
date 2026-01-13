@@ -2,14 +2,12 @@ package panels;
 
 import java.awt.*;
 import javax.swing.*;
-//import javax.swing.border.Border;
 
 import java.awt.event.*;
 
 public class EvaluatorDashboard extends JPanel
 {
     public EvaluatorDashboard(CardLayout cardLayout, JPanel cardManager)
-    //public EvaluatorDashboard()
     {
         setBackground(Color.LIGHT_GRAY);
         setLayout (new GridBagLayout());

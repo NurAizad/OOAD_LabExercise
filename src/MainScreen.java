@@ -32,12 +32,14 @@ public class MainScreen extends JFrame {
         mainPanel.add(Box.createVerticalGlue());
 
         //LOGIN BUTTON
+        Color buttonColor = new Color(216, 223, 231);
         Dimension buttonSize = new Dimension(100, 30);
         
         JButton goToLogin = new JButton("Login");
         goToLogin.setAlignmentX(CENTER_ALIGNMENT);
         goToLogin.setMaximumSize(buttonSize);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        //mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        goToLogin.setBackground(buttonColor);
         mainPanel.add(goToLogin);
 
 
@@ -46,6 +48,7 @@ public class MainScreen extends JFrame {
         goToRegister.setAlignmentX(CENTER_ALIGNMENT);
         goToRegister.setMaximumSize(buttonSize);
         mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        goToRegister.setBackground(buttonColor);
         mainPanel.add(goToRegister);
 
         mainPanel.add(Box.createVerticalGlue());
