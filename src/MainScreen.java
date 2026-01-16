@@ -23,23 +23,23 @@ public class MainScreen extends JFrame {
         Register registerPanel = new Register(cardLayout, cardManager);
         EvaluatorDashboard evaluatorPanel = new EvaluatorDashboard(cardLayout, cardManager);
         
+        
         //TITLE
         JLabel mainLabel = new JLabel("MAIN SCREEN", SwingConstants.CENTER);
         mainLabel.setAlignmentX(CENTER_ALIGNMENT);
         mainPanel.add(Box.createVerticalGlue());
         mainPanel.add(mainLabel);
-        //mainPanel.add(Box.createRigidArea(new Dimension(0, 40)));
         mainPanel.add(Box.createVerticalGlue());
-        //mainPanel.add(mainLabel, BorderLayout.CENTER);
-        //mainPanel.add(goToLogin, BorderLayout.SOUTH);
 
         //LOGIN BUTTON
+        Color buttonColor = new Color(216, 223, 231);
         Dimension buttonSize = new Dimension(100, 30);
         
         JButton goToLogin = new JButton("Login");
         goToLogin.setAlignmentX(CENTER_ALIGNMENT);
         goToLogin.setMaximumSize(buttonSize);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        //mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        goToLogin.setBackground(buttonColor);
         mainPanel.add(goToLogin);
 
 
@@ -48,7 +48,8 @@ public class MainScreen extends JFrame {
         goToRegister.setAlignmentX(CENTER_ALIGNMENT);
         goToRegister.setMaximumSize(buttonSize);
         mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        mainPanel.add(goToRegister); 
+        goToRegister.setBackground(buttonColor);
+        mainPanel.add(goToRegister);
 
         mainPanel.add(Box.createVerticalGlue());
 
