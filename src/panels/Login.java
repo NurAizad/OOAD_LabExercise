@@ -88,7 +88,6 @@ public class Login extends JPanel
                 String id = idText.getText();
                 String password = new String(passText.getPassword());
 
-                //JOptionPane.showMessageDialog(null, "ID: " + id + "\nPassword: " + password);
                 File file = new File("csvFiles/usersCSV.csv");
                
                 //clear fields after login attempt
