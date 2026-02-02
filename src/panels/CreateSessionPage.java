@@ -9,6 +9,28 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class CreateSessionPage extends JPanel{
+    private void loadUsersByRole(JComboBox<String> comboBox, String targetRole) {
+    File file = new File("csvFiles/usersCSV.csv");
+    if (!file.exists()) return;
+
+    try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] data = line.split(",");
+            // Assuming CSV format: Username,Password,Role
+            if (data.length >= 4) {
+                String name = data[2].trim();
+                String role = data[3].trim();
+                
+                if (role.equalsIgnoreCase(targetRole)) {
+                    comboBox.addItem(name);
+                }
+            }
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
     private void makeSearchable(JComboBox<String> comboBox, String[] originalItems) {
     comboBox.setEditable(true);
     JTextField textField = (JTextField) comboBox.getEditor().getEditorComponent();
@@ -58,19 +80,29 @@ public class CreateSessionPage extends JPanel{
 
         Dimension inputDim = new Dimension(300, 30);
 
-        String[] students = {"-- Select a student --","Aizad", "Yuven"};
-        JComboBox<String> studentList = new JComboBox<>(students);
+        String[] studentPlaceholder = {"-- Select a student --"};
+        JComboBox<String> studentList = new JComboBox<>(new DefaultComboBoxModel<>(studentPlaceholder));
         studentList.setPreferredSize(inputDim);
-        studentList.setModel(new DefaultComboBoxModel<>(students));
-        makeSearchable(studentList, students);
+        loadUsersByRole(studentList, "Student");
+        
+        String[] allStudents = new String[studentList.getItemCount()];
+        for (int i = 0; i < studentList.getItemCount(); i++) {
+            allStudents[i] = studentList.getItemAt(i);
+        }
+        makeSearchable(studentList, allStudents);
         //studentList.setEditable(true);
         //container.add(createInputRow("Type", typeCombo));
 
-        String[] evaluators = {"-- Select an evaluator --","Vidhya", "Afrina"};
-        JComboBox<String> evaluatorList = new JComboBox<>(evaluators);
+        String[] evaluatorPlaceholder = {"-- Select an evaluator --"};
+        JComboBox<String> evaluatorList = new JComboBox<>(new DefaultComboBoxModel<>(evaluatorPlaceholder));
         evaluatorList.setPreferredSize(inputDim);
-        evaluatorList.setModel(new DefaultComboBoxModel<>(evaluators));
-        makeSearchable(evaluatorList, evaluators);
+        loadUsersByRole(evaluatorList, "Evaluator");
+
+        String[] allEvaluators = new String[evaluatorList.getItemCount()];
+        for (int i = 0; i < evaluatorList.getItemCount(); i++) {
+            allEvaluators[i] = evaluatorList.getItemAt(i);
+        }
+        makeSearchable(evaluatorList, allEvaluators);
         //evaluatorList.setEditable(true);
         //container.add(createInputRow("Type", typeCombo));
 
