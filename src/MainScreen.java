@@ -1,9 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import panels.Login;
-import panels.Register;
-
+import panels.*;
 
 public class MainScreen extends JFrame {
 
@@ -23,14 +21,16 @@ public class MainScreen extends JFrame {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         Login loginPanel = new Login(cardLayout, cardManager);
         Register registerPanel = new Register(cardLayout, cardManager);
+        EvaluatorDashboard evaluatorPanel = new EvaluatorDashboard(cardLayout, cardManager);
+        StudentDashboard studentPanel = new StudentDashboard(cardLayout, cardManager);
         
         //TITLE
         JLabel mainLabel = new JLabel("MAIN SCREEN", SwingConstants.CENTER);
         mainLabel.setAlignmentX(CENTER_ALIGNMENT);
         mainPanel.add(Box.createVerticalGlue());
         mainPanel.add(mainLabel);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 40)));
-        
+        //mainPanel.add(Box.createRigidArea(new Dimension(0, 40)));
+        mainPanel.add(Box.createVerticalGlue());
         //mainPanel.add(mainLabel, BorderLayout.CENTER);
         //mainPanel.add(goToLogin, BorderLayout.SOUTH);
 
@@ -56,8 +56,8 @@ public class MainScreen extends JFrame {
         cardManager.add(mainPanel, "MainPanel");
         cardManager.add(loginPanel, "LoginPanel");
         cardManager.add(registerPanel, "RegisterPanel");
-
-       // mainPanel.add(loginPanel, "LoginPanel");
+        cardManager.add(evaluatorPanel, "EvaluatorPanel");
+        cardManager.add(studentPanel, "StudentPanel");
         goToLogin.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e) {
