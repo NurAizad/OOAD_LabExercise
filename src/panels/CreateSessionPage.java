@@ -35,6 +35,27 @@ public class CreateSessionPage extends JPanel{
     comboBox.setEditable(true);
     JTextField textField = (JTextField) comboBox.getEditor().getEditorComponent();
 
+    textField.addFocusListener(new FocusAdapter() {
+        @Override
+        public void focusGained(FocusEvent e) {
+            String currentText = textField.getText();
+            if (currentText.startsWith("-- Select")) {
+                textField.setText("");
+            }
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            if (textField.getText().isEmpty()) {
+                // Determine which placeholder to put back
+                if (comboBox.getToolTipText() != null && comboBox.getToolTipText().contains("Evaluator")) {
+                    textField.setText("-- Select an evaluator --");
+                } else {
+                    textField.setText("-- Select a student --");
+                }
+            }
+        }
+    });
     textField.addKeyListener(new KeyAdapter() {
         @Override
         public void keyReleased(KeyEvent e) {
@@ -60,6 +81,7 @@ public class CreateSessionPage extends JPanel{
         }
     });
 }
+    
     public CreateSessionPage(CardLayout cardLayout, JPanel cardManager) {
 
         setBackground(new Color(245, 245, 245));
