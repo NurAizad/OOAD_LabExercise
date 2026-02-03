@@ -1,10 +1,10 @@
 package panels;
 
 import java.awt.*; 
-import javax.swing.*; 
 import java.awt.event.*;
 import java.io.*;
 import java.util.Scanner;
+import javax.swing.*;
 
 
 public class Login extends JPanel
@@ -95,9 +95,31 @@ public class Login extends JPanel
                         String[] parts = line.split(",");
                         if (parts[0].equals(id) && parts[1].equals(password)) 
                         {
+                            
+
                             JOptionPane.showMessageDialog(null, "Login successful!","Success!", JOptionPane.INFORMATION_MESSAGE);
                             fileReader.close();
                             //SHOW THE DASHBOARD PANEL HERE
+                            String role = parts[3];
+
+                            //IF STUDENT
+                             if (role.equals("Student"))
+                                {
+                                    cardlayout.show (cardManager, "StudentPanel");
+                                    fileReader.close();
+                                    return;
+
+                                }          
+                                                 
+                            //IF EVALUATOR
+                            if (role.equals("Evaluator"))
+                            {
+                                cardLayout.show(cardManager, "EvaluatorPanel");
+                                fileReader.close();
+                                return;
+                            }
+
+                            //IF COORDINATOR
                             return;
                         }
 
@@ -108,6 +130,8 @@ public class Login extends JPanel
                             fileReader.close();
                             return;
                         }
+
+                        
 
                         
                     }
