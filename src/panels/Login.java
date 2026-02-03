@@ -1,10 +1,10 @@
 package panels;
 
 import java.awt.*; 
-import javax.swing.*; 
 import java.awt.event.*;
 import java.io.*;
 import java.util.Scanner;
+import javax.swing.*;
 
 
 public class Login extends JPanel
@@ -108,8 +108,16 @@ public class Login extends JPanel
                             fileReader.close();
                             //SHOW THE DASHBOARD PANEL HERE
                             String role = parts[3];
-                            //IF STUDENT
 
+                            //IF STUDENT
+                             if (role.equals("Student"))
+                                {
+                                    cardlayout.show (cardManager, "StudentPanel");
+                                    fileReader.close();
+                                    return;
+
+                                }          
+                                                 
                             //IF EVALUATOR
                             if (role.equals("Evaluator"))
                             {
