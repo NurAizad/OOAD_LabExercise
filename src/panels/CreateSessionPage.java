@@ -102,6 +102,11 @@ public class CreateSessionPage extends JPanel{
 
         Dimension inputDim = new Dimension(300, 30);
 
+        String[] types = {"-- Select a session type --","Oral", "Poster"};
+        JComboBox<String> typeCombo = new JComboBox<>(types);
+        typeCombo.setPreferredSize(inputDim);
+        //container.add(createInputRow("Type", typeCombo));
+
         String[] studentPlaceholder = {"-- Select a student --"};
         JComboBox<String> studentList = new JComboBox<>(new DefaultComboBoxModel<>(studentPlaceholder));
         studentList.setPreferredSize(inputDim);
@@ -134,10 +139,6 @@ public class CreateSessionPage extends JPanel{
         dateSpinner.setEditor(dateEditor);
         dateSpinner.setPreferredSize(inputDim);
 
-        String[] types = {"-- Select a session type --","Online", "Physical"};
-        JComboBox<String> typeCombo = new JComboBox<>(types);
-        typeCombo.setPreferredSize(inputDim);
-        //container.add(createInputRow("Type", typeCombo));
 
         String[] venues = {"-- Select a venue --", "Hall A", "Lecture Theater 1", "Computer Lab 4", "Conference Room", "Virtual Link (Zoom/Teams)" };
         JComboBox<String> venueList = new JComboBox<>(venues);
@@ -147,14 +148,14 @@ public class CreateSessionPage extends JPanel{
         JComboBox<String> timeList = new JComboBox<>(times);
         timeList.setPreferredSize(inputDim);
 
+        mainCard.add(createStyledRow("Session Type:", typeCombo, 120));
+        mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
         mainCard.add(createStyledRow("Select Student:", studentList, 120));
         mainCard.add(Box.createRigidArea(new Dimension(0, 10))); 
         mainCard.add(createStyledRow("Select Evaluator:", evaluatorList, 120));
         mainCard.add(Box.createRigidArea(new Dimension(0, 10))); 
         mainCard.add(createStyledRow("Select Date:", dateSpinner, 120));
         mainCard.add(Box.createRigidArea(new Dimension(0, 10))); 
-        mainCard.add(createStyledRow("Session Type:", typeCombo, 120));
-        mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
         mainCard.add(createStyledRow("Select Venue:", venueList, 120));
         mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
         mainCard.add(createStyledRow("Time Slot:", timeList, 120));
@@ -178,24 +179,6 @@ public class CreateSessionPage extends JPanel{
         //buttonPanel.add(saveButton);
         //mainCard.add(buttonPanel);
         
-        
-        typeCombo.addActionListener(e-> {
-            String selectedType = (String) typeCombo.getSelectedItem();
-
-            venueList.removeAllItems();
-            venueList.addItem("-- Select a venue --");
-
-            if ("Online".equals(selectedType)) {
-                venueList.addItem("Virtual Link (Zoom/Ms. Teams/Google Meet)");
-
-            } else if ("Physical".equals(selectedType)) {
-                venueList.addItem("Hall A");
-                venueList.addItem("Lecture Theater 1");
-                venueList.addItem("Computer Lab 4");
-                venueList.addItem("Conference Room");
-            } 
-            venueList.setSelectedIndex(0);
-        });
 
         saveButton.addActionListener(e -> {
             String student = (String) studentList.getSelectedItem();
