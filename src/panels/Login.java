@@ -112,7 +112,7 @@ public class Login extends JPanel
                                 }          
                                                  
                             //IF EVALUATOR
-                            if (role.equals("Evaluator"))
+                            else if (role.equals("Evaluator"))
                             {
                                 cardLayout.show(cardManager, "EvaluatorPanel");
                                 fileReader.close();
@@ -120,6 +120,13 @@ public class Login extends JPanel
                             }
 
                             //IF COORDINATOR
+                            else if (role.equals("Coordinator"))
+                            {
+                                cardLayout.show(cardManager, "CoordinatorPanel"); 
+                                fileReader.close();
+                                return;
+                            }
+                            
                             return;
                         }
 
