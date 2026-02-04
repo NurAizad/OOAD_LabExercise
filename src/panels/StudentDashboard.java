@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class StudentDashboard extends JPanel{
-    public StudentDashboard(CardLayout, cardlayout, JPanel, cardManager) {
+    public StudentDashboard(CardLayout cardlayout, JPanel cardManager) {
 
         setLayout(new GridBagLayout ());
         
