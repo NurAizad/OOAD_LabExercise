@@ -22,7 +22,7 @@ public class MainScreen extends JFrame {
         Login loginPanel = new Login(cardLayout, cardManager);
         Register registerPanel = new Register(cardLayout, cardManager);
         EvaluatorDashboard evaluatorPanel = new EvaluatorDashboard(cardLayout, cardManager);
-        StudentDashboard studentPanel = new StudentDashboard(cardLayout, cardManager);
+        StudentDashboard studentPanel = new StudentDashboard (cardLayout, cardManager);
         
         //TITLE
         JLabel mainLabel = new JLabel("MAIN SCREEN", SwingConstants.CENTER);
