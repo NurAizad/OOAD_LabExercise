@@ -9,6 +9,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class CreateSessionPage extends JPanel{
+    private CardLayout cardLayout;
+    private JPanel cardManager;
     private void loadUsersByRole(JComboBox<String> comboBox, String targetRole) {
     File file = new File("csvFiles/usersCSV.csv");
     if (!file.exists()) return;
@@ -34,6 +36,8 @@ public class CreateSessionPage extends JPanel{
     private void makeSearchable(JComboBox<String> comboBox, String[] originalItems) {
     comboBox.setEditable(true);
     JTextField textField = (JTextField) comboBox.getEditor().getEditorComponent();
+
+    
 
     textField.addFocusListener(new FocusAdapter() {
         @Override
@@ -84,6 +88,9 @@ public class CreateSessionPage extends JPanel{
     
     public CreateSessionPage(CardLayout cardLayout, JPanel cardManager) {
 
+        this.cardLayout = cardLayout;
+        this.cardManager = cardManager;
+
         setBackground(new Color(245, 245, 245));
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -120,6 +127,35 @@ public class CreateSessionPage extends JPanel{
         //studentList.setEditable(true);
         //container.add(createInputRow("Type", typeCombo));
 
+        studentList.addActionListener(e -> {
+            String selectedStudent = (String) studentList.getSelectedItem();
+            // Skip if nothing is selected or if it's the placeholder
+            if (selectedStudent == null || selectedStudent.startsWith("-- Select")) return;
+
+            try (BufferedReader br = new BufferedReader(new FileReader("csvFiles/registrationsCSV.csv"))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    String[] data = line.split(",");
+                    // registrationsCSV format: Name(0), Topic(1), Description(2), Type(3)
+                    if (data.length >= 4 && data[0].trim().equalsIgnoreCase(selectedStudent)) {
+                        String registeredType = data[3].trim();
+                        
+                        // Set typeCombo to match the CSV value
+                        for (int i = 0; i < typeCombo.getItemCount(); i++) {
+                            if (typeCombo.getItemAt(i).equalsIgnoreCase(registeredType)) {
+                                typeCombo.setSelectedIndex(i);
+                                break;
+                            }
+                        }
+                        break; 
+                    }
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+        
+
         String[] evaluatorPlaceholder = {"-- Select an evaluator --"};
         JComboBox<String> evaluatorList = new JComboBox<>(new DefaultComboBoxModel<>(evaluatorPlaceholder));
         evaluatorList.setPreferredSize(inputDim);
@@ -132,6 +168,7 @@ public class CreateSessionPage extends JPanel{
         makeSearchable(evaluatorList, allEvaluators);
         //evaluatorList.setEditable(true);
         //container.add(createInputRow("Type", typeCombo));
+
 
         SpinnerDateModel dateModel = new SpinnerDateModel(new Date(), null, null, Calendar.DAY_OF_MONTH);
         JSpinner dateSpinner = new JSpinner(dateModel);
@@ -148,12 +185,13 @@ public class CreateSessionPage extends JPanel{
         JComboBox<String> timeList = new JComboBox<>(times);
         timeList.setPreferredSize(inputDim);
 
-        mainCard.add(createStyledRow("Session Type:", typeCombo, 120));
-        mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
+        
         mainCard.add(createStyledRow("Select Student:", studentList, 120));
         mainCard.add(Box.createRigidArea(new Dimension(0, 10))); 
         mainCard.add(createStyledRow("Select Evaluator:", evaluatorList, 120));
         mainCard.add(Box.createRigidArea(new Dimension(0, 10))); 
+        mainCard.add(createStyledRow("Session Type:", typeCombo, 120));
+        mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
         mainCard.add(createStyledRow("Select Date:", dateSpinner, 120));
         mainCard.add(Box.createRigidArea(new Dimension(0, 10))); 
         mainCard.add(createStyledRow("Select Venue:", venueList, 120));
@@ -183,9 +221,9 @@ public class CreateSessionPage extends JPanel{
         saveButton.addActionListener(e -> {
             String student = (String) studentList.getSelectedItem();
             String evaluator = (String) evaluatorList.getSelectedItem();
+            String type = (String) typeCombo.getSelectedItem();
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
             String dateStr = sdf.format(dateSpinner.getValue());
-            String type = (String) typeCombo.getSelectedItem();
             String venue = (String) venueList.getSelectedItem();
             String time = (String) timeList.getSelectedItem();
 
@@ -194,7 +232,58 @@ public class CreateSessionPage extends JPanel{
                 JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Input Required", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            
+
+            // Conflict Validation
+            boolean isRegistered = false;
+            try (BufferedReader regReader = new BufferedReader(new FileReader("csvFiles/registrationsCSV.csv"))) {
+                String line;
+                while ((line = regReader.readLine()) != null) {
+                    if (line.startsWith(student + ",")) {
+                        isRegistered = true;
+                        break;
+                    }
+                }
+            } catch (IOException ex) { ex.printStackTrace(); }
+
+            if (!isRegistered) {
+                JOptionPane.showMessageDialog(this, "This student has not registered for the seminar yet.");
+                return;
+            }
+
+            File sessionFile = new File("csvFiles/sessionsCSV.csv");
+            if (sessionFile.exists()) {
+                try (BufferedReader sessionReader = new BufferedReader(new FileReader(sessionFile))) {
+                    String line;
+                    while ((line = sessionReader.readLine()) != null) {
+                        String[] parts = line.split(",");
+                        if (parts.length < 7) continue;
+
+                        String exStudent = parts[0].trim();
+                        String exEvaluator = parts[1].trim();
+                        String exDate = parts[3].trim();
+                        String exVenue = parts[4].trim();
+                        String exTime = parts[6].trim();
+
+                        if (student.equals(exStudent)) {
+                            JOptionPane.showMessageDialog(this, "This student is already assigned to a session.");
+                            return;
+                        }
+
+                        if (dateStr.equals(exDate) && time.equals(exTime)) {
+                            if (evaluator.equalsIgnoreCase(exEvaluator)) {
+                                JOptionPane.showMessageDialog(this, "Evaluator is not available at this time.");
+                                return;
+                            }
+                            if (venue.equals(exVenue)) {
+                                JOptionPane.showMessageDialog(this, "Venue is already booked for this time!");
+                                return;
+                            }
+                        }
+                    }
+                } catch (IOException ex) { ex.printStackTrace(); }
+            }
+
+
             try {
                 File folder = new File("csvFiles");
                 if (!folder.exists()) folder.mkdir();
@@ -202,11 +291,11 @@ public class CreateSessionPage extends JPanel{
                 File file = new File("csvFiles/sessionsCSV.csv");
                 FileWriter writer = new FileWriter(file, true);
 
-                writer.write(student + "," + evaluator + "," + dateStr + "," + venue + "," + type + "," + time + "\n");
+                writer.write(student + "," + evaluator + "," + type + "," + dateStr + "," + venue + ",," + time + "\n");
                 writer.close();
 
-                JOptionPane.showMessageDialog(this, "Session Created Successfully!");
-                cardLayout.show(cardManager, "MainPanel");
+                JOptionPane.showMessageDialog(this, "Session Created Successfully.");
+                cardLayout.show(cardManager, "CoordinatorPanel");
 
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -225,7 +314,7 @@ public class CreateSessionPage extends JPanel{
         return panel;
     }
     // Temporary main method for independent testing
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         JFrame frame = new JFrame("Test CreateSessionPage");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 400);
@@ -240,5 +329,5 @@ public class CreateSessionPage extends JPanel{
 
         frame.add(container);
         frame.setVisible(true);
-    }
+    } */
 }
