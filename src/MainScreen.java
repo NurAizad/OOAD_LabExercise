@@ -21,7 +21,8 @@ public class MainScreen extends JFrame {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         Login loginPanel = new Login(cardLayout, cardManager);
         Register registerPanel = new Register(cardLayout, cardManager);
-        EvaluatorDashboard evaluatorPanel = new EvaluatorDashboard(cardLayout, cardManager);
+       // EvaluatorDashboard evaluatorPanel = new EvaluatorDashboard(cardLayout, cardManager);
+
         StudentDashboard studentPanel = new StudentDashboard(cardLayout, cardManager);
         CoordinatorDashboard coordinatorPanel = new CoordinatorDashboard(cardLayout, cardManager);
         CreateSessionPage createSessionPanel = new CreateSessionPage(cardLayout, cardManager);
@@ -60,7 +61,7 @@ public class MainScreen extends JFrame {
         cardManager.add(mainPanel, "MainPanel");
         cardManager.add(loginPanel, "LoginPanel");
         cardManager.add(registerPanel, "RegisterPanel");
-        cardManager.add(evaluatorPanel, "EvaluatorPanel");
+        //cardManager.add(evaluatorPanel, "EvaluatorPanel");
         cardManager.add(studentPanel, "StudentPanel");
         cardManager.add(coordinatorPanel, "CoordinatorPanel");
         cardManager.add(createSessionPanel, "CreateSessionPanel");

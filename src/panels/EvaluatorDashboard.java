@@ -6,9 +6,9 @@ import java.awt.event.*;
 
 public class EvaluatorDashboard extends JPanel
 {
-    public EvaluatorDashboard(CardLayout cardLayout, JPanel cardManager)
+    public EvaluatorDashboard(CardLayout cardLayout, JPanel cardManager, String evaluatorName)
     {
-        setBackground(Color.LIGHT_GRAY);
+        //setBackground(Color.LIGHT_GRAY);
         setLayout (new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.CENTER;
@@ -17,6 +17,10 @@ public class EvaluatorDashboard extends JPanel
         centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
         add(centerContainer, gbc);
 
+        JLabel welcomeLabel = new JLabel("Welcome, " + evaluatorName); //LATER NI DELETE NI DEBUG PURPOSES
+        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        welcomeLabel.setAlignmentX(CENTER_ALIGNMENT);
+        centerContainer.add(welcomeLabel);
 
         //BUTTONS
         Dimension buttonSize = new Dimension(200, 30);
@@ -25,7 +29,7 @@ public class EvaluatorDashboard extends JPanel
         //REVIEW SUBMISSIONS BUTTON
         JPanel reviewButtonPanel = new JPanel();
         reviewButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        reviewButtonPanel.setBackground(Color.LIGHT_GRAY);
+        //reviewButtonPanel.setBackground(Color.LIGHT_GRAY);
         centerContainer.add(reviewButtonPanel);
 
         JButton reviewButton = new JButton("View Presentations");
@@ -36,7 +40,7 @@ public class EvaluatorDashboard extends JPanel
         //EVALUATE SUBMISSIONS BUTTON
         JPanel evaluateButtonPanel = new JPanel();
         evaluateButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        evaluateButtonPanel.setBackground(Color.LIGHT_GRAY);
+        //evaluateButtonPanel.setBackground(Color.LIGHT_GRAY);
         centerContainer.add(evaluateButtonPanel);
 
         JButton evaluateButton = new JButton("Evaluate Presentations");
@@ -49,7 +53,7 @@ public class EvaluatorDashboard extends JPanel
         logoutButton.setPreferredSize(buttonSize);
         logoutButton.setBackground(buttonColor);
         JPanel logoutButtonPanel = new JPanel();
-        logoutButtonPanel.setBackground(Color.LIGHT_GRAY);
+        //logoutButtonPanel.setBackground(Color.LIGHT_GRAY);
 
         logoutButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         centerContainer.add(logoutButtonPanel);

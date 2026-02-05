@@ -19,9 +19,6 @@ public class Login extends JPanel
 
         JPanel centerContainer = new JPanel();
         centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
-        //centerContainer.setBackground(Color.PINK);
-        //centerContainer.setPreferredSize(new Dimension(300, 250));
-        //centerContainer.setOpaque(true);
         add(centerContainer, gbc);
 
     
@@ -121,6 +118,10 @@ public class Login extends JPanel
                             //IF EVALUATOR
                             else if (role.equals("Evaluator"))
                             {
+                                //cardLayout.show(cardManager, "EvaluatorPanel");
+                                String name = parts[2];
+                                EvaluatorDashboard evaluatorDashboard = new EvaluatorDashboard(cardLayout, cardManager, name);
+                                cardManager.add(evaluatorDashboard, "EvaluatorPanel");
                                 cardLayout.show(cardManager, "EvaluatorPanel");
                                 fileReader.close();
                                 return;
