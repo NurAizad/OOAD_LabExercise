@@ -2,8 +2,6 @@ package panels;
 
 import java.awt.*;
 import javax.swing.*;
-
-
 public class StudentDashboard extends JPanel{
     public StudentDashboard(CardLayout cardLayout, JPanel cardManager) 
     {
@@ -64,11 +62,67 @@ public class StudentDashboard extends JPanel{
         // Uploading Material
 
         JPanel filePanel = new JPanel (new FlowLayout (FlowLayout.CENTER, 10, 10));
-        
-        
+        JLabel fileLabel = new JLabel ("Material Path: ");
+        fileLabel.setPreferredSize (labelSize);
+        JTextField fileField = new JTextField (12);
+        JButton browseButton = new JButton ("Browse");
+        filePanel.add (fileLabel);
+        filePanel.add (fileField);
+        filePanel.add (browseButton);
+        centerContainer.add (filePanel);
 
+        // For Register Button 
 
+        JPanel submitButtonPanel = new JPanel (new FlowLayout (FlowLayout.CENTER, 10, 10));
+        JButton submitButton = new JButton ("Register Seminar");
+        submitButton.setPreferredSize (buttonSize);
+        submitButtonPanel.add (submitButton);
+        centerContainer.add (submitButtonPanel);
 
+        // Logout Button
+
+        JPanel logoutButtonPanel = new JPanel (new FlowLayout (FlowLayout.CENTER, 10, 10));
+        JButton logoutButton = new JButton ("Logout");
+        logoutButton.setPreferredSize (buttonSize);
+        logoutButtonPanel.add (logoutButton);
+        centerContainer.add (logoutButtonPanel);
+
+        setVisible (true);
+
+        // Action Listeners 
+
+        browseButton.addActionListener (e -> 
+        {
+            JFileChooser fileChooser = new JFileChooser ();
+            if (chooser.showOpenDialog (this) == JFileChooser.APROOVE_OPTION)            if (choser.APPROVE_OPTION)
+            {
+                filePathField.setText (chooser.getSelectedFile().getAbsolutePath());
+            }
+        });
+
+        submitButton.addActionListener (e -> 
+        {
+            try (FileWriter writer = new FileWriter ("csvFiles/registrationsCSV.csv", true))
+            {
+                writer.write (titleField.getText() + "," +
+                              supervisorField.getText() + "," +
+                              typeCombo.getSelectedItem() + "," +
+                              filePathField.getText() + "\n");
+
+                JOptionPane.showMessageDialog (this, "Registration Succesful!");
+            }
+            catch (IOException ex)
+            {
+                JOptionPane.showMessageDialog (this, "Error saving file.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        logoutButton.addActionListener (new ActionListener ()
+        {
+            public void actionPerformed (ActionEvent e) 
+            {
+                cardLayout.show (cardManager, "MainPanel");
+            }
+        });
     }
-    
 }
