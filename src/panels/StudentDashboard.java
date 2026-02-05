@@ -4,8 +4,14 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.filechooser.*;
+import java.io.File;
+
 public class StudentDashboard extends JPanel{
 
     private JTextField titleField;
@@ -13,6 +19,8 @@ public class StudentDashboard extends JPanel{
     private JTextField supervisorField;
     private JTextField fileField;
     private JComboBox<String> typeCombo;
+
+    private File selectedFile;
 
     public StudentDashboard(CardLayout cardLayout, JPanel cardManager) 
     {
@@ -130,21 +138,57 @@ public class StudentDashboard extends JPanel{
             if (fileChooser.showOpenDialog (this) == JFileChooser.APPROVE_OPTION)
             {
                 fileField.setText (fileChooser.getSelectedFile().getAbsolutePath());
+                selectedFile = fileChooser.getSelectedFile();
             }
         });
 
         submitButton.addActionListener (e -> 
         {
-            try (FileWriter writer = new FileWriter ("csvFiles/registrationsCSV.csv", true))
+            if (selectedFile == null || titleField.getText().trim().isEmpty() || abstractArea.getText().trim().isEmpty()) 
             {
-                writer.write (titleField.getText() + "," +
-                              supervisorField.getText() + "," +
-                              typeCombo.getSelectedItem() + "," +
-                              fileField.getText() + "\n");
+                JOptionPane.showMessageDialog (this, "All fields are mandatory.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            try
+            {
+                File folder = new File ("presentationMaterials");
+                if (!folder.exists())
+                {
+                    folder.mkdir();
+                }
+
+                //nk copy file to presentationMaterials folder
+                String fileName = selectedFile.getName();
+                File destination = new File (folder, fileName);
+
+                try 
+                {
+                    Files.copy(selectedFile.toPath(),destination.toPath());
+                }
+                catch(FileAlreadyExistsException exists)
+                {
+                    JOptionPane.showMessageDialog(this, "File already exists.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                
+
+                String relativePath = "presentationMaterials/" + fileName;
+                try (FileWriter writer = new FileWriter ("csvFiles/registrationsCSV.csv", true))
+                {
+                        writer.write (titleField.getText() + "," +
+                                    supervisorField.getText() + "," +
+                                    typeCombo.getSelectedItem() + "," +
+                                    relativePath + "\n");
+
+                        
+                }
 
                 JOptionPane.showMessageDialog (this, "Registration Succesful!");
                 clearFields();
+                selectedFile = null;
+
             }
+         
             catch (IOException ex)
             {
                 JOptionPane.showMessageDialog (this, "Error saving file.", "Error", JOptionPane.ERROR_MESSAGE);
