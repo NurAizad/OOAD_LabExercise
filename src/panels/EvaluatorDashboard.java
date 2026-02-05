@@ -64,6 +64,7 @@ public class EvaluatorDashboard extends JPanel
         //---ACTION LISTENERS---
         logoutButton.addActionListener(new ActionListener()
         {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(cardManager, "MainPanel");
                 
@@ -72,6 +73,7 @@ public class EvaluatorDashboard extends JPanel
 
         reviewButton.addActionListener(new ActionListener()
         {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 ViewPresentation viewPresentationPanel = new ViewPresentation(cardLayout, cardManager, evaluatorName);
                 cardManager.add (viewPresentationPanel, "ViewPresentationPanel");
