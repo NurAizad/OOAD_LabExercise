@@ -100,6 +100,45 @@ public class ViewPresentation extends JPanel
                     String studentName = (String) sessionTable.getValueAt(row, 0); //make sure to cahnge to string
                     //JOptionPane.showMessageDialog(null, "Viewing presentation for " + studentName);
                     // Implement actual presentation viewing logic here
+
+                    File file = new File ("csvFiles/registrationsCSV.csv");
+                    try
+                    {
+                        Scanner fileReader = new Scanner (file);
+                        //boolean found = false;
+                        while (fileReader.hasNextLine())
+                        {
+                            String line = fileReader.nextLine();
+                            String[] parts = line.split(",");
+                            String RegisteredStudentName = parts[0];
+                            String presentationFilePath = parts[4];
+
+                            if (RegisteredStudentName.equals(studentName))
+                            {
+                                //found = true;
+                                // Open the presentation file
+                                File presentationFile = new File(presentationFilePath);
+                                if (presentationFile.exists())
+                                {
+                                    Desktop.getDesktop().open(presentationFile);
+                                }
+                                else
+                                {
+                                    JOptionPane.showMessageDialog(null, "Presentation file not found.","Error!", JOptionPane.ERROR_MESSAGE);
+                                }
+                                break;
+                            }
+                        }
+                        fileReader.close();
+                        //if (!found)
+                        //{
+                        //    JOptionPane.showMessageDialog(null, "No registration found for " + studentName,"Error!", JOptionPane.ERROR_MESSAGE);
+                        //}
+                    }
+                    catch (Exception ex)
+                    {
+                        JOptionPane.showMessageDialog(null, "Error reading registration file.","Error!", JOptionPane.ERROR_MESSAGE);
+                    }
                     
                 }
             }
