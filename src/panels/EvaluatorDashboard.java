@@ -70,6 +70,15 @@ public class EvaluatorDashboard extends JPanel
             }
         });
 
+        reviewButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e) {
+                ViewPresentation viewPresentationPanel = new ViewPresentation(cardLayout, cardManager, evaluatorName);
+                cardManager.add (viewPresentationPanel, "ViewPresentationPanel");
+                cardLayout.show(cardManager, "ViewPresentationPanel");
+            }
+        }); 
+
        
     }
     
