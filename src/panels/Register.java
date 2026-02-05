@@ -1,6 +1,8 @@
 package panels;
 import java.awt.*; 
-import javax.swing.*; 
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+
 import java.awt.event.*;
 import java.io.*; //for file 
 import java.util.Scanner;
@@ -10,18 +12,28 @@ public class Register extends JPanel
     public Register(CardLayout cardLayout, JPanel cardManager)
     //public Register()
     {
+        Color lightGray = new Color(245, 245, 245);
+        setBackground(lightGray);
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.CENTER;
+        //gbc.anchor = GridBagConstraints.CENTER;gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(20, 20, 20, 20);
+        //gbc.anchor = GridBagConstraints.CENTER;
        
         JPanel centerContainer = new JPanel();
-        centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
+        centerContainer.setLayout (new BoxLayout (centerContainer, BoxLayout.Y_AXIS));
+        centerContainer.setBackground(Color.WHITE);
+        centerContainer.setBorder (BorderFactory.createCompoundBorder(
+            new LineBorder(new Color(200, 200, 200), 1),
+            BorderFactory.createEmptyBorder(20, 30, 20, 30)
+        ));
         add(centerContainer, gbc);
 
         //IDNAME PANEL
         JPanel idPanel = new JPanel();
         idPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        idPanel.setBackground(Color.LIGHT_GRAY);
+        idPanel.setBackground(lightGray);
         idPanel.setOpaque(true);
         centerContainer.add(idPanel, gbc);
 
@@ -33,7 +45,7 @@ public class Register extends JPanel
         //PASSWORD PANEL
         JPanel passPanel = new JPanel();
         passPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        passPanel.setBackground(Color.LIGHT_GRAY);
+        passPanel.setBackground(lightGray);
         passPanel.setOpaque(true);
         centerContainer.add(passPanel, gbc);
 
@@ -45,7 +57,7 @@ public class Register extends JPanel
         //NAME
         JPanel namePanel = new JPanel();
         namePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        namePanel.setBackground(Color.LIGHT_GRAY);
+        namePanel.setBackground(lightGray);
         namePanel.setOpaque(true);
         centerContainer.add(namePanel, gbc);
         
@@ -57,7 +69,7 @@ public class Register extends JPanel
         //ROLE PANEL
         JPanel rolePanel = new JPanel();
         rolePanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-        rolePanel.setBackground(Color.LIGHT_GRAY);
+        rolePanel.setBackground(lightGray);
         rolePanel.setOpaque(true);
         centerContainer.add(rolePanel, gbc);
         
@@ -74,7 +86,7 @@ public class Register extends JPanel
         //REGISTER BUTTON
         JPanel registerButtonPanel = new JPanel();
         registerButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        registerButtonPanel.setBackground(Color.LIGHT_GRAY);
+        registerButtonPanel.setBackground(lightGray);
         centerContainer.add(registerButtonPanel);
 
         JButton registerButton = new JButton("Register");
@@ -85,7 +97,7 @@ public class Register extends JPanel
         //BACK BUTTON
         JPanel backButtonPanel = new JPanel();
         backButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        backButtonPanel.setBackground(Color.LIGHT_GRAY);
+        backButtonPanel.setBackground(lightGray);
         centerContainer.add(backButtonPanel);
 
         JButton backButton = new JButton("Back");

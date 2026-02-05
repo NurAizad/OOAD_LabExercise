@@ -5,20 +5,31 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.Scanner;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 
 public class Login extends JPanel
 {
     public Login(CardLayout cardLayout, JPanel cardManager)
     {
-
+        Color lightGray = new Color(245, 245, 245);
+        setBackground(lightGray);
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(20, 20, 20, 20);
+        //gbc.anchor = GridBagConstraints.CENTER;
 
 
         JPanel centerContainer = new JPanel();
         centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
+        centerContainer.setBackground(Color.WHITE);
+        centerContainer.setBorder(BorderFactory.createCompoundBorder(
+            new LineBorder(new Color(200, 200, 200), 1),
+            BorderFactory.createEmptyBorder(20, 30, 20, 30)
+        ));
+        
         add(centerContainer, gbc);
 
     
@@ -26,7 +37,7 @@ public class Login extends JPanel
         //username label and text field
         JPanel idPanel = new JPanel();
         idPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        idPanel.setBackground(Color.LIGHT_GRAY);
+        idPanel.setBackground(lightGray);
         centerContainer.add(idPanel);
 
         JLabel idLabel = new JLabel("ID");
@@ -37,7 +48,7 @@ public class Login extends JPanel
         //password label and text field
         JPanel passPanel = new JPanel();
         passPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        passPanel.setBackground(Color.LIGHT_GRAY);
+        passPanel.setBackground(lightGray);
         centerContainer.add(passPanel);
 
         JLabel passLabel = new JLabel("Password");
@@ -51,7 +62,7 @@ public class Login extends JPanel
         //LOGIN BUTTON
         JPanel loginButtonPanel = new JPanel();
         loginButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        loginButtonPanel.setBackground(Color.LIGHT_GRAY);
+        loginButtonPanel.setBackground(lightGray);
         centerContainer.add(loginButtonPanel);
 
         JButton loginButton = new JButton("Login");
@@ -62,7 +73,7 @@ public class Login extends JPanel
         //BACK BUTTON
         JPanel backButtonPanel = new JPanel();
         backButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        backButtonPanel.setBackground(Color.LIGHT_GRAY);
+        backButtonPanel.setBackground(lightGray);
         centerContainer.add(backButtonPanel);
 
         JButton backButton = new JButton("Back");
