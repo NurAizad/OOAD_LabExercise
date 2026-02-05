@@ -1,6 +1,9 @@
 package panels;
 
 import java.awt.*;
+import java.awt.event.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import javax.swing.*;
 public class StudentDashboard extends JPanel{
     public StudentDashboard(CardLayout cardLayout, JPanel cardManager) 
@@ -34,6 +37,8 @@ public class StudentDashboard extends JPanel{
         JLabel abstractLabel = new JLabel ("Abstract: ");
         abstractLabel.setPreferredSize (labelSize);
         JTextArea abstractArea = new JTextArea (3, 20);
+        abstractArea.setLineWrap (true);
+        abstractArea.setWrapStyleWord (true);
         abstractPanel.add (abstractLabel);
         abstractPanel.add (new JScrollPane (abstractArea));
         centerContainer.add (abstractPanel);
@@ -53,8 +58,11 @@ public class StudentDashboard extends JPanel{
         JPanel typePanel = new JPanel (new FlowLayout (FlowLayout.CENTER, 10,10));
         JLabel typeLabel = new JLabel ("Presentation Type:");
         typeLabel.setPreferredSize (labelSize);
+       
         String[] presentationTypes = {"Poster", "Oral"};
         JComboBox<String> typeCombo = new JComboBox<String> (presentationTypes);
+        typeCombo.setPreferredSize (new Dimension (220, 25));
+        
         typePanel.add (typeLabel);
         typePanel.add (typeCombo);
         centerContainer.add (typePanel);
@@ -94,9 +102,9 @@ public class StudentDashboard extends JPanel{
         browseButton.addActionListener (e -> 
         {
             JFileChooser fileChooser = new JFileChooser ();
-            if (chooser.showOpenDialog (this) == JFileChooser.APROOVE_OPTION)            if (choser.APPROVE_OPTION)
+            if (fileChooser.showOpenDialog (this) == JFileChooser.APPROVE_OPTION)
             {
-                filePathField.setText (chooser.getSelectedFile().getAbsolutePath());
+                fileField.setText (fileChooser.getSelectedFile().getAbsolutePath());
             }
         });
 
@@ -107,7 +115,7 @@ public class StudentDashboard extends JPanel{
                 writer.write (titleField.getText() + "," +
                               supervisorField.getText() + "," +
                               typeCombo.getSelectedItem() + "," +
-                              filePathField.getText() + "\n");
+                              fileField.getText() + "\n");
 
                 JOptionPane.showMessageDialog (this, "Registration Succesful!");
             }
