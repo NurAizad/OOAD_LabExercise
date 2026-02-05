@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
+import java.util.Scanner;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -42,6 +43,11 @@ public class StudentDashboard extends JPanel{
 
         Dimension inputDim = new Dimension(300, 30);
         add (centerContainer, gbc);
+
+        JLabel welcomeLabel = new JLabel("Welcome, " + name); //LATER NI DELETE NI DEBUG PURPOSES
+        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        welcomeLabel.setAlignmentX(CENTER_ALIGNMENT);
+        centerContainer.add(welcomeLabel);
 
         // Button
 
@@ -149,6 +155,31 @@ public class StudentDashboard extends JPanel{
                 JOptionPane.showMessageDialog (this, "All fields are mandatory.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+
+            try
+            {
+                File file = new File ("csvFiles/registrationsCSV.csv");
+            
+                Scanner fileReader = new Scanner(file);
+                while(fileReader.hasNextLine())
+                {
+                    String line = fileReader.nextLine();
+                    String[] parts = line.split(",");
+                    if (parts[0].equals(name))
+                    {
+                        JOptionPane.showMessageDialog(this, "You have already registered for a presentation.", "Error", JOptionPane.ERROR_MESSAGE);
+                        fileReader.close();
+                        return;
+                    }
+                }
+                fileReader.close();
+            }
+            catch (Exception ex)
+            {
+                JOptionPane.showMessageDialog(this, "Error reading registration file.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
 
             try
             {

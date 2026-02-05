@@ -98,8 +98,9 @@ public class ViewPresentation extends JPanel
                 if (col == 5)
                 {
                     String studentName = (String) sessionTable.getValueAt(row, 0); //make sure to cahnge to string
-                    JOptionPane.showMessageDialog(null, "Viewing presentation for " + studentName);
+                    //JOptionPane.showMessageDialog(null, "Viewing presentation for " + studentName);
                     // Implement actual presentation viewing logic here
+                    
                 }
             }
         });
