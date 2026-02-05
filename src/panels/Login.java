@@ -112,7 +112,7 @@ public class Login extends JPanel
                             //IF STUDENT
                              if (role.equals("Student"))
                                 {
-                                    cardLayout.show(cardManager, "StudentPanel");
+                                    cardLayout.show (cardManager, "StudentPanel");
                                     fileReader.close();
                                     return;
 
