@@ -38,6 +38,7 @@ public class EvaluatorDashboard extends JPanel
         reviewButtonPanel.add(reviewButton);
 
         //EVALUATE SUBMISSIONS BUTTON
+        
         JPanel evaluateButtonPanel = new JPanel();
         evaluateButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         //evaluateButtonPanel.setBackground(Color.LIGHT_GRAY);
@@ -47,6 +48,8 @@ public class EvaluatorDashboard extends JPanel
         evaluateButton.setPreferredSize(buttonSize);
         evaluateButton.setBackground(buttonColor);
         evaluateButtonPanel.add(evaluateButton);
+        
+        
 
         //LOGOUT BUTTON
         JButton logoutButton = new JButton("Logout");
@@ -80,6 +83,16 @@ public class EvaluatorDashboard extends JPanel
                 cardLayout.show(cardManager, "ViewPresentationPanel");
             }
         }); 
+
+        evaluateButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Evaluate evaluatePanel = new Evaluate(cardLayout, cardManager, evaluatorName);
+                cardManager.add (evaluatePanel, "EvaluatePanel");
+                cardLayout.show(cardManager, "EvaluatePanel");
+            }
+        });
 
        
     }

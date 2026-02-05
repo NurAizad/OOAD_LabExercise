@@ -159,10 +159,6 @@ public class Login extends JPanel
                             fileReader.close();
                             return;
                         }
-
-                        
-
-                        
                     }
                     fileReader.close();
 

@@ -16,8 +16,10 @@ public class ViewPresentation extends JPanel
     private JTable sessionTable;
     private DefaultTableModel tableModel;
 
+
     public ViewPresentation(CardLayout cardLayout, JPanel cardManager, String evaluatorName)
     {
+
         setBackground(new Color(245, 245, 245));
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -94,13 +96,11 @@ public class ViewPresentation extends JPanel
             {
                 int row = sessionTable.rowAtPoint(e.getPoint());
                 int col = sessionTable.columnAtPoint(e.getPoint());
+                String studentName = (String) sessionTable.getValueAt(row, 0); //make sure to cahnge to string
 
-                if (col == 5)
-                {
-                    String studentName = (String) sessionTable.getValueAt(row, 0); //make sure to cahnge to string
-                    //JOptionPane.showMessageDialog(null, "Viewing presentation for " + studentName);
-                    // Implement actual presentation viewing logic here
-                    
+                if (col == 5) //view presentation
+                {    
+                    viewPresentation(studentName);
                 }
             }
         });
@@ -112,7 +112,7 @@ public class ViewPresentation extends JPanel
             public void mouseMoved(MouseEvent e) 
             {
                 int col = sessionTable.columnAtPoint(e.getPoint());
-                if (col == sessionTable.getColumnCount() - 1) 
+                if (col == sessionTable.getColumnCount() - 1 ) 
                 {
                     sessionTable.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 } 
@@ -158,6 +158,40 @@ public class ViewPresentation extends JPanel
         }
     }
 
-    
+    public void viewPresentation(String studentName)
+    {
+        File file = new File ("csvFiles/registrationsCSV.csv");
+        try
+        {
+            Scanner fileReader = new Scanner (file);
+            while (fileReader.hasNextLine())
+            {
+                String line = fileReader.nextLine();
+                String[] parts = line.split(",");
+                String RegisteredStudentName = parts[0];
+                String presentationFilePath = parts[4];
+
+                if (RegisteredStudentName.equals(studentName))
+                {
+                    // Open the presentation file
+                    File presentationFile = new File(presentationFilePath);
+                    if (presentationFile.exists())
+                    {
+                        Desktop.getDesktop().open(presentationFile);
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Presentation file not found.","Error!", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+                }
+            }
+            fileReader.close();
+        }
+        catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Error reading registration file.","Error!", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
 }
