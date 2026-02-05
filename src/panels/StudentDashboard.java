@@ -5,20 +5,39 @@ import java.awt.event.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 public class StudentDashboard extends JPanel{
+
+    private JTextField titleField;
+    private JTextArea abstractArea;
+    private JTextField supervisorField;
+    private JTextField fileField;
+    private JComboBox<String> typeCombo;
+
     public StudentDashboard(CardLayout cardLayout, JPanel cardManager) 
     {
+        setBackground(new Color(245, 245, 245));
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(20, 20, 20, 20);
+        //gbc.anchor = GridBagConstraints.CENTER;
 
         JPanel centerContainer = new JPanel();
         centerContainer.setLayout (new BoxLayout (centerContainer, BoxLayout.Y_AXIS));
+        centerContainer.setBackground(Color.WHITE);
+        centerContainer.setBorder (BorderFactory.createCompoundBorder(
+            new LineBorder(new Color(200, 200, 200), 1),
+            BorderFactory.createEmptyBorder(20, 30, 20, 30)
+        ));
+
+        Dimension inputDim = new Dimension(300, 30);
         add (centerContainer, gbc);
 
         // Button
 
-        Dimension buttonSize = new Dimension (200, 30);
+        Dimension buttonSize = new Dimension (100, 30);
         Dimension labelSize = new Dimension (150, 25);
 
         // Research title
@@ -26,7 +45,9 @@ public class StudentDashboard extends JPanel{
         JPanel titlePanel = new JPanel (new FlowLayout (FlowLayout.CENTER, 10, 10));
         JLabel titleLabel = new JLabel ("Research Title: ");
         titleLabel.setPreferredSize (labelSize);
-        JTextField titleField = new JTextField (20);
+        
+        titleField = new JTextField (20);
+        titleField.setPreferredSize(inputDim);
         titlePanel.add (titleLabel);
         titlePanel.add (titleField);
         centerContainer.add (titlePanel);
@@ -36,9 +57,10 @@ public class StudentDashboard extends JPanel{
         JPanel abstractPanel = new JPanel (new FlowLayout (FlowLayout.CENTER, 10, 10));
         JLabel abstractLabel = new JLabel ("Abstract: ");
         abstractLabel.setPreferredSize (labelSize);
-        JTextArea abstractArea = new JTextArea (3, 20);
+        abstractArea = new JTextArea (3, 20);
         abstractArea.setLineWrap (true);
         abstractArea.setWrapStyleWord (true);
+
         abstractPanel.add (abstractLabel);
         abstractPanel.add (new JScrollPane (abstractArea));
         centerContainer.add (abstractPanel);
@@ -48,7 +70,8 @@ public class StudentDashboard extends JPanel{
         JPanel supervisorPanel = new JPanel (new FlowLayout (FlowLayout.CENTER, 10, 10));
         JLabel supervisorLabel = new JLabel ("Supervisor: ");
         supervisorLabel.setPreferredSize (labelSize);
-        JTextField supervisorField = new JTextField (20);
+        supervisorField = new JTextField (20);
+        supervisorField.setPreferredSize(inputDim);
         supervisorPanel.add (supervisorLabel);
         supervisorPanel.add (supervisorField);
         centerContainer.add (supervisorPanel);
@@ -60,8 +83,8 @@ public class StudentDashboard extends JPanel{
         typeLabel.setPreferredSize (labelSize);
        
         String[] presentationTypes = {"Poster", "Oral"};
-        JComboBox<String> typeCombo = new JComboBox<String> (presentationTypes);
-        typeCombo.setPreferredSize (new Dimension (220, 25));
+        typeCombo = new JComboBox<String> (presentationTypes);
+        typeCombo.setPreferredSize (new Dimension (200, 25));
         
         typePanel.add (typeLabel);
         typePanel.add (typeCombo);
@@ -72,7 +95,7 @@ public class StudentDashboard extends JPanel{
         JPanel filePanel = new JPanel (new FlowLayout (FlowLayout.CENTER, 10, 10));
         JLabel fileLabel = new JLabel ("Material Path: ");
         fileLabel.setPreferredSize (labelSize);
-        JTextField fileField = new JTextField (12);
+        fileField = new JTextField (10);
         JButton browseButton = new JButton ("Browse");
         filePanel.add (fileLabel);
         filePanel.add (fileField);
@@ -82,7 +105,7 @@ public class StudentDashboard extends JPanel{
         // For Register Button 
 
         JPanel submitButtonPanel = new JPanel (new FlowLayout (FlowLayout.CENTER, 10, 10));
-        JButton submitButton = new JButton ("Register Seminar");
+        JButton submitButton = new JButton ("Register");
         submitButton.setPreferredSize (buttonSize);
         submitButtonPanel.add (submitButton);
         centerContainer.add (submitButtonPanel);
@@ -94,6 +117,8 @@ public class StudentDashboard extends JPanel{
         logoutButton.setPreferredSize (buttonSize);
         logoutButtonPanel.add (logoutButton);
         centerContainer.add (logoutButtonPanel);
+
+        add (centerContainer, gbc);
 
         setVisible (true);
 
@@ -118,6 +143,7 @@ public class StudentDashboard extends JPanel{
                               fileField.getText() + "\n");
 
                 JOptionPane.showMessageDialog (this, "Registration Succesful!");
+                clearFields();
             }
             catch (IOException ex)
             {
@@ -129,8 +155,20 @@ public class StudentDashboard extends JPanel{
         {
             public void actionPerformed (ActionEvent e) 
             {
+                clearFields();
                 cardLayout.show (cardManager, "MainPanel");
+
             }
         });
+        
     }
+
+    public void clearFields() 
+        {
+            titleField.setText("");
+            abstractArea.setText("");
+            supervisorField.setText("");
+            fileField.setText("");
+            typeCombo.setSelectedIndex(0);
+        };
 }
