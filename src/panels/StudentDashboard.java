@@ -9,7 +9,7 @@ import java.nio.file.Files;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import javax.swing.filechooser.*;
+//import javax.swing.filechooser.*;
 import java.io.File;
 
 public class StudentDashboard extends JPanel{
@@ -22,7 +22,7 @@ public class StudentDashboard extends JPanel{
 
     private File selectedFile;
 
-    public StudentDashboard(CardLayout cardLayout, JPanel cardManager) 
+    public StudentDashboard(CardLayout cardLayout, JPanel cardManager, String name) 
     {
         setBackground(new Color(245, 245, 245));
         setLayout(new GridBagLayout());
@@ -175,7 +175,8 @@ public class StudentDashboard extends JPanel{
                 String relativePath = "presentationMaterials/" + fileName;
                 try (FileWriter writer = new FileWriter ("csvFiles/registrationsCSV.csv", true))
                 {
-                        writer.write (titleField.getText() + "," +
+                        writer.write (name + "," +
+                                    titleField.getText() + "," +
                                     supervisorField.getText() + "," +
                                     typeCombo.getSelectedItem() + "," +
                                     relativePath + "\n");

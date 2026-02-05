@@ -2,7 +2,7 @@ package panels;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.Border;
+//import javax.swing.border.Border;
 
 import java.awt.event.*;
 
