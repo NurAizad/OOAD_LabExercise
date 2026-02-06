@@ -4,9 +4,9 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class OverviewPanel extends JPanel
+public class Overview extends JPanel
 {
-    public OverviewPanel(CardLayout cardLayout, JPanel cardManager)
+    public Overview(CardLayout cardLayout, JPanel cardManager)
     {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -14,16 +14,16 @@ public class OverviewPanel extends JPanel
 
         JPanel centerContainer = new JPanel();
         centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
-        gbc.insets = new Insets(100, 0, 0, 0); // top, left, bottom, right padding
+        gbc.insets = new Insets(100, 0, 0, 0);
         add(centerContainer, gbc);
 
         //TITLE ----------------------------------------------------------------------------------------------
         JLabel overviewLabel = new JLabel("OVERVIEW", SwingConstants.CENTER);
         overviewLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        overviewLabel.setFont(new Font("Arial", Font.BOLD, 24));
         centerContainer.add(overviewLabel);
 
         centerContainer.add(Box.createRigidArea(new Dimension(0, 20)));
-
 
 
         //BUTTONS ---------------------------------------------------------------------------------------------
@@ -58,23 +58,38 @@ public class OverviewPanel extends JPanel
 
         GridBagConstraints gbcBottom = new GridBagConstraints();
         gbcBottom.gridx = 0;
-        gbcBottom.gridy = 1;         // row below the centerContainer
+        gbcBottom.gridy = 1; 
         gbcBottom.weightx = 1.0;
-        gbcBottom.weighty = 1.0;     // push it to bottom
+        gbcBottom.weighty = 1.0; 
         gbcBottom.anchor = GridBagConstraints.PAGE_END;
         add(bottomButtonPanel, gbcBottom);
 
-        //ACTION LISTENERS (targets can be implemented later)
-        individualReportsButton.addActionListener(e -> {
-            cardLayout.show(cardManager, "IndividualReportsPanel");
+        //ACTION LISTENERS (to add: destinationss)
+        individualReportsButton.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardManager, "IndividualReports");
+                
+            }
+            
         });
 
-        overallSummaryButton.addActionListener(e -> {
-            cardLayout.show(cardManager, "OverallSummaryPanel");
+        overallSummaryButton.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardManager, "OverallSummary");
+                
+            }
+            
         });
 
-        backToDashboardButton.addActionListener(e -> {
-            cardLayout.show(cardManager, "CoordinatorDashboard");
+        backToDashboardButton.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardManager, "CoordinatorPanel");
+                
+            }
+            
         });
 
         setVisible(true);
