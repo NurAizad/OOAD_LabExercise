@@ -102,21 +102,25 @@ public class CreateSessionPage extends JPanel{
         JPanel mainCard = new JPanel();
         mainCard.setLayout(new BoxLayout(mainCard, BoxLayout.Y_AXIS));
         mainCard.setBackground(Color.WHITE);
+       // mainCard.setPreferredSize(new Dimension (600, 400));
         mainCard.setBorder(BorderFactory.createCompoundBorder(
             new LineBorder(new Color(200, 200, 200), 1),
             BorderFactory.createEmptyBorder(20, 30, 20, 30)
         ));
 
         Dimension inputDim = new Dimension(300, 30);
+        Color buttonColor = new Color(216, 223, 231);
 
         String[] types = {"-- Select a session type --","Oral", "Poster"};
         JComboBox<String> typeCombo = new JComboBox<>(types);
         typeCombo.setPreferredSize(inputDim);
+        typeCombo.setBackground(buttonColor);
         //container.add(createInputRow("Type", typeCombo));
 
         String[] studentPlaceholder = {"-- Select a student --"};
         JComboBox<String> studentList = new JComboBox<>(new DefaultComboBoxModel<>(studentPlaceholder));
         studentList.setPreferredSize(inputDim);
+        studentList.setBackground(buttonColor);
         loadUsersByRole(studentList, "Student");
         
         String[] allStudents = new String[studentList.getItemCount()];
@@ -159,6 +163,7 @@ public class CreateSessionPage extends JPanel{
         String[] evaluatorPlaceholder = {"-- Select an evaluator --"};
         JComboBox<String> evaluatorList = new JComboBox<>(new DefaultComboBoxModel<>(evaluatorPlaceholder));
         evaluatorList.setPreferredSize(inputDim);
+        evaluatorList.setBackground(buttonColor);
         loadUsersByRole(evaluatorList, "Evaluator");
 
         String[] allEvaluators = new String[evaluatorList.getItemCount()];
@@ -179,14 +184,17 @@ public class CreateSessionPage extends JPanel{
 
         String[] venues = {"-- Select a venue --", "Hall A", "Lecture Theater 1", "Computer Lab 4", "Conference Room", "Virtual Link (Zoom/Teams)" };
         JComboBox<String> venueList = new JComboBox<>(venues);
+        venueList.setBackground(buttonColor);
         venueList.setPreferredSize(inputDim);
 
         String[] times = {"-- Select a time slot --", "09:00 - 10:00", "10:00 - 11:00", "14:00 - 15:00", "16:00 - 17:00" };
         JComboBox<String> timeList = new JComboBox<>(times);
+        timeList.setBackground(buttonColor);
         timeList.setPreferredSize(inputDim);
 
         String[] board = {"-- Select a board ID --", "1", "2", "3", "4", "5" };
         JComboBox<String> boardList = new JComboBox<>(board);
+        boardList.setBackground(buttonColor);
         boardList.setPreferredSize(inputDim);
 
         
@@ -205,9 +213,18 @@ public class CreateSessionPage extends JPanel{
         mainCard.add(createStyledRow("Board ID:", boardList, 120));
         mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
         JButton saveButton = new JButton("Create Session");
-        saveButton.setPreferredSize(new Dimension(180, 40));
+        saveButton.setBackground(buttonColor);
+        saveButton.setPreferredSize(new Dimension(200, 30));
         saveButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JButton backButton = new JButton("Back");
+        backButton.setBackground(buttonColor);
+        backButton.setPreferredSize(new Dimension(200, 30));
+        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
         mainCard.add(saveButton);
+        mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
+        mainCard.add(backButton);
 
         gbc.gridy = 0;
         add(mainCard, gbc);
@@ -222,7 +239,10 @@ public class CreateSessionPage extends JPanel{
 
         //buttonPanel.add(saveButton);
         //mainCard.add(buttonPanel);
-        
+        backButton.addActionListener(e -> {
+            cardLayout.show(cardManager, "CoordinatorPanel");
+        });
+
 
         saveButton.addActionListener(e -> {
             String student = (String) studentList.getSelectedItem();

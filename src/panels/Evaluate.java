@@ -38,6 +38,7 @@ public class Evaluate extends JPanel
         JPanel centerContainer = new JPanel();
         centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
         centerContainer.setBackground(Color.WHITE);
+        centerContainer.setPreferredSize(new Dimension (600, 400));
         centerContainer.setBorder(BorderFactory.createCompoundBorder
             (
                 new LineBorder(new Color(200, 200, 200), 1),
@@ -60,7 +61,7 @@ public class Evaluate extends JPanel
         studentPanel.add(studentNameComboBox);
         centerContainer.add(studentPanel);
 
-        centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
+        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
         JPanel problemClarityPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JLabel problemClarityLabel = new JLabel("Problem Clarity (0-25): ");
@@ -72,7 +73,7 @@ public class Evaluate extends JPanel
         problemClarityPanel.add(problemClarityField);
         centerContainer.add(problemClarityPanel);
         
-        centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
+        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
         JPanel methodologyPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JLabel methodologyLabel = new JLabel("Methodology (0-25): ");
@@ -84,7 +85,7 @@ public class Evaluate extends JPanel
         methodologyPanel.add(methodologyField);
         centerContainer.add(methodologyPanel);
 
-        centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
+        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
     
         JPanel resultsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JLabel resultsLabel = new JLabel("Results (0-25): ");
@@ -96,7 +97,7 @@ public class Evaluate extends JPanel
         resultsPanel.add(resultsField);
         centerContainer.add(resultsPanel);
 
-        centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
+        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
         JPanel presentationPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JLabel presentationLabel = new JLabel("Presentation (0-25): ");
@@ -108,7 +109,7 @@ public class Evaluate extends JPanel
         presentationPanel.add(presentationField);
         centerContainer.add(presentationPanel);
 
-        centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
+        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
         JPanel commentsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JLabel commentsLabel = new JLabel("Comments: ");
@@ -120,7 +121,7 @@ public class Evaluate extends JPanel
         commentsArea.setWrapStyleWord(true);
         commentsPanel.add(new JScrollPane(commentsArea));
         centerContainer.add(commentsPanel);
-        centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
+        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
         insertStudentNames(evaluatorName);
 

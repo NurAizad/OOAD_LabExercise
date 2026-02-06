@@ -30,7 +30,7 @@ public class ViewPresentation extends JPanel
         JPanel centerContainer = new JPanel();
         centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
         centerContainer.setBackground(Color.WHITE);
-        centerContainer.setPreferredSize(new Dimension (600, 400));
+        //centerContainer.setPreferredSize(new Dimension (600, 400));
         centerContainer.setBorder(BorderFactory.createCompoundBorder
             (
                 new LineBorder(new Color(200, 200, 200), 1),
