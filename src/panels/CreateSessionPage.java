@@ -199,34 +199,46 @@ public class CreateSessionPage extends JPanel{
 
         
         mainCard.add(createStyledRow("Select Student:", studentList, 120));
-        mainCard.add(Box.createRigidArea(new Dimension(0, 10))); 
+       // mainCard.add(Box.createRigidArea(new Dimension(0, 10))); 
         mainCard.add(createStyledRow("Select Evaluator:", evaluatorList, 120));
-        mainCard.add(Box.createRigidArea(new Dimension(0, 10))); 
+       // mainCard.add(Box.createRigidArea(new Dimension(0, 10))); 
         mainCard.add(createStyledRow("Session Type:", typeCombo, 120));
-        mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
+        //mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
         mainCard.add(createStyledRow("Select Date:", dateSpinner, 120));
-        mainCard.add(Box.createRigidArea(new Dimension(0, 10))); 
+        //mainCard.add(Box.createRigidArea(new Dimension(0, 10))); 
         mainCard.add(createStyledRow("Select Venue:", venueList, 120));
-        mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
+        //mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
         mainCard.add(createStyledRow("Time Slot:", timeList, 120));
-        mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
+        //mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
         mainCard.add(createStyledRow("Board ID:", boardList, 120));
-        mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
+        //mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
+
         JButton saveButton = new JButton("Create Session");
         saveButton.setBackground(buttonColor);
-        saveButton.setPreferredSize(new Dimension(200, 30));
+       saveButton.setPreferredSize(new Dimension(150, 30));
         saveButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JButton backButton = new JButton("Back");
         backButton.setBackground(buttonColor);
-        backButton.setPreferredSize(new Dimension(200, 30));
+        backButton.setPreferredSize(new Dimension(150, 30));
         backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        mainCard.add(saveButton);
-        mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
-        mainCard.add(backButton);
+        JPanel savePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
+       // label.setPreferredSize(new Dimension(120, 25));
+        savePanel.add(saveButton);
+        mainCard.add(savePanel);
+        
+        //mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
+        //mainCard.add(backButton);
+
+        JPanel backPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
+       // label.setPreferredSize(new Dimension(120, 25));
+        backPanel.add(backButton);
+        mainCard.add(backPanel);
+
 
         gbc.gridy = 0;
+    
         add(mainCard, gbc);
 
         //gbc.gridy = 1;

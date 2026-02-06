@@ -38,7 +38,7 @@ public class Evaluate extends JPanel
         JPanel centerContainer = new JPanel();
         centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
         centerContainer.setBackground(Color.WHITE);
-        centerContainer.setPreferredSize(new Dimension (600, 400));
+        centerContainer.setPreferredSize(new Dimension (600, 500));
         centerContainer.setBorder(BorderFactory.createCompoundBorder
             (
                 new LineBorder(new Color(200, 200, 200), 1),
@@ -54,12 +54,14 @@ public class Evaluate extends JPanel
         JLabel studentLabel = new JLabel("Select Student: ");
         studentLabel.setPreferredSize(labelDim);
         studentPanel.add(studentLabel);
+        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
         studentNameComboBox = new JComboBox<>();
         studentNameComboBox.setPreferredSize(inputDim);
         studentNameComboBox.setBackground(buttonColor);
         studentPanel.add(studentNameComboBox);
         centerContainer.add(studentPanel);
+        
 
         //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
@@ -72,6 +74,7 @@ public class Evaluate extends JPanel
         problemClarityField.setPreferredSize(inputDim);
         problemClarityPanel.add(problemClarityField);
         centerContainer.add(problemClarityPanel);
+        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
         
         //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
@@ -84,6 +87,7 @@ public class Evaluate extends JPanel
         methodologyField.setPreferredSize(inputDim);
         methodologyPanel.add(methodologyField);
         centerContainer.add(methodologyPanel);
+        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
         //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
     
@@ -96,6 +100,7 @@ public class Evaluate extends JPanel
         resultsField.setPreferredSize(inputDim);
         resultsPanel.add(resultsField);
         centerContainer.add(resultsPanel);
+        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
         //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
@@ -108,6 +113,7 @@ public class Evaluate extends JPanel
         presentationField.setPreferredSize(inputDim);
         presentationPanel.add(presentationField);
         centerContainer.add(presentationPanel);
+        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
         //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
@@ -130,10 +136,15 @@ public class Evaluate extends JPanel
         submitButton.setBackground(buttonColor);
         buttonPanel.add(submitButton);
 
+        //JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         backButton = new JButton("Back");
         backButton.setBackground(buttonColor);
+        //backButtonPanel.add(backButton);
         buttonPanel.add(backButton);
+
         centerContainer.add(buttonPanel);
+        //centerContainer.add(backButtonPanel);
+        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
 
         backButton.addActionListener(new ActionListener()
@@ -285,7 +296,7 @@ public class Evaluate extends JPanel
             FileWriter writer = new FileWriter(file, true);
             writer.write(studentName + "," + evaluatorName + "," + clarity + "," + methodology + "," 
             + results + "," + presentation + "," + totalScore + "," + comments.replace(",", "") 
-            + "," + evaluatorName + "," + presentationType + "\n");
+            + "," + presentationType + "\n");
             writer.close();
         } 
         catch (Exception e) 
