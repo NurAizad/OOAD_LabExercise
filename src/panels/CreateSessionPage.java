@@ -261,7 +261,7 @@ public class CreateSessionPage extends JPanel{
                         String exStudent = parts[0].trim();
                         String exEvaluator = parts[1].trim();
                         String exDate = parts[3].trim();
-                        String exVenue = parts[4].trim();
+                        //String exVenue = parts[4].trim();
                         String exTime = parts[6].trim();
 
                         if (student.equals(exStudent)) {
