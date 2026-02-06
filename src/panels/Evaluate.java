@@ -8,7 +8,6 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Scanner;
-import java.util.concurrent.Flow;
 
 public class Evaluate extends JPanel
 {
@@ -18,16 +17,16 @@ public class Evaluate extends JPanel
     private JTextField resultsField;
     private JTextField presentationField;
     private JTextArea commentsArea;
-    private JLabel totalScoreLabel;
+    //private JLabel totalScoreLabel;
 
     private JButton submitButton;
     private JButton backButton;
 
-    private String evaluatorName;
+    //private String evaluatorName;
 
     public Evaluate (CardLayout cardLayout, JPanel cardManager, String evaluatorName)
     {
-        this.evaluatorName = evaluatorName;
+        //this.evaluatorName = evaluatorName;
 
         setBackground(new Color(245, 245, 245));
         setLayout(new GridBagLayout());
