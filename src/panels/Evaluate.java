@@ -8,7 +8,6 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Scanner;
-import java.util.concurrent.Flow;
 
 public class Evaluate extends JPanel
 {
@@ -18,16 +17,16 @@ public class Evaluate extends JPanel
     private JTextField resultsField;
     private JTextField presentationField;
     private JTextArea commentsArea;
-    private JLabel totalScoreLabel;
+    //private JLabel totalScoreLabel;
 
     private JButton submitButton;
     private JButton backButton;
 
-    private String evaluatorName;
+    //private String evaluatorName;
 
     public Evaluate (CardLayout cardLayout, JPanel cardManager, String evaluatorName)
     {
-        this.evaluatorName = evaluatorName;
+        //this.evaluatorName = evaluatorName;
 
         setBackground(new Color(245, 245, 245));
         setLayout(new GridBagLayout());
@@ -256,13 +255,33 @@ public class Evaluate extends JPanel
     public void saveEvaluation(String studentName, int clarity, int methodology, int results, int presentation, String comments, String evaluatorName)
     {
         File file = new File("csvFiles/evaluationsCSV.csv");
+        File sessionFile = new File("csvFiles/sessionsCSV.csv");
         int totalScore = clarity + methodology + results + presentation;
+        String presentationType = "null";
 
         try 
         { 
+            Scanner scanner = new Scanner(sessionFile);
+            while (scanner.hasNextLine()) 
+            {
+                String line = scanner.nextLine();
+                String[] parts = line.split(",");
+                String existingStudentName = parts[0];
+                String existingEvaluatorName = parts[1];
+
+                if (existingStudentName.equals(studentName) && existingEvaluatorName.equals(evaluatorName)) 
+                {
+                    presentationType = parts[2];
+                    break;
+                }
+            }
+            scanner.close();
+
             //File file = new File("csvFiles/evaluationsCSV.csv");
             FileWriter writer = new FileWriter(file, true);
-            writer.write(studentName + "," + evaluatorName + "," + clarity + "," + methodology + "," + results + "," + presentation + "," + totalScore + "," + comments.replace(",", "") + "," + evaluatorName + "\n");
+            writer.write(studentName + "," + evaluatorName + "," + clarity + "," + methodology + "," 
+            + results + "," + presentation + "," + totalScore + "," + comments.replace(",", "") 
+            + "," + evaluatorName + "," + presentationType + "\n");
             writer.close();
         } 
         catch (Exception e) 
@@ -270,8 +289,5 @@ public class Evaluate extends JPanel
             JOptionPane.showMessageDialog(null, "Error saving evaluation.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
-    
-
     
 }

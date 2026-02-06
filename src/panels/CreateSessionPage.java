@@ -185,6 +185,10 @@ public class CreateSessionPage extends JPanel{
         JComboBox<String> timeList = new JComboBox<>(times);
         timeList.setPreferredSize(inputDim);
 
+        String[] board = {"-- Select a board ID --", "1", "2", "3", "4", "5" };
+        JComboBox<String> boardList = new JComboBox<>(board);
+        boardList.setPreferredSize(inputDim);
+
         
         mainCard.add(createStyledRow("Select Student:", studentList, 120));
         mainCard.add(Box.createRigidArea(new Dimension(0, 10))); 
@@ -197,6 +201,8 @@ public class CreateSessionPage extends JPanel{
         mainCard.add(createStyledRow("Select Venue:", venueList, 120));
         mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
         mainCard.add(createStyledRow("Time Slot:", timeList, 120));
+        mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
+        mainCard.add(createStyledRow("Board ID:", boardList, 120));
         mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
         JButton saveButton = new JButton("Create Session");
         saveButton.setPreferredSize(new Dimension(180, 40));
@@ -226,11 +232,24 @@ public class CreateSessionPage extends JPanel{
             String dateStr = sdf.format(dateSpinner.getValue());
             String venue = (String) venueList.getSelectedItem();
             String time = (String) timeList.getSelectedItem();
+            String boardID = (String) boardList.getSelectedItem();
+            int posterCount = 0;
 
             if (studentList.getSelectedIndex() == 0 || evaluatorList.getSelectedIndex() == 0 || typeCombo.getSelectedIndex() == 0 || venueList.getSelectedIndex() == 0 || timeList.getSelectedIndex() == 0) {
 
                 JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Input Required", JOptionPane.WARNING_MESSAGE);
                 return;
+            }
+
+            if ("Poster".equalsIgnoreCase(type)) {
+                if (boardList.getSelectedIndex() == 0) {
+                    JOptionPane.showMessageDialog(this,
+                        "Please assign a board ID for poster presentation.");
+                    return;
+                }
+                boardID = (String) boardList.getSelectedItem();
+            } else {
+                boardID = "Oral";
             }
 
             // Conflict Validation
@@ -260,8 +279,10 @@ public class CreateSessionPage extends JPanel{
 
                         String exStudent = parts[0].trim();
                         String exEvaluator = parts[1].trim();
+                        String exType = parts[2].trim();    
                         String exDate = parts[3].trim();
                         String exVenue = parts[4].trim();
+                        String exBoard = parts[5].trim();
                         String exTime = parts[6].trim();
 
                         if (student.equals(exStudent)) {
@@ -274,13 +295,35 @@ public class CreateSessionPage extends JPanel{
                                 JOptionPane.showMessageDialog(this, "Evaluator is not available at this time.");
                                 return;
                             }
-                            if (venue.equals(exVenue)) {
+                            /*if (venue.equals(exVenue)) {
                                 JOptionPane.showMessageDialog(this, "Venue is already booked for this time!");
+                                return;
+                            }*/
+                        }
+
+                        if ("Poster".equalsIgnoreCase(type)
+                            && "Poster".equalsIgnoreCase(exType)
+                            && dateStr.equals(exDate)
+                            && venue.equals(exVenue)
+                            && time.equals(exTime)) {
+
+                            posterCount++;
+
+                            // Board conflict
+                            if (boardID.equals(exBoard)) {
+                                JOptionPane.showMessageDialog(this,"This board is already assigned.");
                                 return;
                             }
                         }
+
+                        if ("Poster".equalsIgnoreCase(type) && posterCount >= 5) {
+                            JOptionPane.showMessageDialog(this,"This venue already has 5 poster presentations.");
+                            return;
+                        }
                     }
-                } catch (IOException ex) { ex.printStackTrace(); }
+                } catch (IOException ex) { 
+                    ex.printStackTrace(); 
+                }
             }
 
 
@@ -291,7 +334,7 @@ public class CreateSessionPage extends JPanel{
                 File file = new File("csvFiles/sessionsCSV.csv");
                 FileWriter writer = new FileWriter(file, true);
 
-                writer.write(student + "," + evaluator + "," + type + "," + dateStr + "," + venue + ",," + time + "\n");
+                writer.write(student + "," + evaluator + "," + type + "," + dateStr + "," + venue + "," + boardID + "," + time + "\n");
                 writer.close();
 
                 JOptionPane.showMessageDialog(this, "Session Created Successfully.");
