@@ -274,10 +274,10 @@ public class CreateSessionPage extends JPanel{
                                 JOptionPane.showMessageDialog(this, "Evaluator is not available at this time.");
                                 return;
                             }
-                            if (venue.equals(exVenue)) {
+                            /*if (venue.equals(exVenue)) {
                                 JOptionPane.showMessageDialog(this, "Venue is already booked for this time!");
                                 return;
-                            }
+                            }*/
                         }
                     }
                 } catch (IOException ex) { ex.printStackTrace(); }
