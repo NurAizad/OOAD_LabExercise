@@ -36,6 +36,7 @@ public class MainScreen extends JFrame {
             new LineBorder(new Color(200, 200, 200), 1),
             BorderFactory.createEmptyBorder(20, 30, 20, 30)
         ));
+        
 
         JPanel innerPanel = new JPanel();
         innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
