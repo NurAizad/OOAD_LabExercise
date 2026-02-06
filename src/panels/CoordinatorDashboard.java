@@ -82,8 +82,13 @@ public class CoordinatorDashboard extends JPanel
 
         setVisible(true);
 
-        overviewButton.addActionListener(e -> {
-            cardLayout.show(cardManager, "OverviewPanel");
+        overviewButton.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardManager, "OverviewPanel");
+                
+            }
+            
         });
 
         createsessionButton.addActionListener(e -> {
