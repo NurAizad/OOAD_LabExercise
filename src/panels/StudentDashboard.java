@@ -53,6 +53,7 @@ public class StudentDashboard extends JPanel{
 
         Dimension buttonSize = new Dimension (100, 30);
         Dimension labelSize = new Dimension (150, 25);
+        Color buttonColor = new Color(216, 223, 231);
 
         // Research title
 
@@ -98,6 +99,7 @@ public class StudentDashboard extends JPanel{
        
         String[] presentationTypes = {"Poster", "Oral"};
         typeCombo = new JComboBox<String> (presentationTypes);
+        typeCombo.setBackground(buttonColor);
         typeCombo.setPreferredSize (new Dimension (200, 25));
         
         typePanel.add (typeLabel);
@@ -111,6 +113,7 @@ public class StudentDashboard extends JPanel{
         fileLabel.setPreferredSize (labelSize);
         fileField = new JTextField (10);
         JButton browseButton = new JButton ("Browse");
+        browseButton.setBackground (buttonColor);
         filePanel.add (fileLabel);
         filePanel.add (fileField);
         filePanel.add (browseButton);
@@ -120,6 +123,7 @@ public class StudentDashboard extends JPanel{
 
         JPanel submitButtonPanel = new JPanel (new FlowLayout (FlowLayout.CENTER, 10, 10));
         JButton submitButton = new JButton ("Register");
+        submitButton.setBackground (buttonColor);
         submitButton.setPreferredSize (buttonSize);
         submitButtonPanel.add (submitButton);
         centerContainer.add (submitButtonPanel);
@@ -129,6 +133,7 @@ public class StudentDashboard extends JPanel{
         JPanel logoutButtonPanel = new JPanel (new FlowLayout (FlowLayout.CENTER, 10, 10));
         JButton logoutButton = new JButton ("Logout");
         logoutButton.setPreferredSize (buttonSize);
+        logoutButton.setBackground (buttonColor);
         logoutButtonPanel.add (logoutButton);
         centerContainer.add (logoutButtonPanel);
 

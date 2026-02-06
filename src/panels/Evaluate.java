@@ -46,8 +46,8 @@ public class Evaluate extends JPanel
         add(centerContainer, gbc);
 
         Dimension inputDim = new Dimension(300, 30);
-        
         Dimension labelDim = new Dimension(200, 25);
+        Color buttonColor = new Color(216, 223, 231);
 
         JPanel studentPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JLabel studentLabel = new JLabel("Select Student: ");
@@ -56,6 +56,7 @@ public class Evaluate extends JPanel
 
         studentNameComboBox = new JComboBox<>();
         studentNameComboBox.setPreferredSize(inputDim);
+        studentNameComboBox.setBackground(buttonColor);
         studentPanel.add(studentNameComboBox);
         centerContainer.add(studentPanel);
 
@@ -125,9 +126,11 @@ public class Evaluate extends JPanel
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         submitButton = new JButton("Submit Evaluation");
+        submitButton.setBackground(buttonColor);
         buttonPanel.add(submitButton);
 
         backButton = new JButton("Back");
+        backButton.setBackground(buttonColor);
         buttonPanel.add(backButton);
         centerContainer.add(buttonPanel);
 
