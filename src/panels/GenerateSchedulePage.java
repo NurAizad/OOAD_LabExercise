@@ -79,6 +79,7 @@ public class GenerateSchedulePage extends JPanel {
         // Manual Filter
         btnFilter.addActionListener(e -> refreshList());
         btnPrint.addActionListener(e -> printToPDF());
+
         btnBack.addActionListener(e -> cardLayout.show(cardManager, "CoordinatorPanel"));
 
         // Initialize to current week
