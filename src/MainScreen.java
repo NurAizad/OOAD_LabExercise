@@ -51,6 +51,7 @@ public class MainScreen extends JFrame {
         CreateSessionPage createSessionPanel = new CreateSessionPage(cardLayout, cardManager);
         Overview overviewPanel = new Overview(cardLayout, cardManager);
         IndividualReports individualReportsPanel = new IndividualReports(cardLayout, cardManager);
+        //OverallSummary overallSummaryPanel = new OverallSummary(cardLayout, cardManager);
         
         //TITLE
         JLabel mainLabel = new JLabel("SEMINAR MANAGEMENT SYSTEM", SwingConstants.CENTER);
@@ -104,6 +105,8 @@ public class MainScreen extends JFrame {
         cardManager.add(createSessionPanel, "CreateSessionPanel");
         cardManager.add(overviewPanel, "Overview");
         cardManager.add(individualReportsPanel, "IndividualReports");
+        //cardManager.add(overallSummaryPanel, "OverallSummary");
+
         goToLogin.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e) {

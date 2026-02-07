@@ -186,7 +186,10 @@ public class IndividualReports extends JPanel {
 
             }
 
-        } catch (Exception e) {
+        } 
+        
+        catch (Exception e) 
+        {
             JOptionPane.showMessageDialog(this, "Error reading users CSV.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -202,7 +205,7 @@ public class IndividualReports extends JPanel {
 
         int result = chooser.showSaveDialog(this);
         if (result != JFileChooser.APPROVE_OPTION) {
-            return; // user cancelled
+            return; //user cancelled the exportation
         }
 
         File file = chooser.getSelectedFile();
@@ -226,20 +229,13 @@ public class IndividualReports extends JPanel {
 
             writer.write("Evaluated By: " + evaluatorName + "\n");
 
-            JOptionPane.showMessageDialog(
-                this,
-                "Report exported successfully.",
-                "Export Complete",
-                JOptionPane.INFORMATION_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this, "Report exported successfully.", "Export Complete", JOptionPane.INFORMATION_MESSAGE);
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(
-                this,
-                "Failed to export report.",
-                "Export Error",
-                JOptionPane.ERROR_MESSAGE
-            );
+        } 
+        
+        catch (Exception e) 
+        {
+            JOptionPane.showMessageDialog(this, "Failed to export report.", "Export Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
     }
@@ -272,11 +268,7 @@ public class IndividualReports extends JPanel {
                     String presentationType = data[8];
 
                     //dialog = pop-up window
-                    JDialog dialog = new JDialog(
-                            SwingUtilities.getWindowAncestor(this),
-                            "Individual Report",
-                            Dialog.ModalityType.APPLICATION_MODAL
-                    );
+                    JDialog dialog = new JDialog(SwingUtilities.getWindowAncestor(this), "Individual Report", Dialog.ModalityType.APPLICATION_MODAL);
 
                     dialog.setSize(500, 500);
                     dialog.setLocationRelativeTo(this);
