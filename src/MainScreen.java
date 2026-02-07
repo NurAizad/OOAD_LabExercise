@@ -55,6 +55,7 @@ public class MainScreen extends JFrame {
         
         //TITLE
         JLabel mainLabel = new JLabel("SEMINAR MANAGEMENT SYSTEM", SwingConstants.CENTER);
+        mainLabel.setFont(new Font("Arial", Font.BOLD, 17));
         mainLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         //innerPanel.add(Box.createVerticalGlue());

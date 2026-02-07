@@ -193,7 +193,7 @@ public class Evaluate extends JPanel
                             String line = fileReader.nextLine();
                             String[] parts = line.split(",");
                             String existingStudentName = parts[0];
-                            String existingEvaluatorName = parts[8];
+                            String existingEvaluatorName = parts[1];
 
                             if (existingStudentName.equals(studentName) && existingEvaluatorName.equals(evaluatorName))
                             {
