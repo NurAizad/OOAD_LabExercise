@@ -52,6 +52,7 @@ public class CoordinatorDashboard extends JPanel
 
         //BUTTONS
         Dimension buttonSize = new Dimension(200, 30);
+
         Color buttonColor = new Color(216, 223, 231);
 
         //REVIEW SUBMISSIONS BUTTON
