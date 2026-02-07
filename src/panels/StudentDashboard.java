@@ -52,7 +52,7 @@ public class StudentDashboard extends JPanel{
 
         // Button
 
-        Dimension buttonSize = new Dimension (100, 30);
+        Dimension buttonSize = new Dimension (180, 30);
         Dimension labelSize = new Dimension (150, 25);
         Color buttonColor = new Color(216, 223, 231);
 
@@ -128,6 +128,15 @@ public class StudentDashboard extends JPanel{
         submitButton.setPreferredSize (buttonSize);
         submitButtonPanel.add (submitButton);
         centerContainer.add (submitButtonPanel);
+
+        // Award Nomination Button
+
+        JPanel awardNominationButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        JButton awardNominationButton = new JButton("Award Nomination");
+        awardNominationButton.setBackground(buttonColor);
+        awardNominationButton.setPreferredSize (buttonSize);
+        awardNominationButtonPanel.add(awardNominationButton);
+        centerContainer.add(awardNominationButtonPanel);
 
         // Logout Button
 
@@ -233,6 +242,50 @@ public class StudentDashboard extends JPanel{
             }
         });
 
+        awardNominationButton.addActionListener(e -> {
+            String currentUser = name;
+            boolean hasVoted = false;
+
+            File votedFile = new File("csvFiles/votedUsersCSV.csv");
+
+            //check if user has voted
+            if (votedFile.exists()) {
+                try (Scanner scanner = new Scanner(votedFile)) {
+                    while (scanner.hasNextLine()) {
+                        String line = scanner.nextLine().trim();
+                        if (line.equalsIgnoreCase(currentUser)) {
+                            hasVoted = true;
+                            break;
+                        }
+                    }
+                } 
+                
+                catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(
+                        null,
+                        "Error checking previous votes.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                    );
+                    return;
+                }
+            }
+
+            if (!hasVoted) {
+                new AwardNomination(currentUser);
+            } 
+            
+            else {
+                JOptionPane.showMessageDialog(
+                    null,
+                    "You have completed the nomination.",
+                    "Info",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+            }
+        });
+
         logoutButton.addActionListener (new ActionListener ()
         {
             public void actionPerformed (ActionEvent e) 
@@ -242,6 +295,8 @@ public class StudentDashboard extends JPanel{
 
             }
         });
+
+        
         
     }
 

@@ -163,6 +163,7 @@ public class IndividualReports extends JPanel {
 
     //FUNCTIONS -----------------------------------------------------------------------------------------------
 
+    //dropdown column
     private void insertStudentNames() {
 
         File file = new File("csvFiles/usersCSV.csv");
@@ -194,55 +195,8 @@ public class IndividualReports extends JPanel {
         }
     }
 
-    private void exportReportToTxt(String studentName, String evaluatorName, String presentationType, String clarity, String methodology, String results, String presentation, String totalScore, String comments) 
-    {
 
-        JFileChooser chooser = new JFileChooser();
-        chooser.setDialogTitle("Choose export location");
-        chooser.setSelectedFile(
-            new File("IndividualReport_" + studentName.replace(" ", "_") + ".txt")
-        );
-
-        int result = chooser.showSaveDialog(this);
-        if (result != JFileChooser.APPROVE_OPTION) {
-            return; //user cancelled the exportation
-        }
-
-        File file = chooser.getSelectedFile();
-
-        try (FileWriter writer = new FileWriter(file)) {
-
-            writer.write("=================\n");
-            writer.write("INDIVIDUAL REPORT\n");
-            writer.write("=================\n\n");
-            writer.write("Student Name: " + studentName + "\n");
-            writer.write("Presentation Type: " + presentationType + "\n\n");
-
-            writer.write("SCORES\n");
-            writer.write("Clarity: " + clarity + "\n");
-            writer.write("Methodology: " + methodology + "\n");
-            writer.write("Results: " + results + "\n");
-            writer.write("Presentation: " + presentation + "\n");
-            writer.write("Total Score: " + totalScore + "\n\n");
-
-            writer.write("Comments: " + comments + "\n\n");
-
-            writer.write("Evaluated By: " + evaluatorName + "\n");
-
-            JOptionPane.showMessageDialog(this, "Report exported successfully.", "Export Complete", JOptionPane.INFORMATION_MESSAGE);
-
-        } 
-        
-        catch (Exception e) 
-        {
-            JOptionPane.showMessageDialog(this, "Failed to export report.", "Export Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
-        }
-    }
-
-
-    //INDIVIDUAL REPORT DISPLAY -------------------------------------------------------------------------------
-
+    //individual report display
     private void showIndividualReportWindow(String studentName) {
 
         File file2 = new File("csvFiles/evaluationsCSV.csv");
@@ -303,7 +257,6 @@ public class IndividualReports extends JPanel {
 
 
                     //BUTTONS -----------------------------------------------
-
                     JButton exportBtn = new JButton("Export Report");
                     gbc.gridy = row++;
                     gbc.anchor = GridBagConstraints.CENTER;
@@ -342,7 +295,7 @@ public class IndividualReports extends JPanel {
             }
 
         } 
-        
+
         //ERRORS -------------------------------------------------------------------
         catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error reading evaluator CSV.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -356,6 +309,53 @@ public class IndividualReports extends JPanel {
                     "No Report Found",
                     JOptionPane.WARNING_MESSAGE
             );
+        }
+    }
+
+    //export txt file
+    private void exportReportToTxt(String studentName, String evaluatorName, String presentationType, String clarity, String methodology, String results, String presentation, String totalScore, String comments) 
+    {
+
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Choose export location");
+        chooser.setSelectedFile(
+            new File("IndividualReport_" + studentName.replace(" ", "_") + ".txt")
+        );
+
+        int result = chooser.showSaveDialog(this);
+        if (result != JFileChooser.APPROVE_OPTION) {
+            return; //user cancelled the exportation
+        }
+
+        File file = chooser.getSelectedFile();
+
+        try (FileWriter writer = new FileWriter(file)) {
+
+            writer.write("=================\n");
+            writer.write("INDIVIDUAL REPORT\n");
+            writer.write("=================\n\n");
+            writer.write("Student Name: " + studentName + "\n");
+            writer.write("Presentation Type: " + presentationType + "\n\n");
+
+            writer.write("SCORES\n");
+            writer.write("Clarity: " + clarity + "\n");
+            writer.write("Methodology: " + methodology + "\n");
+            writer.write("Results: " + results + "\n");
+            writer.write("Presentation: " + presentation + "\n");
+            writer.write("Total Score: " + totalScore + "\n\n");
+
+            writer.write("Comments: " + comments + "\n\n");
+
+            writer.write("Evaluated By: " + evaluatorName + "\n");
+
+            JOptionPane.showMessageDialog(this, "Report exported successfully.", "Export Complete", JOptionPane.INFORMATION_MESSAGE);
+
+        } 
+        
+        catch (Exception e) 
+        {
+            JOptionPane.showMessageDialog(this, "Failed to export report.", "Export Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
     }
 

@@ -10,6 +10,7 @@ public class MainScreen extends JFrame {
     CardLayout cardLayout = new CardLayout();
     JPanel cardManager = new JPanel(cardLayout);
 
+
     public MainScreen() {
 
         setTitle("Main Window");
@@ -107,6 +108,7 @@ public class MainScreen extends JFrame {
         cardManager.add(generateSchedulePanel, "GenerateSchedulePanel");
         cardManager.add(overviewPanel, "Overview");
         cardManager.add(individualReportsPanel, "IndividualReports");
+
         //cardManager.add(overallSummaryPanel, "OverallSummary");
 
         goToLogin.addActionListener(new ActionListener()

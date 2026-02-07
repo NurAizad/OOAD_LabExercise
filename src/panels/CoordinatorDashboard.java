@@ -6,6 +6,8 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import java.awt.event.*;
+import java.io.File;
+import java.util.Scanner;
 
 public class CoordinatorDashboard extends JPanel
 {
@@ -118,10 +120,49 @@ public class CoordinatorDashboard extends JPanel
         });
 
         awardnominationButton.addActionListener(e -> {
-            cardLayout.show(cardManager, "AwardNominationPanel");
+            String currentUser = name;
+            boolean hasVoted = false;
+
+            File votedFile = new File("csvFiles/votedUsersCSV.csv");
+
+            //check if user has voted
+            if (votedFile.exists()) {
+                try (Scanner scanner = new Scanner(votedFile)) {
+                    while (scanner.hasNextLine()) {
+                        String line = scanner.nextLine().trim();
+                        if (line.equalsIgnoreCase(currentUser)) {
+                            hasVoted = true;
+                            break;
+                        }
+                    }
+                } 
+                
+                catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(
+                        null,
+                        "Error checking previous votes.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                    );
+                    return;
+                }
+            }
+
+            if (!hasVoted) {
+                new AwardNomination(currentUser);
+            } 
+            
+            else {
+                JOptionPane.showMessageDialog(
+                    null,
+                    "You have completed the nomination.",
+                    "Info",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+            }
         });
 
-        //---ACTION LISTENERS---
         logoutButton.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e) {

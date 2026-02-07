@@ -5,6 +5,8 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import java.awt.event.*;
+import java.io.File;
+import java.util.Scanner;
 
 public class EvaluatorDashboard extends JPanel
 {
@@ -49,7 +51,6 @@ public class EvaluatorDashboard extends JPanel
         reviewButtonPanel.add(reviewButton);
 
         //EVALUATE SUBMISSIONS BUTTON
-        
         JPanel evaluateButtonPanel = new JPanel();
         evaluateButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         //evaluateButtonPanel.setBackground(Color.LIGHT_GRAY);
@@ -60,7 +61,16 @@ public class EvaluatorDashboard extends JPanel
         evaluateButton.setBackground(buttonColor);
         evaluateButtonPanel.add(evaluateButton);
         
-        
+        //AWARD NOMINATION BUTTON
+        JPanel awardNominationButtonPanel = new JPanel();
+        awardNominationButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        awardNominationButtonPanel.setBackground(Color.WHITE); // match other panels
+        centerContainer.add(awardNominationButtonPanel);
+
+        JButton awardnominationButton = new JButton("Award Nomination");
+        awardnominationButton.setPreferredSize(buttonSize);
+        awardnominationButton.setBackground(buttonColor);
+        awardNominationButtonPanel.add(awardnominationButton);
 
         //LOGOUT BUTTON
         JButton logoutButton = new JButton("Logout");
@@ -75,7 +85,7 @@ public class EvaluatorDashboard extends JPanel
 
         setVisible(true);
 
-        //---ACTION LISTENERS---
+        //ACTION LISTENERS
         logoutButton.addActionListener(new ActionListener()
         {
             @Override
@@ -102,6 +112,50 @@ public class EvaluatorDashboard extends JPanel
                 Evaluate evaluatePanel = new Evaluate(cardLayout, cardManager, evaluatorName);
                 cardManager.add (evaluatePanel, "EvaluatePanel");
                 cardLayout.show(cardManager, "EvaluatePanel");
+            }
+        });
+
+        awardnominationButton.addActionListener(e -> {
+            String currentUser = evaluatorName;
+            boolean hasVoted = false;
+
+            File votedFile = new File("csvFiles/votedUsersCSV.csv");
+
+            //check if user has voted
+            if (votedFile.exists()) {
+                try (Scanner scanner = new Scanner(votedFile)) {
+                    while (scanner.hasNextLine()) {
+                        String line = scanner.nextLine().trim();
+                        if (line.equalsIgnoreCase(currentUser)) {
+                            hasVoted = true;
+                            break;
+                        }
+                    }
+                } 
+                
+                catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(
+                        null,
+                        "Error checking previous votes.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                    );
+                    return;
+                }
+            }
+
+            if (!hasVoted) {
+                new AwardNomination(currentUser);
+            } 
+            
+            else {
+                JOptionPane.showMessageDialog(
+                    null,
+                    "You have completed the nomination.",
+                    "Info",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
             }
         });
 
