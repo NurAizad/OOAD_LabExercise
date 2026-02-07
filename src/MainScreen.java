@@ -53,7 +53,7 @@ public class MainScreen extends JFrame {
         GenerateSchedulePage generateSchedulePanel = new GenerateSchedulePage(cardLayout, cardManager);
         Overview overviewPanel = new Overview(cardLayout, cardManager);
         IndividualReports individualReportsPanel = new IndividualReports(cardLayout, cardManager);
-        //OverallSummary overallSummaryPanel = new OverallSummary(cardLayout, cardManager);
+        OverallSummary overallSummaryPanel = new OverallSummary(cardLayout, cardManager);
         
         //TITLE
         JLabel mainLabel = new JLabel("SEMINAR MANAGEMENT SYSTEM", SwingConstants.CENTER);
@@ -108,8 +108,7 @@ public class MainScreen extends JFrame {
         cardManager.add(generateSchedulePanel, "GenerateSchedulePanel");
         cardManager.add(overviewPanel, "Overview");
         cardManager.add(individualReportsPanel, "IndividualReports");
-
-        //cardManager.add(overallSummaryPanel, "OverallSummary");
+        cardManager.add(overallSummaryPanel, "OverallSummary");
 
         goToLogin.addActionListener(new ActionListener()
         {

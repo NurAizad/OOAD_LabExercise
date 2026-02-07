@@ -223,6 +223,7 @@ public class StudentDashboard extends JPanel{
                 {
                         writer.write (name + "," +
                                     titleField.getText() + "," +
+                                    abstractArea.getText() + "," +
                                     supervisorField.getText() + "," +
                                     typeCombo.getSelectedItem() + "," +
                                     relativePath + "\n");
