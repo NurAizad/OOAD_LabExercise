@@ -167,22 +167,27 @@ public class CreateSessionPage extends JPanel{
         JPanel mainCard = new JPanel();
         mainCard.setLayout(new BoxLayout(mainCard, BoxLayout.Y_AXIS));
         mainCard.setBackground(Color.WHITE);
+       // mainCard.setPreferredSize(new Dimension (600, 400));
         mainCard.setBorder(BorderFactory.createCompoundBorder(
             new LineBorder(new Color(200, 200, 200), 1),
             BorderFactory.createEmptyBorder(20, 30, 20, 30)
         ));
 
         Dimension inputDim = new Dimension(300, 30);
+        Color buttonColor = new Color(216, 223, 231);
 
         String[] types = {"-- Select a session type --","Oral", "Poster"};
         JComboBox<String> typeCombo = new JComboBox<>(types);
         typeCombo.setPreferredSize(inputDim);
+        typeCombo.setBackground(buttonColor);
         //container.add(createInputRow("Type", typeCombo));
 
         String[] studentPlaceholder = {"-- Select a student --"};
         JComboBox<String> studentList = new JComboBox<>(new DefaultComboBoxModel<>(studentPlaceholder));
         studentList.setPreferredSize(inputDim);
+        studentList.setBackground(buttonColor);
         loadRegisteredStudents(studentList);
+        //loadUsersByRole(studentList, "Student");
         
         String[] allStudents = new String[studentList.getItemCount()];
         for (int i = 0; i < studentList.getItemCount(); i++) {
@@ -224,6 +229,7 @@ public class CreateSessionPage extends JPanel{
         String[] evaluatorPlaceholder = {"-- Select an evaluator --"};
         JComboBox<String> evaluatorList = new JComboBox<>(new DefaultComboBoxModel<>(evaluatorPlaceholder));
         evaluatorList.setPreferredSize(inputDim);
+        evaluatorList.setBackground(buttonColor);
         loadUsersByRole(evaluatorList, "Evaluator");
 
         String[] allEvaluators = new String[evaluatorList.getItemCount()];
@@ -244,32 +250,64 @@ public class CreateSessionPage extends JPanel{
 
         //String[] venues = {"-- Select a venue --", "Hall A", "Lecture Theater 1", "Computer Lab 4", "Conference Room", "Virtual Link (Zoom/Teams)" };
         JComboBox<String> venueList = new JComboBox<>(VENUES);
-        makeSearchable(venueList, VENUES);
+        venueList.setBackground(buttonColor);
         venueList.setPreferredSize(inputDim);
+        makeSearchable(venueList, VENUES);
+        //String[] venues = {"-- Select a venue --", "Hall A", "Lecture Theater 1", "Computer Lab 4", "Conference Room", "Virtual Link (Zoom/Teams)" };
+        //JComboBox<String> venueList = new JComboBox<>(venues);
 
         String[] times = {"-- Select a time slot --", "08:00 - 10:00", "10:00 - 12:00", "12:00 - 14:00", "14:00 - 16:00" };
         JComboBox<String> timeList = new JComboBox<>(times);
+        timeList.setBackground(buttonColor);
         timeList.setPreferredSize(inputDim);
+
+        String[] board = {"-- Select a board ID --", "1", "2", "3", "4", "5" };
+        JComboBox<String> boardList = new JComboBox<>(board);
+        boardList.setBackground(buttonColor);
+        boardList.setPreferredSize(inputDim);
 
         
         mainCard.add(createStyledRow("Select Student:", studentList, 120));
-        mainCard.add(Box.createRigidArea(new Dimension(0, 10))); 
+       // mainCard.add(Box.createRigidArea(new Dimension(0, 10))); 
         mainCard.add(createStyledRow("Select Evaluator:", evaluatorList, 120));
-        mainCard.add(Box.createRigidArea(new Dimension(0, 10))); 
+       // mainCard.add(Box.createRigidArea(new Dimension(0, 10))); 
         mainCard.add(createStyledRow("Session Type:", typeCombo, 120));
-        mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
+        //mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
         mainCard.add(createStyledRow("Select Date:", dateSpinner, 120));
-        mainCard.add(Box.createRigidArea(new Dimension(0, 10))); 
+        //mainCard.add(Box.createRigidArea(new Dimension(0, 10))); 
         mainCard.add(createStyledRow("Select Venue:", venueList, 120));
-        mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
+        //mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
         mainCard.add(createStyledRow("Time Slot:", timeList, 120));
-        mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
+        //mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
+        mainCard.add(createStyledRow("Board ID:", boardList, 120));
+        //mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
+
         JButton saveButton = new JButton("Create Session");
-        saveButton.setPreferredSize(new Dimension(180, 40));
+        saveButton.setBackground(buttonColor);
+       saveButton.setPreferredSize(new Dimension(150, 30));
         saveButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        mainCard.add(saveButton);
+
+        JButton backButton = new JButton("Back");
+        backButton.setBackground(buttonColor);
+        backButton.setPreferredSize(new Dimension(150, 30));
+        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        JPanel savePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
+       // label.setPreferredSize(new Dimension(120, 25));
+        savePanel.add(saveButton);
+        mainCard.add(savePanel);
+        
+        //mainCard.add(Box.createRigidArea(new Dimension(0, 10)));
+        //mainCard.add(backButton);
+
+        JPanel backPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
+       // label.setPreferredSize(new Dimension(120, 25));
+        backPanel.add(backButton);
+        mainCard.add(backPanel);
+
 
         gbc.gridy = 0;
+    
         add(mainCard, gbc);
 
         //gbc.gridy = 1;
@@ -282,7 +320,10 @@ public class CreateSessionPage extends JPanel{
 
         //buttonPanel.add(saveButton);
         //mainCard.add(buttonPanel);
-        
+        backButton.addActionListener(e -> {
+            cardLayout.show(cardManager, "CoordinatorPanel");
+        });
+
 
         saveButton.addActionListener(e -> {
             String student = (String) studentList.getSelectedItem();
@@ -292,11 +333,24 @@ public class CreateSessionPage extends JPanel{
             String dateStr = sdf.format(dateSpinner.getValue());
             String venue = (String) venueList.getSelectedItem();
             String time = (String) timeList.getSelectedItem();
+            String boardID = (String) boardList.getSelectedItem();
+            int posterCount = 0;
 
             if (studentList.getSelectedIndex() == 0 || evaluatorList.getSelectedIndex() == 0 || typeCombo.getSelectedIndex() == 0 || venueList.getSelectedIndex() == 0 || timeList.getSelectedIndex() == 0) {
 
                 JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Input Required", JOptionPane.WARNING_MESSAGE);
                 return;
+            }
+
+            if ("Poster".equalsIgnoreCase(type)) {
+                if (boardList.getSelectedIndex() == 0) {
+                    JOptionPane.showMessageDialog(this,
+                        "Please assign a board ID for poster presentation.");
+                    return;
+                }
+                boardID = (String) boardList.getSelectedItem();
+            } else {
+                boardID = "Oral";
             }
 
             // Conflict Validation
@@ -326,8 +380,10 @@ public class CreateSessionPage extends JPanel{
 
                         String exStudent = parts[0].trim();
                         String exEvaluator = parts[1].trim();
+                        String exType = parts[2].trim();    
                         String exDate = parts[3].trim();
                         String exVenue = parts[4].trim();
+                        String exBoard = parts[5].trim();
                         String exTime = parts[6].trim();
 
                         if (student.equals(exStudent)) {
@@ -340,13 +396,35 @@ public class CreateSessionPage extends JPanel{
                                 JOptionPane.showMessageDialog(this, "Evaluator is not available at this time.");
                                 return;
                             }
-                            if (venue.equals(exVenue)) {
+                            /*if (venue.equals(exVenue)) {
                                 JOptionPane.showMessageDialog(this, "Venue is already booked for this time!");
+                                return;
+                            }*/
+                        }
+
+                        if ("Poster".equalsIgnoreCase(type)
+                            && "Poster".equalsIgnoreCase(exType)
+                            && dateStr.equals(exDate)
+                            && venue.equals(exVenue)
+                            && time.equals(exTime)) {
+
+                            posterCount++;
+
+                            // Board conflict
+                            if (boardID.equals(exBoard)) {
+                                JOptionPane.showMessageDialog(this,"This board is already assigned.");
                                 return;
                             }
                         }
+
+                        if ("Poster".equalsIgnoreCase(type) && posterCount >= 5) {
+                            JOptionPane.showMessageDialog(this,"This venue already has 5 poster presentations.");
+                            return;
+                        }
                     }
-                } catch (IOException ex) { ex.printStackTrace(); }
+                } catch (IOException ex) { 
+                    ex.printStackTrace(); 
+                }
             }
 
 
@@ -357,7 +435,7 @@ public class CreateSessionPage extends JPanel{
                 File file = new File("csvFiles/sessionsCSV.csv");
                 FileWriter writer = new FileWriter(file, true);
 
-                writer.write(student + "," + evaluator + "," + type + "," + dateStr + "," + venue + ",," + time + "\n");
+                writer.write(student + "," + evaluator + "," + type + "," + dateStr + "," + venue + "," + boardID + "," + time + "\n");
                 writer.close();
 
                 JOptionPane.showMessageDialog(this, "Session Created Successfully.");

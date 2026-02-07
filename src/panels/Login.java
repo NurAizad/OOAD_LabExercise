@@ -7,6 +7,8 @@ import java.util.Scanner;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
+import user.Coordinator;
+
 
 public class Login extends JPanel
 {
@@ -25,6 +27,7 @@ public class Login extends JPanel
         JPanel centerContainer = new JPanel();
         centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
         centerContainer.setBackground(Color.WHITE);
+       // centerContainer.setPreferredSize(new Dimension (600, 400));
         centerContainer.setBorder(BorderFactory.createCompoundBorder(
             new LineBorder(new Color(200, 200, 200), 1),
             BorderFactory.createEmptyBorder(20, 30, 20, 30)
@@ -144,6 +147,9 @@ public class Login extends JPanel
                             //IF COORDINATOR
                             else if (role.equals("Coordinator"))
                             {
+                                String name = parts[2];
+                                CoordinatorDashboard coordinatorDashboard = new CoordinatorDashboard(cardLayout, cardManager, name);
+                                cardManager.add(coordinatorDashboard, "CoordinatorPanel"); 
                                 cardLayout.show(cardManager, "CoordinatorPanel"); 
                                 fileReader.close();
                                 return;
@@ -159,10 +165,6 @@ public class Login extends JPanel
                             fileReader.close();
                             return;
                         }
-
-                        
-
-                        
                     }
                     fileReader.close();
 

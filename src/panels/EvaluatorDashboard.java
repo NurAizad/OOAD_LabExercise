@@ -2,25 +2,36 @@ package panels;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+
 import java.awt.event.*;
 
 public class EvaluatorDashboard extends JPanel
 {
     public EvaluatorDashboard(CardLayout cardLayout, JPanel cardManager, String evaluatorName)
     {
-        //setBackground(Color.LIGHT_GRAY);
+        setBackground(new Color (245, 245, 245));
         setLayout (new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(20, 20, 20, 20);
         
         JPanel centerContainer = new JPanel();
         centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
+        centerContainer.setBackground(Color.WHITE);
+       // centerContainer.setPreferredSize(new Dimension (600, 400));
+        centerContainer.setBorder(BorderFactory.createCompoundBorder(
+            new LineBorder(new Color(200, 200, 200), 1),
+            BorderFactory.createEmptyBorder(20, 30, 20, 30)
+        ));
         add(centerContainer, gbc);
 
         JLabel welcomeLabel = new JLabel("Welcome, " + evaluatorName); //LATER NI DELETE NI DEBUG PURPOSES
         welcomeLabel.setFont(new Font("Arial", Font.BOLD, 16));
         welcomeLabel.setAlignmentX(CENTER_ALIGNMENT);
         centerContainer.add(welcomeLabel);
+        centerContainer.add(Box.createRigidArea(new Dimension(0, 20)));
 
         //BUTTONS
         Dimension buttonSize = new Dimension(200, 30);
@@ -38,6 +49,7 @@ public class EvaluatorDashboard extends JPanel
         reviewButtonPanel.add(reviewButton);
 
         //EVALUATE SUBMISSIONS BUTTON
+        
         JPanel evaluateButtonPanel = new JPanel();
         evaluateButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         //evaluateButtonPanel.setBackground(Color.LIGHT_GRAY);
@@ -47,6 +59,8 @@ public class EvaluatorDashboard extends JPanel
         evaluateButton.setPreferredSize(buttonSize);
         evaluateButton.setBackground(buttonColor);
         evaluateButtonPanel.add(evaluateButton);
+        
+        
 
         //LOGOUT BUTTON
         JButton logoutButton = new JButton("Logout");
@@ -80,6 +94,16 @@ public class EvaluatorDashboard extends JPanel
                 cardLayout.show(cardManager, "ViewPresentationPanel");
             }
         }); 
+
+        evaluateButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Evaluate evaluatePanel = new Evaluate(cardLayout, cardManager, evaluatorName);
+                cardManager.add (evaluatePanel, "EvaluatePanel");
+                cardLayout.show(cardManager, "EvaluatePanel");
+            }
+        });
 
        
     }
