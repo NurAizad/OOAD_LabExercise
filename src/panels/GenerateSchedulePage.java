@@ -38,6 +38,8 @@ public class GenerateSchedulePage extends JPanel {
         // 1. Weekly Buttons
         //JButton btnPrev = new JButton("< Previous Week");
         //JButton btnNext = new JButton("Next Week >");
+
+        Color buttonColor = new Color(216, 223, 231);
         
         // 2. Date Pickers
         startSpinner = new JSpinner(new SpinnerDateModel());
@@ -46,8 +48,11 @@ public class GenerateSchedulePage extends JPanel {
         formatSpinner(endSpinner);
 
         JButton btnFilter = new JButton("Apply Range");
+        btnFilter.setBackground(buttonColor);
         JButton btnPrint = new JButton("Export PDF");
+        btnPrint.setBackground(buttonColor);
         JButton btnBack = new JButton("Back");
+        btnBack.setBackground(buttonColor);
 
         // Layout Navigation
         //gbc.gridx = 0; navPanel.add(btnPrev, gbc);
