@@ -9,8 +9,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class CreateSessionPage extends JPanel{
-    private CardLayout cardLayout;
-    private JPanel cardManager;
+    //private CardLayout cardLayout;
+    //private JPanel cardManager;
     private static final String[] VENUES = {
         "-- Select a venue --", 
         "CNMX1001", "CNMX1002", "CNMX1003", "CNMX1004", "CNMX1005",
@@ -101,9 +101,6 @@ public class CreateSessionPage extends JPanel{
     private void makeSearchable(JComboBox<String> comboBox, String[] originalItems) {
     comboBox.setEditable(true);
     JTextField textField = (JTextField) comboBox.getEditor().getEditorComponent();
-
-    
-
     textField.addFocusListener(new FocusAdapter() {
         @Override
         public void focusGained(FocusEvent e) {
@@ -150,11 +147,26 @@ public class CreateSessionPage extends JPanel{
         }
     });
 }
+    private void clearFields(JComboBox<String> studentList, JComboBox<String> evaluatorList, JComboBox<String> typeCombo, JComboBox<String> venueList, JComboBox<String> timeList, JComboBox<String> boardList, JSpinner dateSpinner) {
+        studentList.setSelectedIndex(0);
+        evaluatorList.setSelectedIndex(0);
+        typeCombo.setSelectedIndex(0);
+        venueList.setSelectedIndex(0);
+        timeList.setSelectedIndex(0);
+        boardList.setSelectedIndex(0);
+        dateSpinner.setValue(new Date());
+
+        ((JTextField)studentList.getEditor().getEditorComponent()).setText("-- Select a student --");
+        ((JTextField)evaluatorList.getEditor().getEditorComponent()).setText("-- Select an evaluator --");
+        ((JTextField) venueList.getEditor().getEditorComponent()).setText("-- Select a venue --");
+        ((JTextField) boardList.getEditor().getEditorComponent()).setText("-- Select a board --");
+
+    }
     
     public CreateSessionPage(CardLayout cardLayout, JPanel cardManager) {
 
-        this.cardLayout = cardLayout;
-        this.cardManager = cardManager;
+        //this.cardLayout = cardLayout;
+        //this.cardManager = cardManager;
 
         setBackground(new Color(245, 245, 245));
         setLayout(new GridBagLayout());
@@ -321,6 +333,7 @@ public class CreateSessionPage extends JPanel{
         //buttonPanel.add(saveButton);
         //mainCard.add(buttonPanel);
         backButton.addActionListener(e -> {
+            clearFields(studentList, evaluatorList, typeCombo, venueList, timeList, boardList, dateSpinner);
             cardLayout.show(cardManager, "CoordinatorPanel");
         });
 
@@ -336,8 +349,13 @@ public class CreateSessionPage extends JPanel{
             String boardID = (String) boardList.getSelectedItem();
             int posterCount = 0;
 
-            if (studentList.getSelectedIndex() == 0 || evaluatorList.getSelectedIndex() == 0 || typeCombo.getSelectedIndex() == 0 || venueList.getSelectedIndex() == 0 || timeList.getSelectedIndex() == 0) {
+            boolean isStudentEmpty = (student == null || student.equals("-- Select a student --") || student.trim().isEmpty());
+            boolean isEvaluatorEmpty = (evaluator == null || evaluator.equals("-- Select an evaluator --") || evaluator.trim().isEmpty());
+            boolean isTypeEmpty = (typeCombo.getSelectedIndex() <= 0); 
+            boolean isVenueEmpty = (venue == null || venue.equals("-- Select a venue --") || venue.trim().isEmpty());
+            boolean isTimeEmpty = (timeList.getSelectedIndex() <= 0);
 
+            if (isStudentEmpty || isEvaluatorEmpty || isTypeEmpty || isVenueEmpty || isTimeEmpty) {
                 JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Input Required", JOptionPane.WARNING_MESSAGE);
                 return;
             }

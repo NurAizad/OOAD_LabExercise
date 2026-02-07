@@ -10,8 +10,8 @@ import java.util.Date;
 import java.awt.print.*;
 
 public class GenerateSchedulePage extends JPanel {
-    private CardLayout cardLayout;
-    private JPanel cardManager;
+    //private CardLayout cardLayout;
+    //private JPanel cardManager;
     private JPanel listContainer;
     private JSpinner startSpinner;
     private JSpinner endSpinner;
@@ -20,8 +20,8 @@ public class GenerateSchedulePage extends JPanel {
 
 
     public GenerateSchedulePage(CardLayout cardLayout, JPanel cardManager) {
-        this.cardLayout = cardLayout;
-        this.cardManager = cardManager;
+        //this.cardLayout = cardLayout;
+        //this.cardManager = cardManager;
 
         setLayout(new BorderLayout());
         setBackground(new Color(240, 240, 240));
