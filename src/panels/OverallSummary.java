@@ -50,8 +50,8 @@ public class OverallSummary extends JPanel {
         centerContainer.add(Box.createRigidArea(new Dimension(0, 20)));
 
         JLabel totalStudentsLabel = makeRow("Number of students overall: ", centerContainer);
-        JLabel oralCountLabel = makeRow("Category 1 (Oral): ", centerContainer);
-        JLabel posterCountLabel = makeRow("Category 2 (Poster): ", centerContainer);
+        JLabel oralCountLabel = makeRow("Oral category: ", centerContainer);
+        JLabel posterCountLabel = makeRow("Poster category: ", centerContainer);
         centerContainer.add(Box.createRigidArea(new Dimension(0, 15)));
 
         JLabel highestOverallLabel = makeRow("Highest score overall: ", centerContainer);
