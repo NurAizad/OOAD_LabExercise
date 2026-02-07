@@ -9,7 +9,7 @@ import java.io.File;
 import java.util.Scanner;
 
 public class IndividualReports extends JPanel {
-
+ 
     private JComboBox<String> studentDropdown;
 
     public IndividualReports(CardLayout cardLayout, JPanel cardManager) {

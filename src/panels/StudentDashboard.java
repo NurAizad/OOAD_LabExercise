@@ -95,7 +95,7 @@ public class StudentDashboard extends JPanel{
         // Presentation 
 
         JPanel typePanel = new JPanel (new FlowLayout (FlowLayout.CENTER, 10,10));
-        JLabel typeLabel = new JLabel ("Presentation Type:");
+        JLabel typeLabel = new JLabel ("Preferred Presentation:");
         typeLabel.setPreferredSize (labelSize);
        
         String[] presentationTypes = {"Poster", "Oral"};
