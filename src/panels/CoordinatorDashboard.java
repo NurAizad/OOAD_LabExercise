@@ -36,7 +36,6 @@ public class CoordinatorDashboard extends JPanel
 
         //BUTTONS
         Dimension buttonSize = new Dimension(200, 30);
-
         //REVIEW SUBMISSIONS BUTTON
         JPanel overviewButtonPanel = new JPanel();
         overviewButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));

@@ -26,6 +26,7 @@ public class MainScreen extends JFrame {
         //StudentDashboard studentPanel = new StudentDashboard(cardLayout, cardManager);
         CoordinatorDashboard coordinatorPanel = new CoordinatorDashboard(cardLayout, cardManager);
         CreateSessionPage createSessionPanel = new CreateSessionPage(cardLayout, cardManager);
+        GenerateSchedulePage generateSchedulePanel = new GenerateSchedulePage(cardLayout, cardManager);
         
         //TITLE
         JLabel mainLabel = new JLabel("MAIN SCREEN", SwingConstants.CENTER);
@@ -63,6 +64,7 @@ public class MainScreen extends JFrame {
         //cardManager.add(studentPanel, "StudentPanel");
         cardManager.add(coordinatorPanel, "CoordinatorPanel");
         cardManager.add(createSessionPanel, "CreateSessionPanel");
+        cardManager.add(generateSchedulePanel, "GenerateSchedulePanel");
         goToLogin.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e) {

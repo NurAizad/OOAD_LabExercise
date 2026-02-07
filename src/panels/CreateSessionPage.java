@@ -11,6 +11,21 @@ import java.util.Date;
 public class CreateSessionPage extends JPanel{
     private CardLayout cardLayout;
     private JPanel cardManager;
+    private static final String[] VENUES = {
+        "-- Select a venue --", 
+        "CNMX1001", "CNMX1002", "CNMX1003", "CNMX1004", "CNMX1005",
+        "CQAR1001", "CQAR1002", "CQAR1003", "CQAR1004", "CQAR1005", "CQAR1006", "CQAR1007",
+        "CQAR2001", "CQAR2002", "CQAR2003", "CQAR2004", "CQAR2005", "CQAR2006", "CQAR2007",
+        "CQAR3001", "CQAR3002", "CQAR3003", "CQAR3004", "CQAR3005", "CQAR3006", "CQAR3007",
+        "CQAR4001", "CQAR4002", "CQAR4003", "CQAR4004",
+        "CQCR1001", "CQCR1002", "CQCR1003", "CQCR1004",
+        "CQCR2001", "CQCR2002", "CQCR2003", "CQCR2004",
+        "CQCR3001", "CQCR3002", "CQCR3003", "CQCR3004",
+        "CQCR4001", "CQCR4002", "CQCR4003", "CQCR4004",
+        "Learning Point Idea Box 1", "Learning Point Idea Box 2", 
+        "Multipurpose Hall", 
+    };
+
     private void loadUsersByRole(JComboBox<String> comboBox, String targetRole) {
     File file = new File("csvFiles/usersCSV.csv");
     if (!file.exists()) return;
@@ -19,13 +34,63 @@ public class CreateSessionPage extends JPanel{
         String line;
         while ((line = br.readLine()) != null) {
             String[] data = line.split(",");
-            // Assuming CSV format: Username,Password,Role
             if (data.length >= 4) {
                 String name = data[2].trim();
                 String role = data[3].trim();
                 
                 if (role.equalsIgnoreCase(targetRole)) {
                     comboBox.addItem(name);
+                }
+            }
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+    private void loadRegisteredStudents(JComboBox<String> comboBox) {
+    File registrationsFile = new File("csvFiles/registrationsCSV.csv");
+    File sessionsFile = new File("csvFiles/sessionsCSV.csv");
+    
+    java.util.ArrayList<String> assignedStudents = new java.util.ArrayList<>();
+
+    if (sessionsFile.exists()) {
+        try (BufferedReader br = new BufferedReader(new FileReader(sessionsFile))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length > 0) {
+                    assignedStudents.add(data[0].trim());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    
+    if (!registrationsFile.exists()) return;
+
+    try (BufferedReader br = new BufferedReader(new FileReader(registrationsFile))) {
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] data = line.split(",");
+            if (data.length > 0) {
+                String studentName = data[0].trim();
+
+               
+                if (!studentName.isEmpty() && !studentName.equalsIgnoreCase("Name")) {
+                    
+                    boolean alreadyAssigned = false;
+                    for (String assigned : assignedStudents) {
+                        if (assigned.equalsIgnoreCase(studentName)) {
+                            alreadyAssigned = true;
+                            break;
+                        }
+                    }
+
+                    if (!alreadyAssigned) {
+                        comboBox.addItem(studentName);
+                    }
                 }
             }
         }
@@ -51,7 +116,7 @@ public class CreateSessionPage extends JPanel{
         @Override
         public void focusLost(FocusEvent e) {
             if (textField.getText().isEmpty()) {
-                // Determine which placeholder to put back
+              
                 if (comboBox.getToolTipText() != null && comboBox.getToolTipText().contains("Evaluator")) {
                     textField.setText("-- Select an evaluator --");
                 } else {
@@ -63,7 +128,7 @@ public class CreateSessionPage extends JPanel{
     textField.addKeyListener(new KeyAdapter() {
         @Override
         public void keyReleased(KeyEvent e) {
-            // Ignore navigation keys so user can still select with arrows
+           
             if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN || 
                 e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                 return;
@@ -117,7 +182,7 @@ public class CreateSessionPage extends JPanel{
         String[] studentPlaceholder = {"-- Select a student --"};
         JComboBox<String> studentList = new JComboBox<>(new DefaultComboBoxModel<>(studentPlaceholder));
         studentList.setPreferredSize(inputDim);
-        loadUsersByRole(studentList, "Student");
+        loadRegisteredStudents(studentList);
         
         String[] allStudents = new String[studentList.getItemCount()];
         for (int i = 0; i < studentList.getItemCount(); i++) {
@@ -177,11 +242,12 @@ public class CreateSessionPage extends JPanel{
         dateSpinner.setPreferredSize(inputDim);
 
 
-        String[] venues = {"-- Select a venue --", "Hall A", "Lecture Theater 1", "Computer Lab 4", "Conference Room", "Virtual Link (Zoom/Teams)" };
-        JComboBox<String> venueList = new JComboBox<>(venues);
+        //String[] venues = {"-- Select a venue --", "Hall A", "Lecture Theater 1", "Computer Lab 4", "Conference Room", "Virtual Link (Zoom/Teams)" };
+        JComboBox<String> venueList = new JComboBox<>(VENUES);
+        makeSearchable(venueList, VENUES);
         venueList.setPreferredSize(inputDim);
 
-        String[] times = {"-- Select a time slot --", "09:00 - 10:00", "10:00 - 11:00", "14:00 - 15:00", "16:00 - 17:00" };
+        String[] times = {"-- Select a time slot --", "08:00 - 10:00", "10:00 - 12:00", "12:00 - 14:00", "14:00 - 16:00" };
         JComboBox<String> timeList = new JComboBox<>(times);
         timeList.setPreferredSize(inputDim);
 
