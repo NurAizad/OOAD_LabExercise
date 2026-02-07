@@ -30,7 +30,7 @@ public class ViewPresentation extends JPanel
         JPanel centerContainer = new JPanel();
         centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
         centerContainer.setBackground(Color.WHITE);
-        //centerContainer.setPreferredSize(new Dimension (600, 400));
+        centerContainer.setPreferredSize(new Dimension (600, 400));
         centerContainer.setBorder(BorderFactory.createCompoundBorder
             (
                 new LineBorder(new Color(200, 200, 200), 1),
@@ -139,10 +139,10 @@ public class ViewPresentation extends JPanel
                 if (sessionEvaluator.equals(evaluatorName))
                 {
                     String studentName = parts[0];
-                    String date = parts[2];
-                    String venue = parts[3];
-                    String type = parts[4];
-                    String time = parts[5];
+                    String type = parts[2];
+                    String date = parts[3];
+                    String venue = parts[4];
+                    String time = parts[6];
 
                     //displayStudentPresentation(studentName, date, venue, type, time);
                     tableModel.addRow(new Object[]{studentName, date, venue, type, time, "Click to View"});
