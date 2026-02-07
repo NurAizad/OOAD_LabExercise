@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.io.File;
+import java.io.FileWriter;
 import java.util.*;
 import java.util.List;
 
@@ -43,23 +44,33 @@ public class OverallSummary extends JPanel {
         
         //LABELS ------------------------------------------------------------------------------------
 
+        Map<String, Integer> reg = readRegistrationStats();
+        Map<String, Object> eval = readEvaluationStats();
+        List<String> peopleChoice = readPeoplesChoice();
+
         JLabel titleLabel = new JLabel("OVERALL SUMMARY");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         centerContainer.add(titleLabel);
         centerContainer.add(Box.createRigidArea(new Dimension(0, 20)));
 
+        //count
         JLabel totalStudentsLabel = makeRow("Number of students overall: ", centerContainer);
         JLabel oralCountLabel = makeRow("Oral category: ", centerContainer);
         JLabel posterCountLabel = makeRow("Poster category: ", centerContainer);
         centerContainer.add(Box.createRigidArea(new Dimension(0, 15)));
 
+        //pie
+        centerContainer.add(new PieChartPanel(reg.get("oral"), reg.get("poster")));
+        centerContainer.add(Box.createRigidArea(new Dimension(0, 40)));
+
+        //score
         JLabel highestOverallLabel = makeRow("Highest score overall: ", centerContainer);
         JLabel oralHighestLabel = makeRow("Oral category highest score: ", centerContainer);
         JLabel posterHighestLabel = makeRow("Poster category highest score: ", centerContainer);
-        centerContainer.add(Box.createRigidArea(new Dimension(0, 25)));
+        centerContainer.add(Box.createRigidArea(new Dimension(0, 15)));
 
-
+        //award
         JLabel awardLabel = new JLabel("Award Nominations");
         awardLabel.setFont(new Font("Arial", Font.BOLD, 16));
         awardLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -72,37 +83,16 @@ public class OverallSummary extends JPanel {
         centerContainer.add(Box.createRigidArea(new Dimension(0, 25)));
 
 
-        //BUTTONS ---------------------------------------------------------------------------------------
-
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-
-        JButton backToOverviewButton = new JButton("Back to Overview");
-        backToOverviewButton.setBackground(buttonColor);
-        backToOverviewButton.setPreferredSize(new Dimension(180, 30));
-
-        JButton backToDashboardButton = new JButton("Back to Dashboard");
-        backToDashboardButton.setBackground(buttonColor);
-        backToDashboardButton.setPreferredSize(new Dimension(180, 30));
-
-        buttonPanel.add(backToOverviewButton);
-        buttonPanel.add(backToDashboardButton);
-
-        centerContainer.add(buttonPanel);
-
-        Map<String, Integer> reg = readRegistrationStats();
-        Map<String, Object> eval = readEvaluationStats();
-        List<String> peopleChoice = readPeoplesChoice();
-
         totalStudentsLabel.setText(
-                "Number of students overall: " + reg.get("total")
+            "Number of students overall: " + reg.get("total")
         );
-
+        
         oralCountLabel.setText(
-                "Category 1 (Oral): " + reg.get("oral")
+            "Oral category: " + reg.get("oral")
         );
 
         posterCountLabel.setText(
-                "Category 2 (Poster): " + reg.get("poster")
+            "Poster category: " + reg.get("poster")
         );
 
         highestOverallLabel.setText(
@@ -135,11 +125,37 @@ public class OverallSummary extends JPanel {
         );
 
         peopleChoiceLabel.setText(
-                "People's Choice: " + String.join(", ", peopleChoice)
+            "People's Choice: " + String.join(", ", peopleChoice)
         );
 
 
+        //BUTTONS ---------------------------------------------------------------------------------------
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+
+        JButton exportButton = new JButton("Export Summary");
+        exportButton.setBackground(buttonColor);
+        exportButton.setPreferredSize(new Dimension(160, 30));
+        buttonPanel.add(exportButton);
+
+        JButton backToOverviewButton = new JButton("Back to Overview");
+        backToOverviewButton.setBackground(buttonColor);
+        backToOverviewButton.setPreferredSize(new Dimension(160, 30));
+
+        JButton backToDashboardButton = new JButton("Back to Dashboard");
+        backToDashboardButton.setBackground(buttonColor);
+        backToDashboardButton.setPreferredSize(new Dimension(160, 30));
+
+        buttonPanel.add(backToOverviewButton);
+        buttonPanel.add(backToDashboardButton);
+
+        centerContainer.add(buttonPanel);
+
+
         //ACTION LISTENERS -------------------------------------------------------------------------------
+
+        
+        exportButton.addActionListener(e -> exportOverall());
 
         backToOverviewButton.addActionListener(e ->
                 cardLayout.show(cardManager, "Overview")
@@ -162,7 +178,6 @@ public class OverallSummary extends JPanel {
         parent.add(row);
         return label;
     }
-
 
 
     private Map<String, Integer> readRegistrationStats() 
@@ -313,6 +328,66 @@ public class OverallSummary extends JPanel {
         return winners;
     }
 
+
+    private void exportOverall() {
+
+        Map<String, Integer> reg = readRegistrationStats();
+        Map<String, Object> eval = readEvaluationStats();
+        List<String> peopleChoice = readPeoplesChoice();
+
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Choose export location");
+        chooser.setSelectedFile(new File("OverallSummary.txt"));
+
+        int result = chooser.showSaveDialog(this);
+        if (result != JFileChooser.APPROVE_OPTION) {
+            return; // user cancelled
+        }
+
+        File file = chooser.getSelectedFile();
+
+        try (FileWriter writer = new FileWriter(file)) {
+
+            writer.write("=========================\n");
+            writer.write("OVERALL SUMMARY REPORT\n");
+            writer.write("=========================\n\n");
+
+            writer.write("NUMBER OF STUDENTS\n");
+            writer.write("Total: " + reg.get("total") + "\n");
+            writer.write("Oral: " + reg.get("oral") + "\n");
+            writer.write("Poster: " + reg.get("poster") + "\n\n");
+
+            writer.write("HIGHEST SCORES\n");
+            writer.write("Overall: " + eval.get("maxOverall") + " , " +
+                    String.join(", ", (List<String>) eval.get("bestOverall")) +
+                    " , " + eval.get("overallCategory") + "\n");
+            writer.write("Oral: " + eval.get("maxOral") + " , " +
+                    String.join(", ", (List<String>) eval.get("bestOral")) + "\n");
+            writer.write("Poster: " + eval.get("maxPoster") + " , " +
+                    String.join(", ", (List<String>) eval.get("bestPoster")) + "\n\n");
+
+            writer.write("AWARD NOMINATIONS\n");
+            writer.write("Best Oral: " + String.join(", ", (List<String>) eval.get("bestOral")) + "\n");
+            writer.write("Best Poster: " + String.join(", ", (List<String>) eval.get("bestPoster")) + "\n");
+            writer.write("People's Choice: " + String.join(", ", peopleChoice) + "\n");
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Overall summary exported successfully.",
+                    "Export Complete",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Failed to export overall summary.",
+                    "Export Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            e.printStackTrace();
+        }
+    }
 
 
 }

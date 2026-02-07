@@ -192,7 +192,7 @@ public class IndividualReports extends JPanel {
         }
     }
 
-    private void exportReportToTxt(String studentName, String evaluatorName, String presentationType, String clarity, String methodology, String results, String presentation, String totalScore, String comments) 
+    private void exportIndi(String studentName, String evaluatorName, String presentationType, String clarity, String methodology, String results, String presentation, String totalScore, String comments) 
     {
 
         JFileChooser chooser = new JFileChooser();
@@ -322,7 +322,7 @@ public class IndividualReports extends JPanel {
 
                     exportBtn.addActionListener(ev -> {
 
-                        exportReportToTxt
+                        exportIndi
                         (
                             studentName,
                             evaluatorName,
