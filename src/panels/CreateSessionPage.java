@@ -9,8 +9,23 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class CreateSessionPage extends JPanel{
-    private CardLayout cardLayout;
-    private JPanel cardManager;
+    //private CardLayout cardLayout;
+    //private JPanel cardManager;
+    private static final String[] VENUES = {
+        "-- Select a venue --", 
+        "CNMX1001", "CNMX1002", "CNMX1003", "CNMX1004", "CNMX1005",
+        "CQAR1001", "CQAR1002", "CQAR1003", "CQAR1004", "CQAR1005", "CQAR1006", "CQAR1007",
+        "CQAR2001", "CQAR2002", "CQAR2003", "CQAR2004", "CQAR2005", "CQAR2006", "CQAR2007",
+        "CQAR3001", "CQAR3002", "CQAR3003", "CQAR3004", "CQAR3005", "CQAR3006", "CQAR3007",
+        "CQAR4001", "CQAR4002", "CQAR4003", "CQAR4004",
+        "CQCR1001", "CQCR1002", "CQCR1003", "CQCR1004",
+        "CQCR2001", "CQCR2002", "CQCR2003", "CQCR2004",
+        "CQCR3001", "CQCR3002", "CQCR3003", "CQCR3004",
+        "CQCR4001", "CQCR4002", "CQCR4003", "CQCR4004",
+        "Learning Point Idea Box 1", "Learning Point Idea Box 2", 
+        "Multipurpose Hall", 
+    };
+
     private void loadUsersByRole(JComboBox<String> comboBox, String targetRole) {
     File file = new File("csvFiles/usersCSV.csv");
     if (!file.exists()) return;
@@ -19,7 +34,6 @@ public class CreateSessionPage extends JPanel{
         String line;
         while ((line = br.readLine()) != null) {
             String[] data = line.split(",");
-            // Assuming CSV format: Username,Password,Role
             if (data.length >= 4) {
                 String name = data[2].trim();
                 String role = data[3].trim();
@@ -33,12 +47,60 @@ public class CreateSessionPage extends JPanel{
         e.printStackTrace();
     }
 }
+    private void loadRegisteredStudents(JComboBox<String> comboBox) {
+    File registrationsFile = new File("csvFiles/registrationsCSV.csv");
+    File sessionsFile = new File("csvFiles/sessionsCSV.csv");
+    
+    java.util.ArrayList<String> assignedStudents = new java.util.ArrayList<>();
+
+    if (sessionsFile.exists()) {
+        try (BufferedReader br = new BufferedReader(new FileReader(sessionsFile))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length > 0) {
+                    assignedStudents.add(data[0].trim());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    
+    if (!registrationsFile.exists()) return;
+
+    try (BufferedReader br = new BufferedReader(new FileReader(registrationsFile))) {
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] data = line.split(",");
+            if (data.length > 0) {
+                String studentName = data[0].trim();
+
+               
+                if (!studentName.isEmpty() && !studentName.equalsIgnoreCase("Name")) {
+                    
+                    boolean alreadyAssigned = false;
+                    for (String assigned : assignedStudents) {
+                        if (assigned.equalsIgnoreCase(studentName)) {
+                            alreadyAssigned = true;
+                            break;
+                        }
+                    }
+
+                    if (!alreadyAssigned) {
+                        comboBox.addItem(studentName);
+                    }
+                }
+            }
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
     private void makeSearchable(JComboBox<String> comboBox, String[] originalItems) {
     comboBox.setEditable(true);
     JTextField textField = (JTextField) comboBox.getEditor().getEditorComponent();
-
-    
-
     textField.addFocusListener(new FocusAdapter() {
         @Override
         public void focusGained(FocusEvent e) {
@@ -51,7 +113,7 @@ public class CreateSessionPage extends JPanel{
         @Override
         public void focusLost(FocusEvent e) {
             if (textField.getText().isEmpty()) {
-                // Determine which placeholder to put back
+              
                 if (comboBox.getToolTipText() != null && comboBox.getToolTipText().contains("Evaluator")) {
                     textField.setText("-- Select an evaluator --");
                 } else {
@@ -63,7 +125,7 @@ public class CreateSessionPage extends JPanel{
     textField.addKeyListener(new KeyAdapter() {
         @Override
         public void keyReleased(KeyEvent e) {
-            // Ignore navigation keys so user can still select with arrows
+           
             if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN || 
                 e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                 return;
@@ -85,11 +147,26 @@ public class CreateSessionPage extends JPanel{
         }
     });
 }
+    private void clearFields(JComboBox<String> studentList, JComboBox<String> evaluatorList, JComboBox<String> typeCombo, JComboBox<String> venueList, JComboBox<String> timeList, JComboBox<String> boardList, JSpinner dateSpinner) {
+        studentList.setSelectedIndex(0);
+        evaluatorList.setSelectedIndex(0);
+        typeCombo.setSelectedIndex(0);
+        venueList.setSelectedIndex(0);
+        timeList.setSelectedIndex(0);
+        boardList.setSelectedIndex(0);
+        dateSpinner.setValue(new Date());
+
+        ((JTextField)studentList.getEditor().getEditorComponent()).setText("-- Select a student --");
+        ((JTextField)evaluatorList.getEditor().getEditorComponent()).setText("-- Select an evaluator --");
+        ((JTextField) venueList.getEditor().getEditorComponent()).setText("-- Select a venue --");
+        ((JTextField) boardList.getEditor().getEditorComponent()).setText("-- Select a board --");
+
+    }
     
     public CreateSessionPage(CardLayout cardLayout, JPanel cardManager) {
 
-        this.cardLayout = cardLayout;
-        this.cardManager = cardManager;
+        //this.cardLayout = cardLayout;
+        //this.cardManager = cardManager;
 
         setBackground(new Color(245, 245, 245));
         setLayout(new GridBagLayout());
@@ -121,7 +198,8 @@ public class CreateSessionPage extends JPanel{
         JComboBox<String> studentList = new JComboBox<>(new DefaultComboBoxModel<>(studentPlaceholder));
         studentList.setPreferredSize(inputDim);
         studentList.setBackground(buttonColor);
-        loadUsersByRole(studentList, "Student");
+        loadRegisteredStudents(studentList);
+        //loadUsersByRole(studentList, "Student");
         
         String[] allStudents = new String[studentList.getItemCount()];
         for (int i = 0; i < studentList.getItemCount(); i++) {
@@ -182,12 +260,15 @@ public class CreateSessionPage extends JPanel{
         dateSpinner.setPreferredSize(inputDim);
 
 
-        String[] venues = {"-- Select a venue --", "Hall A", "Lecture Theater 1", "Computer Lab 4", "Conference Room", "Virtual Link (Zoom/Teams)" };
-        JComboBox<String> venueList = new JComboBox<>(venues);
+        //String[] venues = {"-- Select a venue --", "Hall A", "Lecture Theater 1", "Computer Lab 4", "Conference Room", "Virtual Link (Zoom/Teams)" };
+        JComboBox<String> venueList = new JComboBox<>(VENUES);
         venueList.setBackground(buttonColor);
         venueList.setPreferredSize(inputDim);
+        makeSearchable(venueList, VENUES);
+        //String[] venues = {"-- Select a venue --", "Hall A", "Lecture Theater 1", "Computer Lab 4", "Conference Room", "Virtual Link (Zoom/Teams)" };
+        //JComboBox<String> venueList = new JComboBox<>(venues);
 
-        String[] times = {"-- Select a time slot --", "09:00 - 10:00", "10:00 - 11:00", "14:00 - 15:00", "16:00 - 17:00" };
+        String[] times = {"-- Select a time slot --", "08:00 - 10:00", "10:00 - 12:00", "12:00 - 14:00", "14:00 - 16:00" };
         JComboBox<String> timeList = new JComboBox<>(times);
         timeList.setBackground(buttonColor);
         timeList.setPreferredSize(inputDim);
@@ -252,6 +333,7 @@ public class CreateSessionPage extends JPanel{
         //buttonPanel.add(saveButton);
         //mainCard.add(buttonPanel);
         backButton.addActionListener(e -> {
+            clearFields(studentList, evaluatorList, typeCombo, venueList, timeList, boardList, dateSpinner);
             cardLayout.show(cardManager, "CoordinatorPanel");
         });
 
@@ -267,8 +349,13 @@ public class CreateSessionPage extends JPanel{
             String boardID = (String) boardList.getSelectedItem();
             int posterCount = 0;
 
-            if (studentList.getSelectedIndex() == 0 || evaluatorList.getSelectedIndex() == 0 || typeCombo.getSelectedIndex() == 0 || venueList.getSelectedIndex() == 0 || timeList.getSelectedIndex() == 0) {
+            boolean isStudentEmpty = (student == null || student.equals("-- Select a student --") || student.trim().isEmpty());
+            boolean isEvaluatorEmpty = (evaluator == null || evaluator.equals("-- Select an evaluator --") || evaluator.trim().isEmpty());
+            boolean isTypeEmpty = (typeCombo.getSelectedIndex() <= 0); 
+            boolean isVenueEmpty = (venue == null || venue.equals("-- Select a venue --") || venue.trim().isEmpty());
+            boolean isTimeEmpty = (timeList.getSelectedIndex() <= 0);
 
+            if (isStudentEmpty || isEvaluatorEmpty || isTypeEmpty || isVenueEmpty || isTimeEmpty) {
                 JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Input Required", JOptionPane.WARNING_MESSAGE);
                 return;
             }

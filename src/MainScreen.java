@@ -49,6 +49,7 @@ public class MainScreen extends JFrame {
         //StudentDashboard studentPanel = new StudentDashboard(cardLayout, cardManager);
        // CoordinatorDashboard coordinatorPanel = new CoordinatorDashboard(cardLayout, cardManager);
         CreateSessionPage createSessionPanel = new CreateSessionPage(cardLayout, cardManager);
+        GenerateSchedulePage generateSchedulePanel = new GenerateSchedulePage(cardLayout, cardManager);
         Overview overviewPanel = new Overview(cardLayout, cardManager);
         IndividualReports individualReportsPanel = new IndividualReports(cardLayout, cardManager);
         
@@ -102,6 +103,7 @@ public class MainScreen extends JFrame {
         //cardManager.add(studentPanel, "StudentPanel");
        // cardManager.add(coordinatorPanel, "CoordinatorPanel");
         cardManager.add(createSessionPanel, "CreateSessionPanel");
+        cardManager.add(generateSchedulePanel, "GenerateSchedulePanel");
         cardManager.add(overviewPanel, "Overview");
         cardManager.add(individualReportsPanel, "IndividualReports");
         goToLogin.addActionListener(new ActionListener()
