@@ -7,6 +7,8 @@ import java.util.Scanner;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
+import user.Coordinator;
+
 
 public class Login extends JPanel
 {
@@ -145,6 +147,9 @@ public class Login extends JPanel
                             //IF COORDINATOR
                             else if (role.equals("Coordinator"))
                             {
+                                String name = parts[2];
+                                CoordinatorDashboard coordinatorDashboard = new CoordinatorDashboard(cardLayout, cardManager, name);
+                                cardManager.add(coordinatorDashboard, "CoordinatorPanel"); 
                                 cardLayout.show(cardManager, "CoordinatorPanel"); 
                                 fileReader.close();
                                 return;

@@ -47,13 +47,13 @@ public class MainScreen extends JFrame {
        // EvaluatorDashboard evaluatorPanel = new EvaluatorDashboard(cardLayout, cardManager);
 
         //StudentDashboard studentPanel = new StudentDashboard(cardLayout, cardManager);
-        CoordinatorDashboard coordinatorPanel = new CoordinatorDashboard(cardLayout, cardManager);
+       // CoordinatorDashboard coordinatorPanel = new CoordinatorDashboard(cardLayout, cardManager);
         CreateSessionPage createSessionPanel = new CreateSessionPage(cardLayout, cardManager);
         Overview overviewPanel = new Overview(cardLayout, cardManager);
         IndividualReports individualReportsPanel = new IndividualReports(cardLayout, cardManager);
         
         //TITLE
-        JLabel mainLabel = new JLabel("MAIN SCREEN", SwingConstants.CENTER);
+        JLabel mainLabel = new JLabel("SEMINAR MANAGEMENT SYSTEM", SwingConstants.CENTER);
         mainLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         //innerPanel.add(Box.createVerticalGlue());
@@ -100,7 +100,7 @@ public class MainScreen extends JFrame {
         cardManager.add(registerPanel, "RegisterPanel");
         //cardManager.add(evaluatorPanel, "EvaluatorPanel");
         //cardManager.add(studentPanel, "StudentPanel");
-        cardManager.add(coordinatorPanel, "CoordinatorPanel");
+       // cardManager.add(coordinatorPanel, "CoordinatorPanel");
         cardManager.add(createSessionPanel, "CreateSessionPanel");
         cardManager.add(overviewPanel, "Overview");
         cardManager.add(individualReportsPanel, "IndividualReports");

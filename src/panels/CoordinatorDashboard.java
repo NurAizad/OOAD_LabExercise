@@ -9,7 +9,7 @@ import java.awt.event.*;
 
 public class CoordinatorDashboard extends JPanel
 {
-    public CoordinatorDashboard(CardLayout cardLayout, JPanel cardManager)
+    public CoordinatorDashboard(CardLayout cardLayout, JPanel cardManager, String name)
     {
         //setLayout(new GridBagLayout());
         setBackground(new Color(245, 245, 245));
@@ -44,6 +44,11 @@ public class CoordinatorDashboard extends JPanel
             BorderFactory.createEmptyBorder(20, 30, 20, 30)
         ));
         add(centerContainer, gbc);
+
+        JLabel welcomeLabel = new JLabel("Welcome, " + name); //LATER NI DELETE NI DEBUG PURPOSES
+        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        welcomeLabel.setAlignmentX(CENTER_ALIGNMENT);
+        centerContainer.add(welcomeLabel);
 
         //BUTTONS
         Dimension buttonSize = new Dimension(200, 30);
