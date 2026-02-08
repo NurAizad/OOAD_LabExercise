@@ -169,7 +169,7 @@ public class StudentDashboard extends JPanel{
         {
             public void actionPerformed (ActionEvent e) 
             {
-                StudRegister studRegister = new StudRegister(cardLayout, cardManager, name);
+                Submission studRegister = new Submission(cardLayout, cardManager, name);
                 cardManager.add(studRegister, "studRegister"); 
                 cardLayout.show (cardManager, "studRegister");
             }

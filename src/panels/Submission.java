@@ -13,7 +13,7 @@ import javax.swing.border.LineBorder;
 //import javax.swing.filechooser.*;
 import java.io.File;
 
-public class StudRegister extends JPanel 
+public class Submission extends JPanel 
 {
     private JTextField titleField;
     private JTextArea abstractArea;
@@ -23,7 +23,7 @@ public class StudRegister extends JPanel
 
     private File selectedFile;
 
-    public StudRegister(CardLayout cardLayout, JPanel cardManager, String name) 
+    public Submission(CardLayout cardLayout, JPanel cardManager, String name) 
     //public StudRegister(CardLayout cardLayout, JPanel cardManager) 
     {
         setBackground(new Color(245, 245, 245));
