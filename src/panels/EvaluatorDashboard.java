@@ -62,19 +62,19 @@ public class EvaluatorDashboard extends JPanel
         evaluateButtonPanel.add(evaluateButton);
 
         //VOTE BUTTON
-        JPanel votePanel = new JPanel();
-        votePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        centerContainer.add(votePanel);
+        // JPanel votePanel = new JPanel();
+        // votePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        // centerContainer.add(votePanel);
 
-        JButton voteButton = new JButton("Vote Best Presenter");
-        voteButton.setPreferredSize(buttonSize);
-        voteButton.setBackground(buttonColor);
-        votePanel.add(voteButton);
+        // JButton voteButton = new JButton("Vote Best Presenter");
+        // voteButton.setPreferredSize(buttonSize);
+        // voteButton.setBackground(buttonColor);
+        // votePanel.add(voteButton);
         
         //AWARD NOMINATION BUTTON
         JPanel awardNominationButtonPanel = new JPanel();
         awardNominationButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        awardNominationButtonPanel.setBackground(Color.WHITE); // match other panels
+        //awardNominationButtonPanel.setBackground(Color.WHITE); // match other panels
         centerContainer.add(awardNominationButtonPanel);
 
         JButton awardnominationButton = new JButton("Award Nomination");
