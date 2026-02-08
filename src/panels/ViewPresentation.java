@@ -169,7 +169,7 @@ public class ViewPresentation extends JPanel
                 String line = fileReader.nextLine();
                 String[] parts = line.split(",");
                 String RegisteredStudentName = parts[0];
-                String presentationFilePath = parts[4];
+                String presentationFilePath = parts[5];
 
                 if (RegisteredStudentName.equals(studentName))
                 {
