@@ -22,14 +22,13 @@ public class EvaluatorDashboard extends JPanel
         JPanel centerContainer = new JPanel();
         centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
         centerContainer.setBackground(Color.WHITE);
-       // centerContainer.setPreferredSize(new Dimension (600, 400));
         centerContainer.setBorder(BorderFactory.createCompoundBorder(
             new LineBorder(new Color(200, 200, 200), 1),
             BorderFactory.createEmptyBorder(20, 30, 20, 30)
         ));
         add(centerContainer, gbc);
 
-        JLabel welcomeLabel = new JLabel("Welcome, " + evaluatorName); //LATER NI DELETE NI DEBUG PURPOSES
+        JLabel welcomeLabel = new JLabel("Welcome, " + evaluatorName); 
         welcomeLabel.setFont(new Font("Arial", Font.BOLD, 16));
         welcomeLabel.setAlignmentX(CENTER_ALIGNMENT);
         centerContainer.add(welcomeLabel);
@@ -42,7 +41,6 @@ public class EvaluatorDashboard extends JPanel
         //REVIEW SUBMISSIONS BUTTON
         JPanel reviewButtonPanel = new JPanel();
         reviewButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        //reviewButtonPanel.setBackground(Color.LIGHT_GRAY);
         centerContainer.add(reviewButtonPanel);
 
         JButton reviewButton = new JButton("View Presentations");
@@ -53,28 +51,16 @@ public class EvaluatorDashboard extends JPanel
         //EVALUATE SUBMISSIONS BUTTON
         JPanel evaluateButtonPanel = new JPanel();
         evaluateButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        //evaluateButtonPanel.setBackground(Color.LIGHT_GRAY);
         centerContainer.add(evaluateButtonPanel);
 
         JButton evaluateButton = new JButton("Evaluate Presentations");
         evaluateButton.setPreferredSize(buttonSize);
         evaluateButton.setBackground(buttonColor);
         evaluateButtonPanel.add(evaluateButton);
-
-        //VOTE BUTTON
-        // JPanel votePanel = new JPanel();
-        // votePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        // centerContainer.add(votePanel);
-
-        // JButton voteButton = new JButton("Vote Best Presenter");
-        // voteButton.setPreferredSize(buttonSize);
-        // voteButton.setBackground(buttonColor);
-        // votePanel.add(voteButton);
         
         //AWARD NOMINATION BUTTON
         JPanel awardNominationButtonPanel = new JPanel();
         awardNominationButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        //awardNominationButtonPanel.setBackground(Color.WHITE); // match other panels
         centerContainer.add(awardNominationButtonPanel);
 
         JButton awardnominationButton = new JButton("Award Nomination");
@@ -87,7 +73,6 @@ public class EvaluatorDashboard extends JPanel
         logoutButton.setPreferredSize(buttonSize);
         logoutButton.setBackground(buttonColor);
         JPanel logoutButtonPanel = new JPanel();
-        //logoutButtonPanel.setBackground(Color.LIGHT_GRAY);
 
         logoutButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         centerContainer.add(logoutButtonPanel);

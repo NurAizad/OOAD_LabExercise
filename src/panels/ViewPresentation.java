@@ -1,7 +1,6 @@
 package panels;
 import java.awt.*;
 import javax.swing.*;
-//import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.*;
 
@@ -38,8 +37,6 @@ public class ViewPresentation extends JPanel
             ));
         add(centerContainer, gbc);
 
-        //BUTTONS (IF ADA NANTI)
-       // Dimension inputDim = new Dimension(300, 30);
        //tables 
         String[] columnNames = {"Student Name", "Date", "Venue", "Type", "Time", "View"};
         tableModel = new DefaultTableModel(columnNames, 0)
@@ -144,7 +141,6 @@ public class ViewPresentation extends JPanel
                     String venue = parts[4];
                     String time = parts[6];
 
-                    //displayStudentPresentation(studentName, date, venue, type, time);
                     tableModel.addRow(new Object[]{studentName, date, venue, type, time, "Click to View"});
 
                 }

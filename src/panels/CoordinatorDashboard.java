@@ -2,7 +2,6 @@ package panels;
 
 import java.awt.*;
 import javax.swing.*;
-//import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import java.awt.event.*;
@@ -13,11 +12,9 @@ public class CoordinatorDashboard extends JPanel
 {
     public CoordinatorDashboard(CardLayout cardLayout, JPanel cardManager, String name)
     {
-        //setLayout(new GridBagLayout());
         setBackground(new Color(245, 245, 245));
         setLayout (new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        //gbc.anchor = GridBagConstraints.CENTER;
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.insets = new Insets(20, 20, 20, 20);

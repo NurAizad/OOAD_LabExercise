@@ -26,10 +26,8 @@ public class MainScreen extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.insets = new Insets(20, 20, 20, 20);
-       // mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         
         JPanel centerContainer = new JPanel();
-        //centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
         centerContainer.setLayout(new BorderLayout());
         centerContainer.setBackground(Color.WHITE);
         centerContainer.setPreferredSize(new Dimension (400, 300));
@@ -45,10 +43,10 @@ public class MainScreen extends JFrame {
         
         Login loginPanel = new Login(cardLayout, cardManager);
         Register registerPanel = new Register(cardLayout, cardManager);
-       // EvaluatorDashboard evaluatorPanel = new EvaluatorDashboard(cardLayout, cardManager);
+        //EvaluatorDashboard evaluatorPanel = new EvaluatorDashboard(cardLayout, cardManager); //commented our parts are used in other places
 
         //StudentDashboard studentPanel = new StudentDashboard(cardLayout, cardManager);
-       // CoordinatorDashboard coordinatorPanel = new CoordinatorDashboard(cardLayout, cardManager);
+        //CoordinatorDashboard coordinatorPanel = new CoordinatorDashboard(cardLayout, cardManager);
         CreateSessionPage createSessionPanel = new CreateSessionPage(cardLayout, cardManager);
         GenerateSchedulePage generateSchedulePanel = new GenerateSchedulePage(cardLayout, cardManager);
         Overview overviewPanel = new Overview(cardLayout, cardManager);
@@ -60,11 +58,6 @@ public class MainScreen extends JFrame {
         mainLabel.setFont(new Font("Arial", Font.BOLD, 17));
         mainLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        //innerPanel.add(Box.createVerticalGlue());
-        //innerPanel.add(mainLabel);
-        //innerPanel.add(Box.createRigidArea(new Dimension(0, 100)));
-       // centerContainer.add(Box.createVerticalGlue());
-
         //LOGIN BUTTON
         Color buttonColor = new Color(216, 223, 231);
         Dimension buttonSize = new Dimension(100, 30);
@@ -72,20 +65,14 @@ public class MainScreen extends JFrame {
         JButton goToLogin = new JButton("Login");
         goToLogin.setAlignmentX(Component.CENTER_ALIGNMENT);
         goToLogin.setMaximumSize(buttonSize);
-        //mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         goToLogin.setBackground(buttonColor);
-        //innerPanel.add(goToLogin);
-        //innerPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
 
         //REGISTER BUTTON
         JButton goToRegister = new JButton("Register");
         goToRegister.setAlignmentX(Component.CENTER_ALIGNMENT);
         goToRegister.setMaximumSize(buttonSize);
-        //innerPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         goToRegister.setBackground(buttonColor);
-        //innerPanel.add(goToRegister);
-        //innerPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
         innerPanel.add(Box.createVerticalGlue());
         innerPanel.add(mainLabel);
@@ -96,13 +83,12 @@ public class MainScreen extends JFrame {
         innerPanel.add(Box.createVerticalGlue());
 
         centerContainer.add(innerPanel, BorderLayout.CENTER);
-        //centerContainer.add(Box.createVerticalGlue());
         mainPanel.add(centerContainer, gbc);
 
         cardManager.add(mainPanel, "MainPanel");
         cardManager.add(loginPanel, "LoginPanel");
         cardManager.add(registerPanel, "RegisterPanel");
-        //cardManager.add(evaluatorPanel, "EvaluatorPanel");
+        //cardManager.add(evaluatorPanel, "EvaluatorPanel"); //used in other parts
         //cardManager.add(studentPanel, "StudentPanel");
        // cardManager.add(coordinatorPanel, "CoordinatorPanel");
         cardManager.add(createSessionPanel, "CreateSessionPanel");
