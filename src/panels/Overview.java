@@ -13,7 +13,6 @@ public class Overview extends JPanel
         setBackground(new Color(245,245,245));
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        //gbc.anchor = GridBagConstraints.CENTER;
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -22,7 +21,6 @@ public class Overview extends JPanel
         JPanel centerContainer = new JPanel();
         centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
         centerContainer.setBackground(Color.WHITE);
-        //centerContainer.setPreferredSize(new Dimension (600, 500));
         centerContainer.setBorder(BorderFactory.createCompoundBorder
             (
                 new LineBorder(new Color(200, 200, 200), 1),
@@ -38,8 +36,6 @@ public class Overview extends JPanel
         overviewLabel.setFont(new Font("Arial", Font.BOLD, 24));
         centerContainer.add(overviewLabel);
 
-        //centerContainer.add(Box.createRigidArea(new Dimension(0, 20)));
-
 
         //BUTTONS ---------------------------------------------------------------------------------------------
 
@@ -48,7 +44,6 @@ public class Overview extends JPanel
         //INDIVIDUAL REPORTS BUTTON
         JPanel individualButtonPanel = new JPanel();
         individualButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        //centerContainer.add(individualButtonPanel);
 
         JButton individualReportsButton = new JButton("Individual Reports");
         individualReportsButton.setBackground(buttonColor);
@@ -59,7 +54,6 @@ public class Overview extends JPanel
         //OVERALL SUMMARY BUTTON
         JPanel summaryButtonPanel = new JPanel();
         summaryButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        //centerContainer.add(summaryButtonPanel);
 
         JButton overallSummaryButton = new JButton("Overall Summary");
         overallSummaryButton.setBackground(buttonColor);
@@ -77,15 +71,8 @@ public class Overview extends JPanel
         bottomButtonPanel.add(backToDashboardButton);
         centerContainer.add(bottomButtonPanel);
 
-        // GridBagConstraints gbcBottom = new GridBagConstraints();
-        // gbcBottom.gridx = 0;
-        // gbcBottom.gridy = 1; 
-        // gbcBottom.weightx = 1.0;
-        // gbcBottom.weighty = 1.0; 
-        // gbcBottom.anchor = GridBagConstraints.PAGE_END;
-        // add(bottomButtonPanel, gbcBottom);
 
-        //ACTION LISTENERS (to add: destinationss)
+        //ACTION LISTENERS -----------------------------------------------------------------------------------
         individualReportsButton.addActionListener(new ActionListener() 
         {
             public void actionPerformed(ActionEvent e) {
