@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-//import javax.swing.filechooser.*;
 import java.io.File;
 
 public class Submission extends JPanel 
@@ -24,7 +23,6 @@ public class Submission extends JPanel
     private File selectedFile;
 
     public Submission(CardLayout cardLayout, JPanel cardManager, String name) 
-    //public StudRegister(CardLayout cardLayout, JPanel cardManager) 
     {
         setBackground(new Color(245, 245, 245));
         setLayout(new GridBagLayout());
@@ -32,12 +30,10 @@ public class Submission extends JPanel
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.insets = new Insets(20, 20, 20, 20);
-        //gbc.anchor = GridBagConstraints.CENTER;
 
         JPanel centerContainer = new JPanel();
         centerContainer.setLayout (new BoxLayout (centerContainer, BoxLayout.Y_AXIS));
         centerContainer.setBackground(Color.WHITE);
-        //centerContainer.setPreferredSize(new Dimension (600, 400));
         centerContainer.setBorder (BorderFactory.createCompoundBorder(
             new LineBorder(new Color(200, 200, 200), 1),
             BorderFactory.createEmptyBorder(20, 30, 20, 30)
@@ -45,11 +41,6 @@ public class Submission extends JPanel
 
         Dimension inputDim = new Dimension(300, 30);
         add (centerContainer, gbc);
-
-        // JLabel welcomeLabel = new JLabel("Welcome, " + name); //LATER NI DELETE NI DEBUG PURPOSES
-        // welcomeLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        // welcomeLabel.setAlignmentX(CENTER_ALIGNMENT);
-        // centerContainer.add(welcomeLabel);
 
         // Button
 

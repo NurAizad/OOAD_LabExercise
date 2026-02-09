@@ -10,8 +10,6 @@ import java.util.Date;
 import java.awt.print.*;
 
 public class GenerateSchedulePage extends JPanel {
-    //private CardLayout cardLayout;
-    //private JPanel cardManager;
     private JPanel listContainer;
     private JSpinner startSpinner;
     private JSpinner endSpinner;
@@ -20,8 +18,6 @@ public class GenerateSchedulePage extends JPanel {
 
 
     public GenerateSchedulePage(CardLayout cardLayout, JPanel cardManager) {
-        //this.cardLayout = cardLayout;
-        //this.cardManager = cardManager;
 
         setLayout(new BorderLayout());
         setBackground(new Color(240, 240, 240));
@@ -54,8 +50,6 @@ public class GenerateSchedulePage extends JPanel {
         JButton btnBack = new JButton("Back");
         btnBack.setBackground(buttonColor);
 
-        // Layout Navigation
-        //gbc.gridx = 0; navPanel.add(btnPrev, gbc);
         gbc.gridx = 1; navPanel.add(new JLabel("From:"), gbc);
         gbc.gridx = 2; navPanel.add(startSpinner, gbc);
         gbc.gridx = 3; navPanel.add(new JLabel("To:"), gbc);
@@ -77,10 +71,6 @@ public class GenerateSchedulePage extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
 
         // --- Listeners ---
-        // Weekly Navigation
-        //btnPrev.addActionListener(e -> shiftWeek(-7));
-        //btnNext.addActionListener(e -> shiftWeek(7));
-        
         // Manual Filter
         btnFilter.addActionListener(e -> refreshList());
         btnPrint.addActionListener(e -> printToPDF());
@@ -110,20 +100,6 @@ public class GenerateSchedulePage extends JPanel {
         cal.add(Calendar.DATE, 6);
         endSpinner.setValue(cal.getTime());
     }
-
-    /*private void shiftWeek(int days) {
-        Calendar calStart = Calendar.getInstance();
-        calStart.setTime((Date) startSpinner.getValue());
-        calStart.add(Calendar.DATE, days);
-        startSpinner.setValue(calStart.getTime());
-
-        Calendar calEnd = Calendar.getInstance();
-        calEnd.setTime((Date) endSpinner.getValue());
-        calEnd.add(Calendar.DATE, days);
-        endSpinner.setValue(calEnd.getTime());
-
-        refreshList();
-    }*/
 
     private void refreshList() {
         listContainer.removeAll();

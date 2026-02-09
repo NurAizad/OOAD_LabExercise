@@ -40,7 +40,6 @@ public class IndividualReports extends JPanel {
         //TITLE -----------------------------------------------------------------------------------------------
 
         JPanel indiRepPanel = new JPanel();
-        //indiRepPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         indiRepPanel.setLayout(new BoxLayout(indiRepPanel, BoxLayout.Y_AXIS));
         indiRepPanel.setBackground(Color.WHITE);
         JLabel indiRepLabel = new JLabel("INDIVIDUAL REPORTS");
@@ -48,27 +47,12 @@ public class IndividualReports extends JPanel {
         indiRepLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         centerContainer.add(indiRepLabel);
 
-        //indiRepPanel.add(indiRepLabel);
-
-        //gbc.gridx = 0;
-       // gbc.gridy = 0;
-       // gbc.gridwidth = 1;
-        //gbc.insets = new Insets(20, 0, 30, 0);
-        // indiRepPanel.setBorder(BorderFactory.createCompoundBorder
-        //     (
-        //         new LineBorder(new Color(200, 200, 200), 1),
-        //         BorderFactory.createEmptyBorder(20, 30, 20, 30)
-        //     ));
-        
-        // add(indiRepPanel, gbc);
-
 
         //STUDENT ----------------------------------------------------------------------------------------------
 
         JPanel studentPanel = new JPanel(new GridBagLayout());
         GridBagConstraints studentGbc = new GridBagConstraints();
         studentGbc.insets = new Insets(0, 0, 0, 10);
-        //studentGbc.fill = GridBagConstraints.HORIZONTAL;
 
         JLabel studentLabel = new JLabel("Student Name:");
         studentLabel.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -82,14 +66,12 @@ public class IndividualReports extends JPanel {
         studentDropdown.setBackground(buttonColor);
         studentGbc.gridx = 1;
         studentGbc.gridy = 0;
-        //studentGbc.weightx = 1.0; // let it expand
         studentPanel.add(studentDropdown, studentGbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.insets = new Insets(0, 0, 10, 0);
         centerContainer.add(studentPanel);
-        //add(studentPanel, gbc);
 
 
         //VIEW REPORT ------------------------------------------------------------------------------------------
@@ -102,13 +84,6 @@ public class IndividualReports extends JPanel {
         reportButtonPanel.add(viewReportButton);
         centerContainer.add(reportButtonPanel);
 
-        // gbc.gridx = 0;
-        // gbc.gridy = 2;
-        // gbc.insets = new Insets(20, 0, 20, 0);
-        //add(reportButtonPanel, gbc);
-        //centerContainer.add(reportButtonPanel, gbc);
-
-
         //BACK BUTTONS -----------------------------------------------------------------------------------------
 
         JPanel bottomButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
@@ -119,11 +94,7 @@ public class IndividualReports extends JPanel {
         bottomButtonPanel.add(backToOverviewButton);
         bottomButtonPanel.add(backToDashboardButton);
 
-        // gbc.gridx = 0;
-        // gbc.gridy = 3;
-        // gbc.insets = new Insets(20, 0, 20, 0);
         centerContainer.add(bottomButtonPanel);
-        //add(bottomButtonPanel, gbc);
 
         
         //ACTION LISTENERS --------------------------------------------------------------------------------------

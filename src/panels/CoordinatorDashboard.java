@@ -18,33 +18,17 @@ public class CoordinatorDashboard extends JPanel
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.insets = new Insets(20, 20, 20, 20);
-
-        //TOP TITLE
-        //DASHBOARD PANEL
-        // JPanel dashboardPanel = new JPanel();
-        // dashboardPanel.setLayout(new BoxLayout(dashboardPanel, BoxLayout.Y_AXIS));
-        // dashboardPanel.setBackground(Color.LIGHT_GRAY);
-        // dashboardPanel.setOpaque(true);
-        // add(dashboardPanel, gbc);
-
-        // JLabel dashboardLabel = new JLabel("EVALUATOR DASHBOARD", SwingConstants.CENTER);
-        // dashboardLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        // dashboardLabel.setAlignmentX(CENTER_ALIGNMENT);
-        // dashboardLabel.setAlignmentY(TOP_ALIGNMENT);
-        // //dashboardPanel.add(dashboardLabel);
-        // add(dashboardLabel, BorderLayout.NORTH);
         
         JPanel centerContainer = new JPanel();
         centerContainer.setLayout(new BoxLayout(centerContainer, BoxLayout.Y_AXIS));
         centerContainer.setBackground(getBackground());
-        //centerContainer.setPreferredSize(new Dimension (600, 400));
         centerContainer.setBorder(BorderFactory.createCompoundBorder(
             new LineBorder(new Color(200, 200, 200), 1),
             BorderFactory.createEmptyBorder(20, 30, 20, 30)
         ));
         add(centerContainer, gbc);
 
-        JLabel welcomeLabel = new JLabel("Welcome, " + name); //LATER NI DELETE NI DEBUG PURPOSES
+        JLabel welcomeLabel = new JLabel("Welcome, " + name); 
         welcomeLabel.setFont(new Font("Arial", Font.BOLD, 16));
         welcomeLabel.setAlignmentX(CENTER_ALIGNMENT);
         centerContainer.add(welcomeLabel);
