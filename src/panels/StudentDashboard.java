@@ -8,15 +8,6 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 public class StudentDashboard extends JPanel{
-
-    // private JTextField titleField;
-    // private JTextArea abstractArea;
-    // private JTextField supervisorField;
-    // private JTextField fileField;
-    // private JComboBox<String> typeCombo;
-
-    // private File selectedFile;
-
     public StudentDashboard(CardLayout cardLayout, JPanel cardManager, String name) 
     {
         setBackground(new Color(245, 245, 245));
@@ -35,10 +26,9 @@ public class StudentDashboard extends JPanel{
             BorderFactory.createEmptyBorder(20, 30, 20, 30)
         ));
 
-        //Dimension buttonSize = new Dimension(200, 30);
         add (centerContainer, gbc);
 
-        JLabel welcomeLabel = new JLabel("Welcome, " + name); //LATER NI DELETE NI DEBUG PURPOSES
+        JLabel welcomeLabel = new JLabel("Welcome, " + name);
         welcomeLabel.setFont(new Font("Arial", Font.BOLD, 16));
         welcomeLabel.setAlignmentX(CENTER_ALIGNMENT);
         centerContainer.add(welcomeLabel);
@@ -46,7 +36,6 @@ public class StudentDashboard extends JPanel{
         // Button
 
         Dimension buttonSize = new Dimension (180, 30);
-        Dimension labelSize = new Dimension (150, 25);
         Color buttonColor = new Color(216, 223, 231);
 
         JPanel registerPanel = new JPanel (new FlowLayout (FlowLayout.CENTER, 10, 10));
@@ -56,92 +45,6 @@ public class StudentDashboard extends JPanel{
         registerButton.setPreferredSize(buttonSize);
         registerButton.setBackground(buttonColor);
         registerPanel.add(registerButton);
-
-        //VOTING
-
-        // JPanel votePanel = new JPanel();
-        // votePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        // centerContainer.add(votePanel);
-
-        // JButton voteButton = new JButton("Vote Best Presenter");
-        // voteButton.setPreferredSize(buttonSize);
-        // voteButton.setBackground(buttonColor);
-        // votePanel.add(voteButton);
-
-        // Research title
-
-        /* 
-        JPanel titlePanel = new JPanel (new FlowLayout (FlowLayout.CENTER, 10, 10));
-        JLabel titleLabel = new JLabel ("Research Title: ");
-        titleLabel.setPreferredSize (labelSize);
-        
-        titleField = new JTextField (20);
-        titleField.setPreferredSize(inputDim);
-        titlePanel.add (titleLabel);
-        titlePanel.add (titleField);
-        centerContainer.add (titlePanel);
-
-        // Abstract 
-
-        JPanel abstractPanel = new JPanel (new FlowLayout (FlowLayout.CENTER, 10, 10));
-        JLabel abstractLabel = new JLabel ("Abstract: ");
-        abstractLabel.setPreferredSize (labelSize);
-        abstractArea = new JTextArea (3, 20);
-        abstractArea.setLineWrap (true);
-        abstractArea.setWrapStyleWord (true);
-
-        abstractPanel.add (abstractLabel);
-        abstractPanel.add (new JScrollPane (abstractArea));
-        centerContainer.add (abstractPanel);
-
-        // Supervisor
-
-        JPanel supervisorPanel = new JPanel (new FlowLayout (FlowLayout.CENTER, 10, 10));
-        JLabel supervisorLabel = new JLabel ("Supervisor: ");
-        supervisorLabel.setPreferredSize (labelSize);
-        supervisorField = new JTextField (20);
-        supervisorField.setPreferredSize(inputDim);
-        supervisorPanel.add (supervisorLabel);
-        supervisorPanel.add (supervisorField);
-        centerContainer.add (supervisorPanel);
-
-        // Presentation 
-
-        JPanel typePanel = new JPanel (new FlowLayout (FlowLayout.CENTER, 10,10));
-        JLabel typeLabel = new JLabel ("Preferred Presentation:");
-        typeLabel.setPreferredSize (labelSize);
-       
-        String[] presentationTypes = {"Poster", "Oral"};
-        typeCombo = new JComboBox<String> (presentationTypes);
-        typeCombo.setBackground(buttonColor);
-        typeCombo.setPreferredSize (new Dimension (200, 25));
-        
-        typePanel.add (typeLabel);
-        typePanel.add (typeCombo);
-        centerContainer.add (typePanel);
-
-        // Uploading Material
-
-        JPanel filePanel = new JPanel (new FlowLayout (FlowLayout.CENTER, 10, 10));
-        JLabel fileLabel = new JLabel ("Material Path: ");
-        fileLabel.setPreferredSize (labelSize);
-        fileField = new JTextField (10);
-        JButton browseButton = new JButton ("Browse");
-        browseButton.setBackground (buttonColor);
-        filePanel.add (fileLabel);
-        filePanel.add (fileField);
-        filePanel.add (browseButton);
-        centerContainer.add (filePanel);
-
-        // For Register Button 
-
-        JPanel submitButtonPanel = new JPanel (new FlowLayout (FlowLayout.CENTER, 10, 10));
-        JButton submitButton = new JButton ("Register");
-        submitButton.setBackground (buttonColor);
-        submitButton.setPreferredSize (buttonSize);
-        submitButtonPanel.add (submitButton);
-        centerContainer.add (submitButtonPanel);
-        */
 
         // Award Nomination Button
 
@@ -232,7 +135,6 @@ public class StudentDashboard extends JPanel{
         
     }
 }
-        // Action Listeners 
 
 
         

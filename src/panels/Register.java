@@ -10,21 +10,17 @@ import java.util.Scanner;
 public class Register extends JPanel
 {
     public Register(CardLayout cardLayout, JPanel cardManager)
-    //public Register()
     {
         Color lightGray = new Color(245, 245, 245);
         setBackground(lightGray);
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        //gbc.anchor = GridBagConstraints.CENTER;gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.insets = new Insets(20, 20, 20, 20);
-        //gbc.anchor = GridBagConstraints.CENTER;
        
         JPanel centerContainer = new JPanel();
         centerContainer.setLayout (new BoxLayout (centerContainer, BoxLayout.Y_AXIS));
         centerContainer.setBackground(Color.WHITE);
-        //centerContainer.setPreferredSize(new Dimension (600, 400));
         centerContainer.setBorder (BorderFactory.createCompoundBorder(
             new LineBorder(new Color(200, 200, 200), 1),
             BorderFactory.createEmptyBorder(20, 30, 20, 30)

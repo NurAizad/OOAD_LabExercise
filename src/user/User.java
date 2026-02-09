@@ -7,7 +7,6 @@ import javax.swing.*;
 
 public class User
 {
-    //private ArrayList<String> nameList = new ArrayList<>();
     public void nameList(ArrayList<String> arrName, String role)
     {
         File file = new File("csvFiles/usersCSV.csv");

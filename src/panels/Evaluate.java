@@ -17,16 +17,13 @@ public class Evaluate extends JPanel
     private JTextField resultsField;
     private JTextField presentationField;
     private JTextArea commentsArea;
-    //private JLabel totalScoreLabel;
 
     private JButton submitButton;
     private JButton backButton;
 
-    //private String evaluatorName;
 
     public Evaluate (CardLayout cardLayout, JPanel cardManager, String evaluatorName)
     {
-        //this.evaluatorName = evaluatorName;
 
         setBackground(new Color(245, 245, 245));
         setLayout(new GridBagLayout());
@@ -54,16 +51,12 @@ public class Evaluate extends JPanel
         JLabel studentLabel = new JLabel("Select Student: ");
         studentLabel.setPreferredSize(labelDim);
         studentPanel.add(studentLabel);
-        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
         studentNameComboBox = new JComboBox<>();
         studentNameComboBox.setPreferredSize(inputDim);
         studentNameComboBox.setBackground(buttonColor);
         studentPanel.add(studentNameComboBox);
         centerContainer.add(studentPanel);
-        
-
-        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
         JPanel problemClarityPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JLabel problemClarityLabel = new JLabel("Problem Clarity (0-25): ");
@@ -74,9 +67,6 @@ public class Evaluate extends JPanel
         problemClarityField.setPreferredSize(inputDim);
         problemClarityPanel.add(problemClarityField);
         centerContainer.add(problemClarityPanel);
-        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
-        
-        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
         JPanel methodologyPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JLabel methodologyLabel = new JLabel("Methodology (0-25): ");
@@ -87,9 +77,6 @@ public class Evaluate extends JPanel
         methodologyField.setPreferredSize(inputDim);
         methodologyPanel.add(methodologyField);
         centerContainer.add(methodologyPanel);
-        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
-
-        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
     
         JPanel resultsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JLabel resultsLabel = new JLabel("Results (0-25): ");
@@ -100,9 +87,7 @@ public class Evaluate extends JPanel
         resultsField.setPreferredSize(inputDim);
         resultsPanel.add(resultsField);
         centerContainer.add(resultsPanel);
-        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
-
-        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
+        
 
         JPanel presentationPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JLabel presentationLabel = new JLabel("Presentation (0-25): ");
@@ -113,9 +98,7 @@ public class Evaluate extends JPanel
         presentationField.setPreferredSize(inputDim);
         presentationPanel.add(presentationField);
         centerContainer.add(presentationPanel);
-        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
-
-        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
+        
 
         JPanel commentsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JLabel commentsLabel = new JLabel("Comments: ");
@@ -127,7 +110,7 @@ public class Evaluate extends JPanel
         commentsArea.setWrapStyleWord(true);
         commentsPanel.add(new JScrollPane(commentsArea));
         centerContainer.add(commentsPanel);
-        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
+        
 
         insertStudentNames(evaluatorName);
 
@@ -136,15 +119,14 @@ public class Evaluate extends JPanel
         submitButton.setBackground(buttonColor);
         buttonPanel.add(submitButton);
 
-        //JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        
         backButton = new JButton("Back");
         backButton.setBackground(buttonColor);
-        //backButtonPanel.add(backButton);
+        
         buttonPanel.add(backButton);
 
         centerContainer.add(buttonPanel);
-        //centerContainer.add(backButtonPanel);
-        //centerContainer.add(Box.createRigidArea(new Dimension(0, 10)));
+        
 
 
         backButton.addActionListener(new ActionListener()
@@ -292,7 +274,6 @@ public class Evaluate extends JPanel
             }
             scanner.close();
 
-            //File file = new File("csvFiles/evaluationsCSV.csv");
             FileWriter writer = new FileWriter(file, true);
             writer.write(studentName + "," + evaluatorName + "," + clarity + "," + methodology + "," 
             + results + "," + presentation + "," + totalScore + "," + comments.replace(",", "") 

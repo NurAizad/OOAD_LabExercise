@@ -84,7 +84,6 @@ public class IndividualReports extends JPanel {
         reportButtonPanel.add(viewReportButton);
         centerContainer.add(reportButtonPanel);
 
-
         //BACK BUTTONS -----------------------------------------------------------------------------------------
 
         JPanel bottomButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
