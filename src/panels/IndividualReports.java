@@ -18,7 +18,6 @@ public class IndividualReports extends JPanel {
         setBackground(new Color(245,245,245));
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        //gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.insets = new Insets(20, 20, 20, 20);
