@@ -168,6 +168,7 @@ public class OverallSummary extends JPanel {
 
     //FUNCTIONS -------------------------------------------------------------------------------------------
 
+    //for each row
     private JLabel makeRow(String text, JPanel parent) 
     {
         JPanel row = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 8));
@@ -178,7 +179,7 @@ public class OverallSummary extends JPanel {
         return label;
     }
 
-
+    //read current numbers
     private Map<String, Integer> readRegistrationStats() 
     {
 
@@ -211,6 +212,7 @@ public class OverallSummary extends JPanel {
     }
 
 
+    //read current scores
     private Map<String, Object> readEvaluationStats() 
     {
 
@@ -295,6 +297,7 @@ public class OverallSummary extends JPanel {
         return map;
     }
 
+    //read current votes
     private List<String> readPeoplesChoice() {
         int maxVotes = -1;
         List<String> winners = new ArrayList<>();
@@ -327,7 +330,7 @@ public class OverallSummary extends JPanel {
         return winners;
     }
 
-
+    //export
     private void exportOverall() {
 
         Map<String, Integer> reg = readRegistrationStats();

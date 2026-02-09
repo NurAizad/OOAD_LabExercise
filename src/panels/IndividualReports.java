@@ -93,7 +93,6 @@ public class IndividualReports extends JPanel {
         backToDashboardButton.setBackground(buttonColor);
         bottomButtonPanel.add(backToOverviewButton);
         bottomButtonPanel.add(backToDashboardButton);
-
         centerContainer.add(bottomButtonPanel);
 
         

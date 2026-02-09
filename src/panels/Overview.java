@@ -71,7 +71,8 @@ public class Overview extends JPanel
         bottomButtonPanel.add(backToDashboardButton);
         centerContainer.add(bottomButtonPanel);
 
-        //ACTION LISTENERS (to add: destinationss)
+
+        //ACTION LISTENERS -----------------------------------------------------------------------------------
         individualReportsButton.addActionListener(new ActionListener() 
         {
             public void actionPerformed(ActionEvent e) {
