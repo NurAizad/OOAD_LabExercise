@@ -28,7 +28,9 @@ public class PieChartPanel extends JPanel {
 
         //percentage
         double percentOral = ((double) oralCount / total) * 100;
+        String newPercentOral = String.format("%.2f", percentOral);
         double percentPoster = ((double) posterCount / total) * 100;
+        String newPercentPoster = String.format("%.2f", percentPoster);
 
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -43,7 +45,7 @@ public class PieChartPanel extends JPanel {
 
         //colours
         g2.setColor(Color.BLACK);
-        g2.drawString("Oral: " + oralCount + " (" + percentOral + "%)", 320, 100);
-        g2.drawString("Poster: " + posterCount+ " (" + percentPoster + "%)", 320, 130);
+        g2.drawString("Oral: " + oralCount + " (" + newPercentOral + "%)", 320, 100);
+        g2.drawString("Poster: " + posterCount+ " (" + newPercentPoster + "%)", 320, 130);
     }
 }
